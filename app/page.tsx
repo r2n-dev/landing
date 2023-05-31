@@ -9,6 +9,7 @@ export default function Home() {
   return (
     <main className={BASE_CLASS}>
       <Logo></Logo>
+      <a href="https://www.linkedin.com/in/andres-artunduaga/">About Me</a>
     </main>
   )
 }

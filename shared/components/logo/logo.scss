@@ -3,4 +3,8 @@
 .logo {
     font-size: 120px;
     color: $color-light;
+
+    @include for-sm {
+        font-size: 80px;
+    }
 }
