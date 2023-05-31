@@ -1,10 +1,14 @@
-import Image from 'next/image'
-import styles from './page.module.scss'
+import { Logo } from '@components';
+import './page.scss';
 
 export default function Home() {
+
+
+  const BASE_CLASS = "landing";
+
   return (
-    <main>
-      
+    <main className={BASE_CLASS}>
+      <Logo></Logo>
     </main>
   )
 }
