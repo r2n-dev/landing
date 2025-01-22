@@ -6,7 +6,9 @@ import { HomeStyled } from "./home.styled";
 export default function Home() {
   return (
     <HomeStyled>
-      <Logo></Logo>
+      <Logo size="large"></Logo>
+      <Logo size="medium"></Logo>
+      <Logo size="small"></Logo>
       <Typography
         variant="h6"
         component={"a"}
