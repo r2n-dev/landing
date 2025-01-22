@@ -8,6 +8,7 @@ const audiowide = Audiowide({
 
 const Logo: React.FC = () => {
   return <span className={`${audiowide.className}`}>R2N</span>;
+  
 };
 
 export { Logo };

@@ -5,7 +5,9 @@ import theme from "./theme";
 const MuiWrapper = ({ children }: { children: React.ReactNode }) => {
     return (
         <AppRouterCacheProvider>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            <ThemeProvider theme={theme}>
+                {children}
+            </ThemeProvider>
         </AppRouterCacheProvider>
     );
 };

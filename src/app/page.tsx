@@ -1,15 +1,7 @@
-import { Typography } from '@mui/material';
-import { Logo } from '../shared/components';
+import Home from "../app/home/home";
 
-export default function Home() {
-
-
-  const BASE_CLASS = "landing";
-
+export default function Page() {
   return (
-    <main className={BASE_CLASS}>
-      <Logo></Logo>
-      <Typography variant="h6" component={'a'} href="https://www.linkedin.com/in/andres-artunduaga/" >About Me</Typography>
-    </main>
-  )
+    <Home></Home>
+  );
 }
