@@ -8,14 +8,14 @@ import {
   LinkedIn,
 } from "@mui/icons-material";
 import {
-    Box,
+  Box,
   Card,
   CardContent,
   CardMedia,
   Chip,
   Container,
   Divider,
-  Grid,
+  Grid2 as Grid,
   Link,
   List,
   ListItem,
@@ -30,12 +30,17 @@ const WhoIsAndres: React.FC = () => {
     <Container maxWidth="md">
       <Grid container spacing={3} mt={5}>
         {/* Profile Picture and Basic Information */}
-        <Grid item xs={12} md={4}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 4,
+          }}
+        >
           <Card>
             <CardMedia
               component="img"
               height="300"
-            //   image="your_profile_picture.jpg" // Replace with your actual picture
+              //   image="your_profile_picture.jpg" // Replace with your actual picture
               src="https://andres-artunduaga.github.io/resume/assets/Andres.png"
               alt="Andrés Artunduaga"
             />
@@ -51,7 +56,7 @@ const WhoIsAndres: React.FC = () => {
                   <ListItemIcon>
                     <Email />
                   </ListItemIcon>
-                  <ListItemText primary="andres@r2n.dev"/>
+                  <ListItemText primary="andres@r2n.dev" />
                 </ListItem>
                 <ListItem>
                   <ListItemIcon>
@@ -71,7 +76,12 @@ const WhoIsAndres: React.FC = () => {
         </Grid>
 
         {/* About Me and Experience */}
-        <Grid item xs={12} md={8}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 8,
+          }}
+        >
           <Card>
             <CardContent>
               {/* About Me Section */}
@@ -134,25 +144,32 @@ const WhoIsAndres: React.FC = () => {
                     secondary="May 2023 - August 2023"
                   />
                 </ListItem> */}
-                {/* ... more experience items ... */}
+              {/* ... more experience s ... */}
               {/* </List> */}
             </CardContent>
           </Card>
         </Grid>
 
         {/* Skills and Education */}
-        <Grid item xs={12} md={6}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 6,
+          }}
+        >
           <Card>
             <CardContent>
               <Typography variant="h4" gutterBottom>
                 Skills
               </Typography>
               {/* You could use Chip components, a List, or any other suitable component to display skills */}
-              <Box sx={{
-                display: 'flex',
-                gap: 1,
-                flexWrap: 'wrap',
-              }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 1,
+                  flexWrap: "wrap",
+                }}
+              >
                 <Chip label="React" />
                 <Chip label="Angular" />
                 <Chip label="JavaScript" />
@@ -165,7 +182,12 @@ const WhoIsAndres: React.FC = () => {
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 6,
+          }}
+        >
           <Card>
             <CardContent>
               <Typography variant="h4" gutterBottom>
@@ -187,7 +209,12 @@ const WhoIsAndres: React.FC = () => {
         </Grid>
 
         {/* Social Media Links */}
-        <Grid item xs={12} align="center">
+        <Grid
+          size={{
+            xs: 12,
+            md: 8,
+          }}
+        >
           <Typography variant="h4" gutterBottom>
             Connecting
           </Typography>
