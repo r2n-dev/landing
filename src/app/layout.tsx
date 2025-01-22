@@ -12,7 +12,7 @@ import {
   ShoppingCart,
   Work,
 } from "@mui/icons-material";
-import { demoTheme } from "../mui/theme";
+import theme, { demoTheme } from "../mui/theme";
 import { Logo } from "@components";
 
 const roboto = Roboto({
@@ -59,28 +59,28 @@ export default function RootLayout({
       kind: "header",
       title: "Tools",
     },
-    // {
-    //   segment: "reports",
-    //   title: "Reports",
-    //   icon: <BarChart />,
-    //   children: [
-    //     {
-    //       segment: "sales",
-    //       title: "Sales",
-    //       icon: <Description />,
-    //     },
-    //     {
-    //       segment: "traffic",
-    //       title: "Traffic",
-    //       icon: <Description />,
-    //     },
-    //   ],
-    // },
-    // {
-    //   segment: "integrations",
-    //   title: "Integrations",
-    //   icon: <Layers />,
-    // },
+    {
+      segment: "reports",
+      title: "Reports",
+      icon: <BarChart />,
+      children: [
+        {
+          segment: "sales",
+          title: "Sales",
+          icon: <Description />,
+        },
+        {
+          segment: "traffic",
+          title: "Traffic",
+          icon: <Description />,
+        },
+      ],
+    },
+    {
+      segment: "integrations",
+      title: "Integrations",
+      icon: <Layers />,
+    },
   ];
 
   return (
@@ -91,12 +91,12 @@ export default function RootLayout({
             branding={{
               title: "",
               logo: <Logo size="small" />,
-              homeUrl: "/",
+              homeUrl: "/who-is-andres",
             }}
             navigation={NAVIGATION}
-            theme={demoTheme}
+            theme={theme}
           >
-            <DashboardLayout>{children}</DashboardLayout>
+            <DashboardLayout hideNavigation>{children}</DashboardLayout>
           </AppProvider>
         </MuiWrapper>
       </body>
