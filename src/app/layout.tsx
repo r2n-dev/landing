@@ -1,5 +1,6 @@
 import { Roboto } from "next/font/google";
 import MuiWrapper from "../mui/MuiWrapper";
+import { Container, CssBaseline } from "@mui/material";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -23,7 +24,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.variable}>
         <MuiWrapper>
-          {children}
+          <Container>
+            {children}
+          </Container>
         </MuiWrapper>
       </body>
     </html>
