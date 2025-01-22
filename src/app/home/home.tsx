@@ -16,9 +16,6 @@ export default function Home() {
       >
         About Me
       </Typography>
-      <span>
-        Hey aooke
-      </span>
     </HomeStyled>
   );
 }
