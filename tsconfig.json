@@ -24,7 +24,7 @@
     ],
     "paths": {
       "@components": [
-        "./shared/components"
+        "./src/shared/components"
       ]
     },
     "target": "ES2017"
