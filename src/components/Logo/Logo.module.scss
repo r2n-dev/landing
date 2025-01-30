@@ -2,6 +2,18 @@
 @import "shadows.scss";
 
 .logo {
-    display: flex;
+  display: flex;
+  font-size: $size-9;
+
+  &.small {
+    font-size: $size-5;
+  }
+
+  &.medium {
+    font-size: $size-7;
+  }
+
+  &.large {
     font-size: $size-9;
+  }
 }
