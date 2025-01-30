@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.scss";
 import { inter } from "./fonts";
 import { Header } from "@/components";
+import ContentWrapper from "@/components/ContentWrapper/ContentWrapper";
 
 export const metadata: Metadata = {
   title: "R2N",
@@ -17,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className}`}>
         <Header></Header>
-        {children}
+        <ContentWrapper>{children}</ContentWrapper>
       </body>
     </html>
   );
