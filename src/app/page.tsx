@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./page.module.scss";
 
 export default function Home() {
@@ -5,12 +6,17 @@ export default function Home() {
     <main className={styles.home}>
       <section className={styles.hero}>
         <div className={styles.left}>
+          <Image
+            src={`/undraw/undraw_version-control_eiam.svg`}
+            alt="hero-image"
+            width={300}
+            height={300}
+          ></Image>
+        </div>
+        <div className={styles.right}>
           <p>Hello, i'm</p>
           <h1>Andres Artunduaga</h1>
           <p>Frontend Developer</p>
-        </div>
-        <div className={styles.right}>
-
         </div>
       </section>
     </main>

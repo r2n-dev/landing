@@ -1,5 +1,5 @@
-@import "sizes.scss";
-@import "shadows.scss";
+@use 'sizes' as *;
+@use 'shadows' as *;
 
 .logo {
   display: flex;

@@ -1,6 +1,6 @@
 
-@import "sizes.scss";
-@import "shadows.scss";
+@use 'sizes' as *;
+@use 'shadows' as *;
 
 .header {
     align-items: center;

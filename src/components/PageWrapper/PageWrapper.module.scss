@@ -1,4 +1,4 @@
-@import "sizes.scss";
+@use 'sizes' as *;
 
 .pageWrapper {
     display: flex;
