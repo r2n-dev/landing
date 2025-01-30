@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 import { inter } from "./fonts";
-import { Header } from "@/components";
-import PageWrapper from "@/components/PageWrapper/PageWrapper";
-import Footer from "@/components/Footer/Footer";
+import { Footer, Header, PageWrapper } from "@/components";
 
 export const metadata: Metadata = {
   title: "R2N",
