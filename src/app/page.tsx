@@ -14,7 +14,7 @@ export default function Home() {
           ></Image>
         </div>
         <div className={styles.right}>
-          <p>Hello, i'm</p>
+          <p>Hello, I&apos;m</p>
           <h1>Andres Artunduaga</h1>
           <p>Frontend Developer</p>
         </div>
