@@ -1,0 +1,10 @@
+@import "sizes.scss";
+@import "shadows.scss";
+
+.footer {
+    display: flex;
+    justify-content: center;
+    box-shadow: $shadow-3;
+    width: 100%;
+    padding: $size-1 $size-2;
+}
