@@ -1,16 +1,21 @@
-@import "sizes.scss";
-@import "shadows.scss";
-
+@use "palette" as *;
+@use "sizes" as *;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #{$color-oxford-blue};
+  --color-secondary: #{$color-orange-web};
+  --color-tertiary: #{$color-platinum};
+  --color-light: #{$color-white-smoke};
+  --color-dark: #{$color-night};
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-primary: #{$color-oxford-blue};
+    --color-secondary: #{$color-orange-web};
+    --color-tertiary: #{$color-platinum};
+    --color-light: #{$color-white-smoke};
+    --color-dark: #{$color-night};
   }
 }
 
@@ -21,8 +26,8 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: $color-dark;
+  background: $color-light;
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

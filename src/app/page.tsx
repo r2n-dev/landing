@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.scss";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -17,6 +18,16 @@ export default function Home() {
           <p>Hello, I&apos;m</p>
           <h1>Andres Artunduaga</h1>
           <p>Frontend Developer</p>
+          <div className={styles.links}>
+            <div className={styles.link}>
+              <Link
+                href="https://www.linkedin.com/in/andres-artunduaga/"
+                target="_blank"
+              >
+                LinkedIn
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </main>
