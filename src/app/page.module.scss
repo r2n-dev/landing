@@ -1,5 +1,5 @@
-@use 'sizes' as *;
-@use 'palette' as *;
+@use "sizes" as *;
+@use "palette" as *;
 
 .home {
   display: flex;
@@ -7,7 +7,6 @@
   padding: 1px;
 
   .hero {
-
     display: flex;
     width: 100%;
     height: 500px;
@@ -20,7 +19,7 @@
       display: flex;
       flex-direction: column;
     }
-    
+
     .right {
       display: flex;
       flex-direction: column;
@@ -30,10 +29,10 @@
       margin-top: $size-3;
       .link {
         &:hover {
-          color: $color-secondary;
+          color: $color-primary;
         }
+        
       }
     }
-  
   }
 }
