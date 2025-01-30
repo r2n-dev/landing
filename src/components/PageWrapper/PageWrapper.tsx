@@ -6,7 +6,7 @@ interface PageWrapperProps {}
 const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = ({
   children,
 }) => {
-  return <div className={styles.PageWrapper}>{children}</div>;
+  return <div className={styles.pageWrapper}>{children}</div>;
 };
 
 export default PageWrapper;
