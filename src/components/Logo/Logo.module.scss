@@ -1,11 +1,13 @@
 @use 'sizes' as *;
 @use 'shadows' as *;
+@use 'palette' as *;
 
 .logo {
   display: flex;
   font-size: $size-9;
   user-select: none;
   cursor: pointer;
+  color: $color-primary;
 
   &.small {
     font-size: $size-5;

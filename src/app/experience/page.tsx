@@ -1,9 +1,10 @@
 import React from "react";
+import { NextPage } from "next";
 import { Button, Card, Timeline } from "@/components";
 import styles from "./experience.module.scss";
 import { experienceItems } from "./experience.helpers";
 
-export const Experience: React.FC = () => {
+export const Experience: NextPage = () => {
   return (
     <div className={styles.experience}>
       <Card

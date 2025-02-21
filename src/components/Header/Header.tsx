@@ -7,7 +7,7 @@ export const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <Link href="/">
-        <Logo />
+        <Logo size="large" />
       </Link>
     </header>
   );

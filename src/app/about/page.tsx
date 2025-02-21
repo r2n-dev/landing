@@ -1,10 +1,11 @@
 import React from "react";
+import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Button, Card } from "@/components";
 import styles from "./about.module.scss";
 
-export const About: React.FC = () => {
+export const About: NextPage = () => {
   return (
     <div className={styles.about}>
       <Card

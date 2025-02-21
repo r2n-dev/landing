@@ -7,7 +7,6 @@ type LogoProps = {
 };
 
 export const Logo: React.FC<LogoProps> = ({ size = "medium" }) => {
-    console.log(size);
   return (
     <div className={`${audiowide.className} ${styles.logo} ${styles[size]}`}>
       R2N
