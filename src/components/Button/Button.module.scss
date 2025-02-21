@@ -1,0 +1,42 @@
+@use 'palette' as *;
+@use 'sizes' as *;
+@use 'typography' as *;
+
+.button {
+  display: inline-block;
+  padding: $size-2 $size-4;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: $color-light;
+  background-color: $color-primary;
+  border: none;
+  border-radius: $size-2;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  @extend %p;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: $color-secondary;
+  }
+
+  &.small {
+    @extend %small;
+  }
+
+  &.large {
+    @extend %h6;
+  }
+
+  &.outline {
+    background-color: transparent;
+    color: $color-primary;
+    border: 2px solid $color-primary;
+
+    &:hover {
+      background-color: $color-primary;
+      color: $color-light;
+    }
+  }
+}
