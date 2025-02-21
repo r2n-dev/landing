@@ -4,3 +4,4 @@ export { Footer } from "./Footer/Footer";
 export { PageWrapper } from "./PageWrapper/PageWrapper";
 export { Card } from "./Card/Card";
 export { Button } from "./Button/Button";
+export { Timeline } from "./Timeline/Timeline";
