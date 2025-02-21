@@ -2,3 +2,4 @@ export { Header } from "./Header/Header";
 export { Logo } from "./Logo/Logo";
 export { Footer } from "./Footer/Footer";
 export { PageWrapper } from "./PageWrapper/PageWrapper";
+export { Card } from "./Card/Card";

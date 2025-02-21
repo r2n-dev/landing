@@ -1,0 +1,30 @@
+@use 'sizes' as *;
+@use 'shadows' as *;
+@use 'palette' as *;
+@use 'typography' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  box-shadow: $shadow-3;
+  background-color: $color-light;
+  border-radius: $size-5;
+  width: 100%;
+  margin: $size-3 auto;
+
+  .header {
+    display: flex;
+    align-items: center;
+    padding: $size-3;
+  }
+
+  .content {
+    padding: $size-3;
+  }
+
+  .footer {
+    padding: $size-3;
+    display: flex;
+    align-items: center;
+  }
+}
