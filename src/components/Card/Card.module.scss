@@ -17,10 +17,12 @@
     display: flex;
     align-items: center;
     padding: $size-3;
+    border-bottom: 1px solid $color-gray-300;
   }
 
   .content {
     padding: $size-3;
+    overflow-y: scroll;
   }
 
   .footer {

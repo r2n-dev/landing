@@ -1,29 +1,9 @@
 import React from "react";
 import { Card, Timeline } from "@/components";
 import styles from "./experience.module.scss";
-
+import { experienceItems } from "./experience.helpers";
 
 export const Experience: React.FC = () => {
-  const experienceItems = [
-    {
-      date: "2019 - Present",
-      title: "Software Engineer",
-      description:
-        "Developed and maintained web applications using React, Angular, and Node.js.",
-    },
-    {
-      date: "2016 - 2019",
-      title: "Frontend Developer",
-      description: "Built responsive websites using HTML, CSS, and JavaScript.",
-    },
-    {
-      date: "2014 - 2016",
-      title: "Web Designer",
-      description:
-        "Designed user interfaces and experiences for web applications.",
-    },
-  ];
-
   return (
     <div className={styles.experience}>
       <Card
@@ -32,24 +12,27 @@ export const Experience: React.FC = () => {
       >
         <Timeline
           items={experienceItems.map((item, index) => (
-            <div
-              key={index}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: index % 2 === 1 ? "flex-start" : "flex-end",
-                padding: "1rem",
-              }}
-            >
-              <h5>{item.date}</h5>
+            <div key={index} className={styles.timelineItem}>
               <h6>{item.title}</h6>
-              <p
+              <span
                 style={{
-                  textAlign: index % 2 === 1 ? "left" : "right",
+                  display: "flex",
+                  gap: "10px",
+                  fontWeight: "bold",
                 }}
               >
-                {item.description}
-              </p>
+                <small>🏢 {item.company}</small>
+                <small>📍 {item.location}</small>
+              </span>
+              <small
+                style={{
+                  fontWeight: "bold",
+                }}
+              >📆 {item.date}</small>
+              <p style={{
+                marginTop: "10px",
+                textAlign: "justify",
+              }} dangerouslySetInnerHTML={{ __html: item.description }} />
             </div>
           ))}
         />
