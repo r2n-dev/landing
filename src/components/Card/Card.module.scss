@@ -6,11 +6,12 @@
 .card {
   display: flex;
   flex-direction: column;
-  box-shadow: $shadow-3;
+  // box-shadow: $shadow-3;
   background-color: $color-light;
   border-radius: $size-5;
   width: 100%;
   margin: $size-3 auto;
+  border: 1px solid $color-gray-300;
 
   .header {
     display: flex;

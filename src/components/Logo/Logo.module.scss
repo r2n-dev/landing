@@ -4,6 +4,8 @@
 .logo {
   display: flex;
   font-size: $size-9;
+  user-select: none;
+  cursor: pointer;
 
   &.small {
     font-size: $size-5;

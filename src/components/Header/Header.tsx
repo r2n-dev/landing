@@ -1,11 +1,14 @@
 import React from "react";
 import styles from "./Header.module.scss";
 import { Logo } from "@/components";
+import Link from "next/link";
 
 export const Header: React.FC = () => {
   return (
     <header className={styles.header}>
-      <Logo />
+      <Link href="/">
+        <Logo />
+      </Link>
     </header>
   );
 };

@@ -4,7 +4,10 @@
 .home {
   display: flex;
   flex-direction: column;
-  padding: 1px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 
   .hero {
     display: flex;
@@ -14,6 +17,11 @@
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
+
+    .image {
+      border: 3px solid $color-primary;
+      border-radius: 50px;
+    }
 
     .left {
       display: flex;
@@ -26,13 +34,10 @@
     }
 
     .links {
-      margin-top: $size-3;
-      .link {
-        &:hover {
-          color: $color-primary;
-        }
-        
-      }
+      display: flex;
+      margin-top: $size-5;
+      gap: 10px;
     }
+      
   }
 }
