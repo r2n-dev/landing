@@ -1,11 +1,12 @@
 import React, { PropsWithChildren } from "react";
 import styles from "./Timeline.module.scss";
+import scssVars from "@/app/styles/_exported.module.scss";
 
 type TimelineItemProps = {
   bulletComponent?: React.ReactNode;
   isInitial?: boolean;
   isFinal?: boolean;
-  isOdd?: boolean;
+  isEven?: boolean;
 };
 
 type TimelineProps = {
@@ -18,7 +19,7 @@ const TimelineItem: React.FC<PropsWithChildren<TimelineItemProps>> = ({
   isInitial,
   isFinal,
   children,
-  isOdd,
+  isEven,
 }) => {
   if (!bulletComponent) {
     throw new Error("bulletComponent is required");
@@ -32,30 +33,48 @@ const TimelineItem: React.FC<PropsWithChildren<TimelineItemProps>> = ({
 
   return (
     <div
-        className={styles.timelineItem}
-        style={{
-            flexDirection: isOdd ? "row-reverse" : "row",
-            marginLeft: isOdd ? "0" : `calc(50% - ${BULLET_SIZE_PX}px)`,
-            marginRight: isOdd ? `calc(50% - ${BULLET_SIZE_PX}px)` : "0",
-        }}
+      className={styles.timelineItem}
+      style={{
+        flexDirection: isEven ? "row-reverse" : "row",
+        marginRight: isEven ? `calc(50% - ${BULLET_SIZE_PX}px)` : "0",
+        marginLeft: isEven ? "0" : `calc(50% - ${BULLET_SIZE_PX}px)`,
+      }}
     >
       <div className={styles.connector}>
-        <span className={styles.top} style={{
+        <span
+          className={styles.top}
+          style={{
             visibility: isInitial ? "hidden" : "visible",
-        }}></span>
-        <span className={styles.bullet}>
-            {bulletComponent}
-        </span>
-        <span className={styles.bottom} style={{
+          }}
+        ></span>
+        <span className={styles.bullet}>{bulletComponent}</span>
+        <span
+          className={styles.bottom}
+          style={{
             visibility: isFinal ? "hidden" : "visible",
-        }}></span>
+          }}
+        ></span>
       </div>
       <div className={styles.content}>{children}</div>
     </div>
   );
 };
 
-export const Timeline: React.FC<TimelineProps> = ({ bulletComponent, items }) => {
+const DefaulBullet = () => (
+  <span
+    style={{
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      border: `2px solid ${scssVars.colorPrimary}`,
+    }}
+  />
+);
+
+export const Timeline: React.FC<TimelineProps> = ({
+  bulletComponent = <DefaulBullet />,
+  items,
+}) => {
   return (
     <div className={styles.timeline}>
       {items.map((item, index) => (
@@ -64,9 +83,9 @@ export const Timeline: React.FC<TimelineProps> = ({ bulletComponent, items }) =>
           bulletComponent={bulletComponent}
           isInitial={index === 0}
           isFinal={index === items.length - 1}
-          isOdd={index % 2 === 1}
+          isEven={index % 2 === 0}
         >
-            {item}
+          {item}
         </TimelineItem>
       ))}
     </div>

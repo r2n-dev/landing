@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Timeline } from "@/components";
 import styles from "./experience.module.scss";
-import scssVars from "@/app/styles/_exported.module.scss";
+
 
 export const Experience: React.FC = () => {
   const experienceItems = [
@@ -31,23 +31,13 @@ export const Experience: React.FC = () => {
         header={<h4 className={styles.title}>Experience</h4>}
       >
         <Timeline
-          bulletComponent={
-            <span
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: "50%",
-                border: `2px solid ${scssVars.colorPrimary}`,
-              }}
-            />
-          }
           items={experienceItems.map((item, index) => (
             <div
               key={index}
               style={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: index % 2 === 0 ? "flex-start" : "flex-end",
+                alignItems: index % 2 === 1 ? "flex-start" : "flex-end",
                 padding: "1rem",
               }}
             >
@@ -55,7 +45,7 @@ export const Experience: React.FC = () => {
               <h6>{item.title}</h6>
               <p
                 style={{
-                  textAlign: index % 2 === 0 ? "left" : "right",
+                  textAlign: index % 2 === 1 ? "left" : "right",
                 }}
               >
                 {item.description}
