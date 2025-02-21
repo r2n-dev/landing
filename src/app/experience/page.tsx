@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Timeline } from "@/components";
+import { Button, Card, Timeline } from "@/components";
 import styles from "./experience.module.scss";
 import { experienceItems } from "./experience.helpers";
 
@@ -8,7 +8,19 @@ export const Experience: React.FC = () => {
     <div className={styles.experience}>
       <Card
         className={styles.card}
-        header={<h4 className={styles.title}>Experience</h4>}
+        header={
+          <div className={styles.title}>
+            <h4>Experience</h4>
+            <Button
+              linkProps={{
+                href: "https://www.linkedin.com/in/andres-artunduaga/",
+                target: "_blank",
+              }}
+            >
+              LinkedIn
+            </Button>
+          </div>
+        }
       >
         <Timeline
           items={experienceItems.map((item, index) => (
@@ -28,11 +40,16 @@ export const Experience: React.FC = () => {
                 style={{
                   fontWeight: "bold",
                 }}
-              >📆 {item.date}</small>
-              <p style={{
-                marginTop: "10px",
-                textAlign: "justify",
-              }} dangerouslySetInnerHTML={{ __html: item.description }} />
+              >
+                📆 {item.date}
+              </small>
+              <p
+                style={{
+                  marginTop: "10px",
+                  textAlign: "justify",
+                }}
+                dangerouslySetInnerHTML={{ __html: item.description }}
+              />
             </div>
           ))}
         />

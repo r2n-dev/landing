@@ -9,7 +9,14 @@ export const About: React.FC = () => {
     <div className={styles.about}>
       <Card
         className={styles.card}
-        header={<h4 className={styles.title}>About Me</h4>}
+        header={
+          <div className={styles.title}>
+            <h4>About Me</h4>
+            <Button>
+              <Link href="/experience">Check my experience</Link>
+            </Button>
+          </div>
+        }
       >
         <div className={styles.content}>
           <div className={styles.left}>
@@ -30,11 +37,6 @@ export const About: React.FC = () => {
               reusable components. I thrive in collaborative, agile environments
               and love exploring new technologies.
             </p>
-            <div className={styles.actions}>
-              <Button>
-                <Link href="/experience">Check my experience</Link>
-              </Button>
-            </div>
           </div>
         </div>
       </Card>

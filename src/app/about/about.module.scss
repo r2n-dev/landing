@@ -15,6 +15,9 @@
 }
 
 .title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     color: $color-primary;
 }
 
@@ -31,6 +34,7 @@
         width: 200px;
         height: 200px;
         border-radius: 50%;
+        border: 2px solid $color-primary;
     }
 }
 

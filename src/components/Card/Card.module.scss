@@ -11,13 +11,13 @@
   border-radius: $size-5;
   width: 100%;
   margin: $size-3 auto;
-  border: 1px solid $color-gray-300;
+  border: 2px solid $color-gray-300;
 
   .header {
     display: flex;
     align-items: center;
     padding: $size-3;
-    border-bottom: 1px solid $color-gray-300;
+    border-bottom: 2px solid $color-gray-300;
   }
 
   .content {
