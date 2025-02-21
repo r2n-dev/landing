@@ -12,6 +12,22 @@
     text-decoration: underline;
 }
 
-.aboutMeText {
+.content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.left {
+    margin-right: $size-5;
+    .image {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+    }
+}
+
+.text {
     line-height: 1.6;
+    text-align: justify;
 }
