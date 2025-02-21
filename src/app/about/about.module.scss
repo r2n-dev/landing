@@ -1,0 +1,9 @@
+@use 'sizes' as *;
+
+.about {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: $size-2 $size-3;
+    font-size: $size-4;
+}
