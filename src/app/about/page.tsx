@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button, Card } from "@/components";
 import styles from "./about.module.scss";
 
-export const About: NextPage = () => {
+const About: NextPage = () => {
   return (
     <div className={styles.about}>
       <Card

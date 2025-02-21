@@ -4,7 +4,7 @@ import { Button, Card, Timeline } from "@/components";
 import styles from "./experience.module.scss";
 import { experienceItems } from "./experience.helpers";
 
-export const Experience: NextPage = () => {
+const Experience: NextPage = () => {
   return (
     <div className={styles.experience}>
       <Card
