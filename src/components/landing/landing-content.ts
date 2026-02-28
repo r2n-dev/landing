@@ -1,6 +1,11 @@
 import type { LandingLocale } from "./i18n";
 import { andresProfileData, type LocalizedCopy } from "./profile-data";
-import type { LandingContent, LandingExperienceItem, LandingSkillsSection } from "./landing.types";
+import type {
+  LandingContent,
+  LandingEducationSection,
+  LandingExperienceItem,
+  LandingSkillsSection,
+} from "./landing.types";
 
 type LandingContentByLocale = Record<LandingLocale, LandingContent>;
 
@@ -8,15 +13,29 @@ function getCopy(locale: LandingLocale, copy: LocalizedCopy): string {
   return copy[locale];
 }
 
-function getRecentExperience(locale: LandingLocale): LandingExperienceItem[] {
-  return andresProfileData.experiences.slice(0, 4).map((item) => ({
+function getAllExperience(locale: LandingLocale): LandingExperienceItem[] {
+  return andresProfileData.experiences.map((item) => ({
     period: getCopy(locale, item.period),
     role: getCopy(locale, item.role),
     company: item.company,
+    companyUrl: item.companyUrl,
     location: getCopy(locale, item.location),
     summary: getCopy(locale, item.summary),
     highlights: item.highlights.map((highlight) => getCopy(locale, highlight)),
   }));
+}
+
+function getEducation(locale: LandingLocale): LandingEducationSection {
+  const isSpanish = locale === "es";
+  return {
+    title: isSpanish ? "Educación" : "Education",
+    items: andresProfileData.education.map((item) => ({
+      degree: getCopy(locale, item.degree),
+      institution: item.institution,
+      period: item.period,
+      location: item.location,
+    })),
+  };
 }
 
 function getSkills(locale: LandingLocale): LandingSkillsSection {
@@ -54,7 +73,8 @@ function getLandingContent(locale: LandingLocale): LandingContent {
     portraitUrl: andresProfileData.portraitUrl,
     sections: {
       principlesTitle: isSpanish ? "Cómo trabajo" : "How I Work",
-      experienceTitle: isSpanish ? "Experiencia reciente" : "Recent Experience",
+      experienceTitle: isSpanish ? "Experiencia" : "Experience",
+      educationTitle: isSpanish ? "Educación" : "Education",
       skillsTitle: isSpanish ? "Habilidades" : "Skills",
       contactTitle: isSpanish
         ? "Construyamos algo valioso"
@@ -71,6 +91,10 @@ function getLandingContent(locale: LandingLocale): LandingContent {
       switchToDarkMode: isSpanish
         ? "Cambiar a modo oscuro"
         : "Switch to dark mode",
+    },
+    footer: {
+      madeWithLabel: isSpanish ? "Hecho con" : "Made with",
+      inCountryLabel: isSpanish ? "en Colombia" : "in Colombia",
     },
     actions: [
       {
@@ -92,22 +116,22 @@ function getLandingContent(locale: LandingLocale): LandingContent {
     ],
     stats: [
       {
-        value: isSpanish ? "10+ años" : "10+ years",
+        value: "10+",
         label: isSpanish
-          ? "Diseñando e implementando aplicaciones web escalables en producción"
-          : "Designing and implementing scalable production web applications",
+          ? "Años en producción con React, Angular y TypeScript"
+          : "Years shipping production React, Angular & TypeScript applications",
       },
       {
-        value: "React + Angular",
+        value: "8+",
         label: isSpanish
-          ? "Modernizando interfaces enterprise y liderando migraciones de plataformas"
-          : "Modernizing enterprise interfaces and leading platform migrations",
+          ? "Empresas, desde startups hasta enterprise, en equipos ágiles globales"
+          : "Companies, from startups to enterprise, in global agile teams",
       },
       {
-        value: "Design systems",
+        value: "3+",
         label: isSpanish
-          ? "Componentes reutilizables, estándares de UI y colaboración cercana con diseño"
-          : "Reusable components, UI standards, and strong design collaboration",
+          ? "Migraciones de plataforma lideradas (AngularJS → Angular → React)"
+          : "Platform migrations led (AngularJS → Angular → React)",
       },
     ],
     principles: [
@@ -130,7 +154,8 @@ function getLandingContent(locale: LandingLocale): LandingContent {
           : "I balance product delivery speed with engineering quality through clear and maintainable tradeoffs, collaborating closely with QA and design teams.",
       },
     ],
-    experience: getRecentExperience(locale),
+    experience: getAllExperience(locale),
+    education: getEducation(locale),
     skills: getSkills(locale),
     resumeAction: {
       href: andresProfileData.resumeAssets[locale],

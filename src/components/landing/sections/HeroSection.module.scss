@@ -1,0 +1,47 @@
+.card {
+  backdrop-filter: blur(6px);
+  background: var(--mantine-color-body);
+}
+
+.meta {
+  margin-bottom: var(--mantine-spacing-lg);
+}
+
+.grid {
+  align-items: center;
+  display: grid;
+  gap: var(--mantine-spacing-xl);
+  grid-template-columns: minmax(0, 1.2fr) minmax(220px, 320px);
+}
+
+.role {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.portraitFrame {
+  align-self: stretch;
+  background: var(--mantine-color-body);
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: var(--mantine-radius-lg);
+  overflow: hidden;
+}
+
+.portrait {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+@media (max-width: 62em) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portraitFrame {
+    justify-self: center;
+    max-width: 320px;
+    width: 100%;
+  }
+}

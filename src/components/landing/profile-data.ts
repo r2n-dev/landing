@@ -59,8 +59,8 @@ export interface CandidateProfile {
 export const andresProfileData: CandidateProfile = {
   name: "Andres Artunduaga",
   role: {
-    en: "Frontend Engineer",
-    es: "Ingeniero Frontend",
+    en: "Senior Frontend Engineer",
+    es: "Ingeniero Frontend Senior",
   },
   location: "Bogotá D.C, Colombia",
   phone: "+57 3195036643",
@@ -156,7 +156,12 @@ export const andresProfileData: CandidateProfile = {
         es:
           "Desarrollé, mantuve y desplegué funcionalidades de TruCare en Angular 13, asegurando continuidad operativa y evolución del producto.",
       },
-      highlights: [],
+      highlights: [
+        {
+          en: "Maintained and released TruCare product features under tight delivery schedules.",
+          es: "Mantuve y desplegué funcionalidades del producto TruCare bajo calendarios de entrega ajustados.",
+        },
+      ],
     },
     {
       id: "terminal",
@@ -180,7 +185,16 @@ export const andresProfileData: CandidateProfile = {
         es:
           "Implementé funcionalidades con Angular 12+ para plataformas dirigidas a terapeutas y di mantenimiento a una app embebida en Flutter, colaborando con QA y diseño para entregas fluidas.",
       },
-      highlights: [],
+      highlights: [
+        {
+          en: "Implemented therapist-facing features in Angular 12+ for healthcare platform workflows.",
+          es: "Implementé funcionalidades dirigidas a terapeutas en Angular 12+ para flujos de trabajo en plataformas de salud.",
+        },
+        {
+          en: "Maintained an embedded Flutter application, collaborating across QA and design teams.",
+          es: "Mantuve una aplicación embebida en Flutter, colaborando con equipos de QA y diseño.",
+        },
+      ],
     },
     {
       id: "commure-engineer-ii",
@@ -345,8 +359,14 @@ export const andresProfileData: CandidateProfile = {
       "JavaScript",
       "TypeScript",
       "Next.js",
+      "StencilJS",
+      "SingleSPA",
+      "Flutter",
+      "Python",
+      "Mantine",
       "Bootstrap",
       "MUI",
+      "Sentry",
       "Figma",
       "UX",
       "SEO",

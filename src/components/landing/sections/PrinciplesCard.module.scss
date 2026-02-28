@@ -1,0 +1,17 @@
+.card {
+  height: 100%;
+}
+
+.heading {
+  margin-bottom: var(--mantine-spacing-md);
+}
+
+.item {
+  align-items: flex-start;
+  display: flex;
+  gap: var(--mantine-spacing-sm);
+}
+
+.text {
+  flex: 1;
+}
