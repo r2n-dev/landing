@@ -134,7 +134,7 @@ function getLandingContent(locale: LandingLocale): LandingContent {
           : "Years shipping production React, Angular & TypeScript applications",
       },
       {
-        value: "8+",
+        value: "6+",
         label: isSpanish
           ? "Empresas, desde startups hasta enterprise, en equipos ágiles globales"
           : "Companies, from startups to enterprise, in global agile teams",
