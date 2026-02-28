@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
+import { seo } from "./seo";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "R2N - Andres Artunduaga",
-    short_name: "R2N",
-    description: "Andres Artunduaga personal landing page",
+    name: seo.siteName,
+    short_name: "Andres",
+    description: seo.description,
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
