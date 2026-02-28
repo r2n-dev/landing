@@ -1,31 +1,15 @@
 import type { Metadata } from "next";
+import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from "@mantine/core";
+import "@mantine/core/styles.css";
 import "./globals.scss";
-import { inter } from "./fonts";
-import { Footer, Header, PageWrapper } from "@/components";
-import {
-  DEFAULT_THEME,
-  THEME_NAMES,
-  THEME_STORAGE_KEY,
-  ThemeProvider,
-} from "@/design-system/theme";
+import { jetBrainsMono, manrope } from "./fonts";
+import { mantineTheme } from "@/theme/mantine-theme";
 
 export const metadata: Metadata = {
-  title: "R2N",
-  description: "R2N Landing Page",
+  title: "Andres Artunduaga | Frontend Engineer",
+  description:
+    "Single-page portfolio built with Next.js and Mantine.",
 };
-
-const themeInitScript = `(() => {
-  try {
-    const key = "${THEME_STORAGE_KEY}";
-    const fallback = "${DEFAULT_THEME}";
-    const validThemes = ${JSON.stringify(THEME_NAMES)};
-    const stored = window.localStorage.getItem(key);
-    const selected = validThemes.includes(stored) ? stored : fallback;
-    document.documentElement.setAttribute("data-theme", selected);
-  } catch {
-    document.documentElement.setAttribute("data-theme", "${DEFAULT_THEME}");
-  }
-})();`;
 
 export default function RootLayout({
   children,
@@ -33,16 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" {...mantineHtmlProps}>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <ColorSchemeScript defaultColorScheme="auto" />
       </head>
-      <body className={inter.className}>
-        <ThemeProvider>
-          <Header />
-          <PageWrapper>{children}</PageWrapper>
-          <Footer />
-        </ThemeProvider>
+      <body className={`${manrope.variable} ${jetBrainsMono.variable}`}>
+        <MantineProvider theme={mantineTheme} defaultColorScheme="auto">
+          {children}
+        </MantineProvider>
       </body>
     </html>
   );

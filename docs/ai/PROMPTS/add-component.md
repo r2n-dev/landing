@@ -1,20 +1,20 @@
 # Prompt: Add Component
 
-Create a reusable design-system component in this repo.
+Create a reusable Mantine-oriented component in this repo.
 
 ## Goal
 {{goal}}
 
 ## Scope
-- Build component in `src/design-system/components/{{component_name}}`
-- Export from `src/design-system/components/index.ts`
-- Document API in `docs/design-system/COMPONENT_API.md`
+- Build component in `src/components/{{component_name}}`
+- Export from `src/components/index.ts` when intended for reuse
+- Document API updates in `docs/design-system/COMPONENT_API.md`
 
 ## Constraints
-- Use semantic tokens only
+- Compose with Mantine primitives first
 - Include accessible keyboard/focus behavior
 - Provide typed variants/sizes if relevant
-- No inline styles unless absolutely necessary
+- Keep component pure and presentational when possible
 
 ## Allowed files
 {{allowed_files}}
@@ -23,7 +23,7 @@ Create a reusable design-system component in this repo.
 {{out_of_scope}}
 
 ## Acceptance criteria
-- Component renders correctly in all 4 themes
+- Component renders correctly in light and dark schemes
 - API is typed and documented
 - Lint/build pass
 

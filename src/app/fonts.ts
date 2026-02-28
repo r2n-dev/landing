@@ -1,16 +1,13 @@
-import { Inter, Roboto_Mono, Audiowide } from "next/font/google";
+import { JetBrains_Mono, Manrope } from "next/font/google";
 
-export const inter = Inter({
+export const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-sans",
 });
 
-export const roboto_mono = Roboto_Mono({
+export const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
-});
-
-export const audiowide = Audiowide({
-  subsets: ["latin"],
-  weight: "400",
+  variable: "--font-mono",
 });

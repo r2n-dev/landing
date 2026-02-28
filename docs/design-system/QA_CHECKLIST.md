@@ -1,14 +1,14 @@
 # Design System QA Checklist
 
 ## Visual
-- [ ] All 4 themes look coherent and readable.
+- [ ] Light and dark schemes are readable and coherent.
 - [ ] Hover/active/focus states are visible.
 - [ ] No clipping or overlap on small screens.
 
 ## Functional
-- [ ] Theme switch persists after refresh.
-- [ ] Header/footer/layout render correctly on all routes.
-- [ ] Component variants behave as documented.
+- [ ] Landing page sections render correctly.
+- [ ] Color scheme toggle works and persists.
+- [ ] External links and anchors work as expected.
 
 ## Accessibility
 - [ ] Keyboard navigation works.

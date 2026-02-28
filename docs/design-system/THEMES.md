@@ -1,17 +1,17 @@
 # Themes
 
-## Supported Themes
-- `light-solar`
-- `light-azure`
-- `dark-slate`
-- `dark-ember`
+## Supported Color Schemes
+- `light`
+- `dark`
+- `auto` (follows OS preference)
 
 ## Runtime Behavior
-- Selected theme is applied to `<html data-theme="...">`.
-- Preference is persisted in `localStorage` key `r2n_theme`.
-- Default theme is `light-solar`.
+- `ColorSchemeScript` runs in layout head.
+- `<html>` receives Mantine hydration-safe attributes via `mantineHtmlProps`.
+- `MantineProvider` controls runtime scheme and theme tokens.
+- Choice is persisted by Mantine local storage manager.
 
 ## Quality Bar
-- Text remains readable across surfaces.
+- Text remains readable on all surfaces.
 - Interactive elements have visible hover/focus states.
-- Border contrast remains clear on all backgrounds.
+- Contrast remains clear for borders and dividers.

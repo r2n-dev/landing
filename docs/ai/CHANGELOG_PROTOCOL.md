@@ -1,6 +1,6 @@
 # Changelog Protocol
 
-Use this protocol when a task changes public component contracts, theme behavior, or token semantics.
+Use this protocol when a task changes public component contracts, Mantine theme behavior, or workflow conventions.
 
 ## Entry Structure
 - Date
@@ -10,10 +10,10 @@ Use this protocol when a task changes public component contracts, theme behavior
 - Migration notes (if any)
 
 ## Required for
-- New primitive components
-- New component variants/sizes/tones
-- New or changed semantic tokens
-- Theme behavior changes (naming, persistence, defaults)
+- New reusable components in `src/components/*`
+- Theme changes in `src/theme/mantine-theme.ts`
+- Changes to color scheme runtime behavior
+- Significant AI workflow/rules changes
 
 ## Optional for
 - Internal refactors with no contract changes

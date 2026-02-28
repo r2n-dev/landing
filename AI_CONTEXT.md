@@ -1,28 +1,30 @@
 # AI Context
 
 ## Project Snapshot
-- Framework: Next.js (App Router) + TypeScript + SCSS modules.
-- Design system root: `src/design-system`.
-- Existing app routes: `/`, `/about`, `/experience`, `/testforms`, `/design-system`.
+- Framework: Next.js (App Router) + TypeScript.
+- UI library: Mantine (`@mantine/core`, `@mantine/hooks`).
+- Styling: Mantine styles + SCSS modules for page/layout structure.
+- Active route scope: single landing page at `/`.
 
 ## Critical Paths
-- Theme runtime: `src/design-system/theme/*`
-- Tokens/themes: `src/design-system/styles/*`
-- Reusable primitives: `src/design-system/components/*`
-- Compatibility exports: `src/components/index.ts`
+- Root runtime: `src/app/layout.tsx`
+- Mantine theme: `src/theme/mantine-theme.ts`
+- Landing UI: `src/components/landing/*`
+- Scheme toggle: `src/components/theme/ColorSchemeToggle.tsx`
 
 ## Theme Contract
-- Themes: `light-solar`, `light-azure`, `dark-slate`, `dark-ember`.
-- HTML selector: `data-theme` on `<html>`.
-- Persistence key: `r2n_theme`.
+- Use Mantine color schemes: `light`, `dark`, `auto`.
+- Keep `ColorSchemeScript` in layout `<head>`.
+- Keep `mantineHtmlProps` on `<html>`.
+- Rely on Mantine local storage manager default key (`mantine-color-scheme-value`).
 
 ## UI Composition Rules
-- Build new views with primitives (`Button`, `Card`, `Text`, `Stack`, `Container`) before introducing page-specific components.
-- If a pattern repeats 2+ times, extract a reusable component.
-- Prefer class-based styling over inline `style` objects.
+- Start with Mantine primitives (`Container`, `Card`, `Stack`, `Button`, `Text`, etc.).
+- Extract custom components only when a pattern repeats or improves readability.
+- Keep custom components presentational where possible.
 
 ## Before Shipping Any Change
-1. Verify all themes visually for regressions.
+1. Verify light and dark schemes visually.
 2. Verify keyboard navigation and focus states.
 3. Run lint/build checks.
-4. Update docs when introducing new tokens, component variants, or layout patterns.
+4. Update docs when public APIs, theme behavior, or workflow expectations change.

@@ -2,26 +2,26 @@
 
 ## Functional
 - [ ] Behavior matches requested scope.
-- [ ] Existing routes/components still work.
+- [ ] Only intended route(s) and components changed.
 
-## Design System
-- [ ] Semantic tokens used instead of hardcoded values.
-- [ ] New variants follow existing naming conventions.
-- [ ] Components are reusable and not page-coupled.
+## Mantine System
+- [ ] Mantine components/variants used before custom CSS.
+- [ ] Theme changes are centralized in `src/theme/mantine-theme.ts`.
+- [ ] No legacy design-system runtime/tokens reintroduced.
 
 ## Accessibility
 - [ ] Keyboard navigation works.
 - [ ] Focus state visible.
-- [ ] Contrast remains readable in all themes.
+- [ ] Contrast remains readable in light and dark schemes.
 
 ## Code Quality
 - [ ] Types are explicit for public APIs.
-- [ ] No unnecessary complexity or dead code.
-- [ ] No unsafe inline style debt introduced.
+- [ ] Components remain pure and low-complexity.
+- [ ] No unnecessary inline style debt.
 
 ## Validation
 - [ ] `npm run lint`
 - [ ] `npm run build`
 
 ## Docs
-- [ ] Updated docs for any API/theme/token changes.
+- [ ] Updated docs for API/theme/workflow changes.

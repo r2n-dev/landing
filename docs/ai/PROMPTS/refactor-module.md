@@ -1,6 +1,6 @@
 # Prompt: Refactor Module
 
-Refactor an existing module to align with the design system.
+Refactor an existing module to align with Mantine architecture.
 
 ## Goal
 {{goal}}
@@ -10,8 +10,8 @@ Refactor an existing module to align with the design system.
 
 ## Constraints
 - Preserve behavior unless explicitly requested
-- Replace hardcoded values with semantic tokens
-- Remove inline style objects when feasible
+- Replace bespoke UI code with Mantine primitives where practical
+- Reduce complexity and keep components pure
 
 ## Allowed files
 {{allowed_files}}
@@ -21,7 +21,7 @@ Refactor an existing module to align with the design system.
 
 ## Acceptance criteria
 - Behavior remains intact
-- DS compliance improved
+- Mantine alignment improved
 - Lint/build pass
 
 ## Validation commands

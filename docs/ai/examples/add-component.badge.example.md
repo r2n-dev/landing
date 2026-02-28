@@ -1,31 +1,30 @@
 # Example: Add Component Prompt (Badge)
 
 ## Goal
-Add a reusable `Badge` primitive for labels and statuses.
+Add a reusable `StatusBadge` component built with Mantine `Badge`.
 
 ## Scope
-- Create `src/design-system/components/Badge/Badge.tsx`
-- Create `src/design-system/components/Badge/Badge.module.scss`
-- Export it from `src/design-system/components/index.ts`
+- Create `src/components/StatusBadge/StatusBadge.tsx`
+- Export from `src/components/index.ts`
 - Document props in `docs/design-system/COMPONENT_API.md`
 
 ## Constraints
-- Semantic tokens only
+- Mantine-first composition
 - Variants: `neutral`, `success`, `warning`, `danger`, `accent`
 - Sizes: `sm`, `md`
-- Accessible contrast in all themes
+- Accessible contrast in light and dark schemes
 
 ## Allowed files
-- `src/design-system/components/Badge/*`
-- `src/design-system/components/index.ts`
+- `src/components/StatusBadge/*`
+- `src/components/index.ts`
 - `docs/design-system/COMPONENT_API.md`
 
 ## Out of scope
 - No route/page redesign
-- No additional theme creation
+- No new package additions
 
 ## Acceptance criteria
-- Badge works in all themes
+- Badge works in light and dark schemes
 - API typed and documented
 - `npm run lint` and `npm run build` pass
 

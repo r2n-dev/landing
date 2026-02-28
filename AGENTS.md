@@ -3,12 +3,12 @@
 This repository is optimized for AI-assisted development.
 
 ## Mission
-Implement portfolio features using the local design system and keep all UI work theme-safe, reusable, and accessible.
+Build and maintain a single-page portfolio landing experience using Mantine as the only UI component library.
 
 ## Non-Negotiable Rules
-- Use semantic design tokens. Do not hardcode colors, shadows, spacing, font sizes, or radii in components.
-- Do not add inline styles in `.tsx` files unless there is no CSS alternative and the reason is documented.
-- Keep components reusable and variant-based instead of page-specific.
+- Prefer Mantine primitives before creating custom wrappers.
+- Keep custom components pure and reusable with typed props.
+- Centralize theme decisions in `src/theme/mantine-theme.ts`.
 - Preserve responsive behavior for mobile and desktop.
 - Keep changes focused; avoid unrelated refactors.
 
@@ -19,19 +19,14 @@ Implement portfolio features using the local design system and keep all UI work 
 4. Run validation commands from `CONTRIBUTING.md`.
 5. Self-review with `docs/ai/REVIEW_CHECKLIST.md` before finalizing.
 
-## Design System Guardrails
-- Theme names: `light-solar`, `light-azure`, `dark-slate`, `dark-ember`.
-- Use only semantic CSS variables in UI components (for example `--color-bg-surface`).
-- New components must expose typed props for variants/sizes where relevant.
-- New sections/pages must be composed from primitives when possible.
-
-## Skills
-Codex skills for this repo live in `.codex/skills/`.
-- `design-system-core`: token, theme, and primitive component work.
-- `portfolio-feature-builder`: adding portfolio sections/pages with DS conventions.
+## Mantine Guardrails
+- Color schemes: `light`, `dark`, `auto`.
+- Runtime setup must use `ColorSchemeScript`, `mantineHtmlProps`, and `MantineProvider` in App Router layout.
+- Prefer theme-level overrides over one-off component styling.
+- Avoid inline style objects unless no Mantine prop, class, or styles API alternative exists.
 
 ## Definition of Done
-- Feature works in all themes.
+- Landing page works in light and dark schemes.
 - No contrast regressions or broken focus states.
-- No new inline style debt.
-- Docs updated when public component/theme APIs change.
+- Components remain pure and reusable.
+- Docs updated when theme or public component APIs change.

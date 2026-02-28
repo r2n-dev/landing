@@ -10,6 +10,9 @@
     "check:ds": "npm run lint && npm run build"
   },
   "dependencies": {
+    "@mantine/core": "^8.3.15",
+    "@mantine/hooks": "^8.3.15",
+    "@tabler/icons-react": "^3.37.1",
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

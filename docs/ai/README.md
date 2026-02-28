@@ -1,6 +1,6 @@
 # AI Docs
 
-This folder contains model-agnostic instructions for implementing and reviewing changes in this repository.
+This folder contains model-agnostic instructions for implementing and reviewing changes in this Mantine-based repository.
 
 ## Start Here
 1. `docs/ai/RULES.md`

@@ -1,14 +1,14 @@
 import type { NextConfig } from "next";
-import path from 'path';
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  sassOptions: {
-    includePaths: [path.join(__dirname, 'src/app/styles')],
-  },
   images: {
-    domains: ['andres-artunduaga.github.io'],
-  }
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "andres-artunduaga.github.io",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

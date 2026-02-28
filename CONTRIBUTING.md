@@ -9,15 +9,15 @@
 - Build production bundle: `npm run build`.
 - Lint code: `npm run lint`.
 
-## Design System Rules
-- Place reusable primitives under `src/design-system/components`.
-- Place theme/token files under `src/design-system/styles`.
-- Keep route-specific styles inside route/module SCSS files.
-- Prefer semantic tokens over raw values.
+## UI System Rules
+- Use Mantine components first.
+- Keep theme overrides in `src/theme/mantine-theme.ts`.
+- Keep landing page composition in `src/components/landing/*`.
+- Use SCSS modules only for structural/custom styling not covered by Mantine props.
 
 ## Pull Request Checklist
 - [ ] Scope is limited to the task.
-- [ ] New UI is tokenized and theme-aware.
+- [ ] UI aligns with Mantine theme and component patterns.
 - [ ] Responsive layout checked at mobile and desktop widths.
 - [ ] Keyboard focus visible for interactive elements.
 - [ ] `npm run lint` passes.

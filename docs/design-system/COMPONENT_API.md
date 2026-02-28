@@ -1,32 +1,31 @@
 # Component API
 
-## Button
-Props:
-- `variant`: `solid | outline | ghost`
-- `size`: `sm | md | lg`
-- `href?`, `target?`, `onClick?`, `fullWidth?`
+## LandingPage
+File: `src/components/landing/LandingPage.tsx`
 
-## Card
 Props:
-- `header?`, `footer?`, `elevation?`, `children`
+- `content: LandingContent`
 
-## Text
-Props:
-- `as?`
-- `variant`: `display | h1 | h2 | h3 | h4 | h5 | h6 | body | small | label`
-- `tone`: `default | muted | accent | inverse`
+Behavior:
+- Composes the full single-page landing experience.
+- Renders hero, stats, principles, experience, and contact sections.
 
-## Stack
-Props:
-- `direction`: `row | column`
-- `gap`: `xs | sm | md | lg | xl`
-- `align?`, `justify?`, `wrap?`
+## ColorSchemeToggle
+File: `src/components/theme/ColorSchemeToggle.tsx`
 
-## Container
 Props:
-- `size`: `sm | md | lg | xl`
-- `padding`: `sm | md | lg`
+- none
 
-## ThemeSwitcher
-Props:
-- `className?`
+Behavior:
+- Toggles Mantine color scheme between light and dark.
+- Uses Mantine color scheme hooks and accessible `aria-label`.
+
+## LandingContent Types
+File: `src/components/landing/landing.types.ts`
+
+Key types:
+- `LandingAction`
+- `LandingStat`
+- `LandingPrinciple`
+- `LandingExperienceItem`
+- `LandingContent`

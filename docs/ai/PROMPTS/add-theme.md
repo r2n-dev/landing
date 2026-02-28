@@ -1,20 +1,19 @@
 # Prompt: Add Theme
 
-Add a new runtime theme to the design system.
+Update Mantine theme configuration for this repository.
 
 ## Goal
 {{goal}}
 
 ## Scope
-- Extend theme types/constants
-- Add semantic token mapping in `src/design-system/styles/themes.scss`
-- Ensure switcher shows the theme label
+- Extend `src/theme/mantine-theme.ts`
+- Keep runtime compatibility with `ColorSchemeScript` and `MantineProvider`
 - Update docs in `docs/design-system/THEMES.md`
 
 ## Constraints
-- Preserve semantic token contract
-- Maintain readable contrast for text, borders, and interactive states
-- Keep naming consistent with existing theme IDs
+- Preserve readable contrast for text, borders, and controls
+- Keep naming and palette structure consistent
+- Avoid ad-hoc style overrides when theme tokens can solve the need
 
 ## Allowed files
 {{allowed_files}}
@@ -23,8 +22,8 @@ Add a new runtime theme to the design system.
 {{out_of_scope}}
 
 ## Acceptance criteria
-- Theme can be selected in UI and persists
-- No broken contrast in core routes
+- Theme update is visible in UI
+- No broken contrast in light/dark schemes
 - Docs updated
 
 ## Validation commands
@@ -33,6 +32,6 @@ Add a new runtime theme to the design system.
 
 ## Expected output format
 - Summary
-- Theme token diff
+- Theme diff
 - Files changed
 - Validation results

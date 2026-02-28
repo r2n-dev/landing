@@ -1,13 +1,14 @@
 # Migration Guide
 
-## From Legacy Styles to Design System
-1. Replace palette imports with semantic CSS variables.
-2. Replace repeated layout wrappers with `Container` and `Stack`.
-3. Replace page-specific button/card styles with primitives and variants.
-4. Remove inline style objects and move to CSS modules.
-5. Validate all themes and responsive breakpoints.
+## Legacy to Mantine
+1. Remove legacy local design-system runtime and primitives.
+2. Install and configure Mantine provider in App Router layout.
+3. Create centralized Mantine theme overrides.
+4. Rebuild route UI with Mantine primitives.
+5. Keep only required routes/components for current product scope.
+6. Update AI and design-system docs to Mantine-first conventions.
 
-## Common Replacements
-- Hardcoded spacing -> `var(--space-*)`
-- Hardcoded colors -> `var(--color-*)`
-- Route-specific card/button styles -> DS primitives
+## Repository Status
+- Legacy `src/design-system/*` removed.
+- Multi-route portfolio replaced with a single landing page.
+- Theme runtime now fully managed by Mantine.

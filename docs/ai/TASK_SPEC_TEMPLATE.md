@@ -9,7 +9,7 @@ Describe the user outcome in one paragraph.
 
 ## Constraints
 - Technical constraints:
-- Design system constraints:
+- Mantine/theme constraints:
 - Accessibility constraints:
 
 ## Allowed Files

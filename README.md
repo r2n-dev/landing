@@ -1,12 +1,13 @@
 # R2N Portfolio Landing
 
-Personal portfolio built with Next.js App Router, TypeScript, and a local design system with runtime themes.
+Single-page portfolio built with Next.js App Router, TypeScript, and Mantine.
 
 ## Tech Stack
 - Next.js 15
 - React 19
 - TypeScript
-- SCSS modules
+- Mantine (`@mantine/core`, `@mantine/hooks`)
+- SCSS modules (for structural styling)
 
 ## Local Setup
 1. Use Node version from `.nvmrc`.
@@ -24,27 +25,20 @@ Personal portfolio built with Next.js App Router, TypeScript, and a local design
 - `npm run lint` - run lint checks
 - `npm run build` - build production bundle
 - `npm run start` - run production server
-- `npm run check:ds` - lint + build design-system validation gate
+- `npm run check:ds` - lint + build validation gate
 
-## Design System
-- Tokens and themes: `src/design-system/styles`
-- Theme runtime: `src/design-system/theme`
-- Reusable primitives: `src/design-system/components`
-- Living docs route: `/design-system`
+## Mantine Architecture
+- Runtime shell: `src/app/layout.tsx`
+- Theme contract: `src/theme/mantine-theme.ts`
+- Landing components: `src/components/landing/*`
+- Color scheme toggle: `src/components/theme/ColorSchemeToggle.tsx`
 
-Supported themes:
-- `light-solar`
-- `light-azure`
-- `dark-slate`
-- `dark-ember`
-
-Theme selection is persisted with `localStorage` key `r2n_theme`.
+Color scheme is managed by Mantine (`light`, `dark`, `auto`) and persisted automatically.
 
 ## AI Contributor Pack
 - Root policies: `AGENTS.md`, `AI_CONTEXT.md`, `CONTRIBUTING.md`
 - Model-agnostic docs: `docs/ai/*`
-- Codex skills: `.codex/skills/*`
-- Design system docs: `docs/design-system/*`
+- Mantine workflow docs: `docs/design-system/*`
 
 Start from:
 1. `AI_CONTEXT.md`

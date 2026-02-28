@@ -3,7 +3,7 @@
 Perform a risk-focused code review for this change.
 
 ## Goal
-Identify bugs, regressions, accessibility issues, and design-system violations.
+Identify bugs, regressions, accessibility issues, and Mantine usage problems.
 
 ## Scope
 {{scope}}

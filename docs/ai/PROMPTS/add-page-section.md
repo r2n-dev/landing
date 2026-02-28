@@ -1,18 +1,18 @@
 # Prompt: Add Page Section
 
-Add a new portfolio section/page using existing design-system primitives.
+Add or update a landing page section using Mantine components.
 
 ## Goal
 {{goal}}
 
 ## Scope
-- Implement page/section UI
-- Reuse `Container`, `Stack`, `Card`, `Text`, and `Button` where possible
+- Implement section UI in `src/components/landing/*` or `src/app/page.tsx`
+- Reuse existing landing components before introducing new ones
 - Keep layout responsive
 
 ## Constraints
-- Tokenized styling only
-- Do not duplicate component logic already in primitives
+- Mantine-first composition
+- Keep custom components pure and typed
 - Keep motion subtle
 
 ## Allowed files
@@ -23,8 +23,8 @@ Add a new portfolio section/page using existing design-system primitives.
 
 ## Acceptance criteria
 - Responsive at mobile and desktop
-- Works in all themes
-- No inline style debt
+- Works in light and dark schemes
+- No unnecessary styling debt
 
 ## Validation commands
 - `npm run lint`
@@ -33,5 +33,5 @@ Add a new portfolio section/page using existing design-system primitives.
 ## Expected output format
 - Summary
 - Files changed
-- Reused primitives
+- Reused/added components
 - Validation results

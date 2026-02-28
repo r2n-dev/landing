@@ -1,16 +1,16 @@
 # Design System Overview
 
 ## Purpose
-Provide a reusable, theme-safe UI foundation for this portfolio.
+Use Mantine as the UI foundation for the portfolio landing page, with minimal custom abstractions.
 
 ## Architecture
-- Core tokens: scale values for spacing, radius, typography, motion, and shadows.
-- Semantic tokens: UI meaning values applied per theme.
-- Runtime themes selected via `data-theme` on `<html>`.
-- Primitives under `src/design-system/components`.
+- Mantine runtime provider configured in `src/app/layout.tsx`.
+- Theme overrides defined in `src/theme/mantine-theme.ts`.
+- Landing composition in `src/components/landing/*`.
+- Color scheme toggle in `src/components/theme/ColorSchemeToggle.tsx`.
 
 ## Principles
-- Reuse over duplication.
-- Semantic token usage over hardcoded styles.
-- Accessibility and contrast are first-class constraints.
-- Keep public APIs typed, minimal, and documented.
+- Mantine-first composition.
+- Pure, typed custom components.
+- Accessibility and contrast as default constraints.
+- Keep theme concerns centralized.

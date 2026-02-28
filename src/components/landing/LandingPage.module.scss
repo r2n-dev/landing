@@ -1,0 +1,101 @@
+.page {
+  min-height: 100vh;
+  padding: clamp(2rem, 4vw, 4rem) 0 clamp(3rem, 5vw, 5rem);
+  position: relative;
+}
+
+.page::before {
+  background:
+    radial-gradient(circle at 0% 10%, var(--mantine-primary-color-light) 0%, transparent 45%),
+    radial-gradient(circle at 90% 20%, var(--mantine-color-cyan-light) 0%, transparent 30%);
+  content: "";
+  inset: 0;
+  opacity: 0.75;
+  pointer-events: none;
+  position: absolute;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+.heroCard {
+  backdrop-filter: blur(6px);
+  background: var(--mantine-color-body);
+}
+
+.heroMeta {
+  margin-bottom: var(--mantine-spacing-lg);
+}
+
+.heroGrid {
+  align-items: center;
+  display: grid;
+  gap: var(--mantine-spacing-xl);
+  grid-template-columns: minmax(0, 1.2fr) minmax(220px, 320px);
+}
+
+.role {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.portraitFrame {
+  align-self: stretch;
+  background: var(--mantine-color-body);
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: var(--mantine-radius-lg);
+  overflow: hidden;
+}
+
+.portrait {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.actions {
+  gap: var(--mantine-spacing-sm);
+}
+
+.statCard {
+  background: var(--mantine-color-default-hover);
+}
+
+.principlesCard,
+.experienceCard,
+.contactCard {
+  height: 100%;
+}
+
+.sectionHeading {
+  margin-bottom: var(--mantine-spacing-md);
+}
+
+.principleItem {
+  align-items: flex-start;
+  display: flex;
+  gap: var(--mantine-spacing-sm);
+}
+
+.principleText {
+  flex: 1;
+}
+
+.timelineItemTitle {
+  line-height: 1.35;
+}
+
+@media (max-width: 62em) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .portraitFrame {
+    justify-self: center;
+    max-width: 320px;
+    width: 100%;
+  }
+}
