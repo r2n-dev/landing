@@ -60,6 +60,8 @@ export interface LandingSkillsSection {
 export interface LandingSectionCopy {
   principlesTitle: string;
   experienceTitle: string;
+  experienceShowMoreLabel: string;
+  experienceShowLessLabel: string;
   educationTitle: string;
   skillsTitle: string;
   contactTitle: string;

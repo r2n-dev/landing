@@ -6,6 +6,11 @@
   line-height: 1.35;
 }
 
+.expandButton {
+  margin-top: var(--mantine-spacing-sm);
+  padding-left: 0;
+}
+
 .resumeButton {
-  margin-top: var(--mantine-spacing-lg);
+  margin-top: var(--mantine-spacing-md);
 }

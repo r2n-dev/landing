@@ -1,3 +1,6 @@
+"use client";
+
+import { useMemo, useState } from "react";
 import {
   Anchor,
   Button,
@@ -13,19 +16,37 @@ import styles from "./ExperienceCard.module.scss";
 
 interface ExperienceCardProps {
   title: string;
+  showMoreLabel: string;
+  showLessLabel: string;
   experience: LandingExperienceItem[];
   resumeAction: LandingAction;
 }
 
-export function ExperienceCard({ title, experience, resumeAction }: ExperienceCardProps) {
+const DEFAULT_VISIBLE_EXPERIENCE_ITEMS = 4;
+
+export function ExperienceCard({
+  title,
+  showMoreLabel,
+  showLessLabel,
+  experience,
+  resumeAction,
+}: ExperienceCardProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const shouldShowToggle = experience.length > DEFAULT_VISIBLE_EXPERIENCE_ITEMS;
+  const visibleExperience = useMemo(
+    () =>
+      isExpanded ? experience : experience.slice(0, DEFAULT_VISIBLE_EXPERIENCE_ITEMS),
+    [experience, isExpanded],
+  );
+
   return (
     <Card padding="xl" id="experience">
       <Title order={2} size="h3" className={styles.heading}>
         {title}
       </Title>
 
-      <Timeline active={experience.length} bulletSize={22} lineWidth={2}>
-        {experience.map((item) => (
+      <Timeline active={visibleExperience.length} bulletSize={22} lineWidth={2}>
+        {visibleExperience.map((item) => (
           <TimelineItem
             key={`${item.company}-${item.period}`}
             title={
@@ -63,6 +84,17 @@ export function ExperienceCard({ title, experience, resumeAction }: ExperienceCa
           </TimelineItem>
         ))}
       </Timeline>
+
+      {shouldShowToggle ? (
+        <Button
+          variant="subtle"
+          onClick={() => setIsExpanded((prev) => !prev)}
+          aria-expanded={isExpanded}
+          className={styles.expandButton}
+        >
+          {isExpanded ? showLessLabel : showMoreLabel}
+        </Button>
+      ) : null}
 
       <Button
         component="a"

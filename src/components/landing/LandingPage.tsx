@@ -65,6 +65,8 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
               <Stack gap="lg">
                 <ExperienceCard
                   title={content.sections.experienceTitle}
+                  showMoreLabel={content.sections.experienceShowMoreLabel}
+                  showLessLabel={content.sections.experienceShowLessLabel}
                   experience={content.experience}
                   resumeAction={content.resumeAction}
                 />

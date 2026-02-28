@@ -74,6 +74,8 @@ function getLandingContent(locale: LandingLocale): LandingContent {
     sections: {
       principlesTitle: isSpanish ? "Cómo trabajo" : "How I Work",
       experienceTitle: isSpanish ? "Experiencia" : "Experience",
+      experienceShowMoreLabel: isSpanish ? "Ver experiencia completa" : "Show full experience",
+      experienceShowLessLabel: isSpanish ? "Ver menos experiencia" : "Show less experience",
       educationTitle: isSpanish ? "Educación" : "Education",
       skillsTitle: isSpanish ? "Habilidades" : "Skills",
       contactTitle: isSpanish
@@ -115,6 +117,13 @@ function getLandingContent(locale: LandingLocale): LandingContent {
         external: true,
         variant: "default",
         icon: "linkedin",
+      },
+      {
+        href: andresProfileData.links.whatsapp.href,
+        label: andresProfileData.links.whatsapp.label,
+        external: true,
+        variant: "default",
+        icon: "whatsapp",
       },
     ],
     stats: [
