@@ -1,6 +1,6 @@
 import type { LandingLocale } from "./i18n";
 import { andresProfileData, type LocalizedCopy } from "./profile-data";
-import type { LandingContent, LandingExperienceItem } from "./landing.types";
+import type { LandingContent, LandingExperienceItem, LandingSkillsSection } from "./landing.types";
 
 type LandingContentByLocale = Record<LandingLocale, LandingContent>;
 
@@ -19,6 +19,22 @@ function getRecentExperience(locale: LandingLocale): LandingExperienceItem[] {
   }));
 }
 
+function getSkills(locale: LandingLocale): LandingSkillsSection {
+  const isSpanish = locale === "es";
+  return {
+    title: isSpanish ? "Habilidades" : "Skills",
+    technicalLabel: isSpanish ? "Técnicas" : "Technical",
+    softLabel: isSpanish ? "Blandas" : "Soft",
+    languagesLabel: isSpanish ? "Idiomas" : "Languages",
+    technical: andresProfileData.skills.technical,
+    soft: andresProfileData.skills.soft.map((s) => getCopy(locale, s)),
+    languages: andresProfileData.skills.languages.map((l) => ({
+      language: getCopy(locale, l.language),
+      level: getCopy(locale, l.level),
+    })),
+  };
+}
+
 function getLandingContent(locale: LandingLocale): LandingContent {
   const isSpanish = locale === "es";
 
@@ -30,21 +46,22 @@ function getLandingContent(locale: LandingLocale): LandingContent {
     role: getCopy(locale, andresProfileData.role),
     name: andresProfileData.name,
     intro: isSpanish
-      ? "Diseño y entrego interfaces resilientes con React, TypeScript y arquitectura basada en componentes."
-      : "I design and ship resilient product interfaces with React, TypeScript, and component-driven architecture.",
+      ? "Soy un desarrollador de software bilingüe con más de 10 años de experiencia especializado en la construcción de aplicaciones web escalables y de alto rendimiento. Diseño y entrego interfaces de producto resilientes con React, TypeScript y arquitectura basada en componentes, trabajando eficazmente en equipos ágiles globales."
+      : "I am a bilingual software developer with over 10 years of experience specializing in building scalable, high-performance web applications. I design and ship resilient product interfaces with React, TypeScript, and component-driven architecture, collaborating effectively in global agile teams.",
     about: isSpanish
-      ? "Me enfoco en sistemas frontend escalables, patrones accesibles de interacción y entregas de alta calidad con colaboración cercana de diseño."
-      : "I focus on scalable frontend systems, accessible interaction patterns, and high-quality delivery with strong design collaboration.",
+      ? "Me apasiona trabajar con sistemas de diseño, crear componentes reutilizables y construir experiencias de usuario fluidas y accesibles. Utilizo herramientas y tecnologías web modernas para ofrecer soluciones de alta calidad, y actualmente exploro herramientas de inteligencia artificial para integrarlas en mi flujo de trabajo diario y aumentar la productividad."
+      : "I am passionate about design systems, creating reusable components, and building seamless, accessible user experiences. I leverage modern web tools and technologies to deliver high-quality solutions, and I am currently exploring artificial intelligence tools to integrate into my daily workflow and boost productivity.",
     portraitUrl: andresProfileData.portraitUrl,
     sections: {
       principlesTitle: isSpanish ? "Cómo trabajo" : "How I Work",
       experienceTitle: isSpanish ? "Experiencia reciente" : "Recent Experience",
+      skillsTitle: isSpanish ? "Habilidades" : "Skills",
       contactTitle: isSpanish
         ? "Construyamos algo valioso"
         : "Let's Build Something Valuable",
       contactIntro: isSpanish
-        ? "Busco oportunidades como frontend senior, enfocado en arquitectura, mantenibilidad y resultados de producto."
-        : "Looking for senior frontend opportunities focused on architecture, maintainability, and product outcomes.",
+        ? "Busco oportunidades como frontend senior donde pueda aportar mi experiencia en arquitectura de aplicaciones, sistemas de diseño y migración de plataformas legacy. Mi enfoque está en la mantenibilidad, el rendimiento y los resultados de producto que generen impacto real."
+        : "Looking for senior frontend opportunities where I can bring my expertise in application architecture, design systems, and legacy platform migration. My focus is on maintainability, performance, and product outcomes that drive real impact.",
     },
     controls: {
       languageSelectorLabel: isSpanish ? "Seleccionar idioma" : "Select language",
@@ -75,45 +92,46 @@ function getLandingContent(locale: LandingLocale): LandingContent {
     ],
     stats: [
       {
-        value: isSpanish ? "10 años" : "10 years",
+        value: isSpanish ? "10+ años" : "10+ years",
         label: isSpanish
-          ? "Construyendo aplicaciones frontend en producción"
-          : "Building production frontend applications",
+          ? "Diseñando e implementando aplicaciones web escalables en producción"
+          : "Designing and implementing scalable production web applications",
       },
       {
         value: "React + Angular",
         label: isSpanish
-          ? "Modernizando productos enterprise"
-          : "Modernizing enterprise product interfaces",
+          ? "Modernizando interfaces enterprise y liderando migraciones de plataformas"
+          : "Modernizing enterprise interfaces and leading platform migrations",
       },
       {
         value: "Design systems",
         label: isSpanish
-          ? "Componentes y estándares reutilizables"
-          : "Reusable components and standards at scale",
+          ? "Componentes reutilizables, estándares de UI y colaboración cercana con diseño"
+          : "Reusable components, UI standards, and strong design collaboration",
       },
     ],
     principles: [
       {
         title: isSpanish ? "Arquitectura orientada al sistema" : "System-first architecture",
         description: isSpanish
-          ? "Construyo patrones y componentes reutilizables que aceleran la entrega manteniendo consistencia."
-          : "Build reusable patterns and components that accelerate delivery while preserving consistency.",
+          ? "Construyo patrones y componentes reutilizables que aceleran la entrega manteniendo consistencia y escalabilidad a través de múltiples equipos y productos."
+          : "I build reusable patterns and components that accelerate delivery while preserving consistency and scalability across multiple teams and products.",
       },
       {
         title: isSpanish ? "Interacción accesible" : "Accessible interaction",
         description: isSpanish
-          ? "Diseño experiencias legibles y navegables por teclado, confiables en escenarios reales."
-          : "Design keyboard-friendly, readable interfaces that stay reliable under real-world constraints.",
+          ? "Diseño experiencias legibles, navegables por teclado y compatibles entre navegadores, confiables bajo restricciones del mundo real y diversos contextos de usuario."
+          : "I design keyboard-friendly, readable, cross-browser interfaces that stay reliable under real-world constraints and diverse user contexts.",
       },
       {
         title: isSpanish ? "Ejecución pragmática" : "Pragmatic execution",
         description: isSpanish
-          ? "Balanceo tiempos de producto con calidad de ingeniería mediante decisiones claras y mantenibles."
-          : "Balance product delivery speed with engineering quality through clear and maintainable tradeoffs.",
+          ? "Balanceo tiempos de entrega de producto con calidad de ingeniería mediante decisiones claras y mantenibles, colaborando estrechamente con equipos de QA y diseño."
+          : "I balance product delivery speed with engineering quality through clear and maintainable tradeoffs, collaborating closely with QA and design teams.",
       },
     ],
     experience: getRecentExperience(locale),
+    skills: getSkills(locale),
     resumeAction: {
       href: andresProfileData.resumeAssets[locale],
       label: isSpanish ? "Descargar hoja de vida" : "Download resume",
@@ -124,18 +142,21 @@ function getLandingContent(locale: LandingLocale): LandingContent {
         href: `mailto:${andresProfileData.email}`,
         label: isSpanish ? "Correo" : "Email",
         variant: "filled",
+        icon: "mail",
       },
       {
         href: andresProfileData.links.linkedin.href,
         label: andresProfileData.links.linkedin.label,
         external: true,
         variant: "light",
+        icon: "linkedin",
       },
       {
         href: andresProfileData.links.github.href,
         label: andresProfileData.links.github.label,
         external: true,
         variant: "default",
+        icon: "github",
       },
     ],
   };

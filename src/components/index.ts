@@ -9,6 +9,7 @@ export type {
   LandingExperienceItem,
   LandingPrinciple,
   LandingSectionCopy,
+  LandingSkillsSection,
   LandingStat,
 } from "./landing/landing.types";
 export { ColorSchemeToggle } from "./theme/ColorSchemeToggle";

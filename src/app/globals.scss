@@ -24,3 +24,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* Fix timeline bullet center to match background in both light and dark mode */
+.mantine-Timeline-itemBullet,
+.mantine-Timeline-itemBullet[data-active] {
+  background-color: var(--mantine-color-body);
+}

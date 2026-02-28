@@ -5,6 +5,7 @@ export interface LandingAction {
   label: string;
   external?: boolean;
   variant?: LandingActionVariant;
+  icon?: string;
 }
 
 export interface LandingStat {
@@ -26,9 +27,20 @@ export interface LandingExperienceItem {
   highlights?: string[];
 }
 
+export interface LandingSkillsSection {
+  title: string;
+  technicalLabel: string;
+  softLabel: string;
+  languagesLabel: string;
+  technical: string[];
+  soft: string[];
+  languages: { language: string; level: string }[];
+}
+
 export interface LandingSectionCopy {
   principlesTitle: string;
   experienceTitle: string;
+  skillsTitle: string;
   contactTitle: string;
   contactIntro: string;
 }
@@ -53,6 +65,7 @@ export interface LandingContent {
   stats: LandingStat[];
   principles: LandingPrinciple[];
   experience: LandingExperienceItem[];
+  skills: LandingSkillsSection;
   resumeAction: LandingAction;
   contactActions: LandingAction[];
 }

@@ -1,5 +1,28 @@
-.page {
+.layout {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+}
+
+.header {
+  background: var(--mantine-color-body);
+  border-bottom: 1px solid var(--mantine-color-default-border);
+  padding: var(--mantine-spacing-sm) 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  color: var(--mantine-primary-color-filled);
+  font-family: var(--font-logo), sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.page {
+  flex: 1;
   padding: clamp(2rem, 4vw, 4rem) 0 clamp(3rem, 5vw, 5rem);
   position: relative;
 }
@@ -90,6 +113,11 @@
 
 .resumeButton {
   margin-top: var(--mantine-spacing-lg);
+}
+
+.footer {
+  border-top: 1px solid var(--mantine-color-default-border);
+  padding: var(--mantine-spacing-lg) 0;
 }
 
 @media (max-width: 62em) {
