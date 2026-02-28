@@ -16,7 +16,7 @@
 .logo {
   color: var(--mantine-primary-color-filled);
   font-family: var(--font-logo), sans-serif;
-  font-size: 1.5rem;
+  font-size: 2rem;
   letter-spacing: 0.05em;
   line-height: 1;
 }
@@ -118,6 +118,12 @@
 .footer {
   border-top: 1px solid var(--mantine-color-default-border);
   padding: var(--mantine-spacing-lg) 0;
+}
+
+.footerLink {
+  align-items: center;
+  display: inline-flex;
+  gap: 4px;
 }
 
 @media (max-width: 62em) {

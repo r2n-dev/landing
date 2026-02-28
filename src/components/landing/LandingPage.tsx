@@ -306,7 +306,7 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
       <footer className={styles.footer}>
         <Container size="lg">
           <Group justify="space-between" align="center" wrap="wrap">
-            <Text size="sm" c="dimmed">
+            <Text size="sm" c="dimmed" suppressHydrationWarning>
               &copy; {new Date().getFullYear()} {content.name}
             </Text>
             <Group gap="md">
@@ -314,11 +314,10 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
                 href={`mailto:${andresProfileData.email}`}
                 c="dimmed"
                 size="sm"
+                className={styles.footerLink}
               >
-                <Group gap={4} wrap="nowrap">
-                  <IconMail size={16} />
-                  <span>{andresProfileData.email}</span>
-                </Group>
+                <IconMail size={16} />
+                <span>{andresProfileData.email}</span>
               </Anchor>
               <Anchor
                 href={andresProfileData.links.linkedin.href}
@@ -326,11 +325,10 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
                 rel="noreferrer"
                 c="dimmed"
                 size="sm"
+                className={styles.footerLink}
               >
-                <Group gap={4} wrap="nowrap">
-                  <IconBrandLinkedin size={16} />
-                  <span>LinkedIn</span>
-                </Group>
+                <IconBrandLinkedin size={16} />
+                <span>LinkedIn</span>
               </Anchor>
               <Anchor
                 href={andresProfileData.links.github.href}
@@ -338,18 +336,17 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
                 rel="noreferrer"
                 c="dimmed"
                 size="sm"
+                className={styles.footerLink}
               >
-                <Group gap={4} wrap="nowrap">
-                  <IconBrandGithub size={16} />
-                  <span>GitHub</span>
-                </Group>
+                <IconBrandGithub size={16} />
+                <span>GitHub</span>
               </Anchor>
             </Group>
-            <Text size="xs" c="dimmed">
-              <Group gap={4} wrap="nowrap">
-                {isSpanish ? "Hecho con" : "Made with"} <IconHeart size={14} /> {isSpanish ? "en Colombia" : "in Colombia"}
-              </Group>
-            </Text>
+            <Group gap={4} wrap="nowrap" c="dimmed">
+              <Text size="xs" c="dimmed">{isSpanish ? "Hecho con" : "Made with"}</Text>
+              <IconHeart size={14} />
+              <Text size="xs" c="dimmed">{isSpanish ? "en Colombia" : "in Colombia"}</Text>
+            </Group>
           </Group>
         </Container>
       </footer>
