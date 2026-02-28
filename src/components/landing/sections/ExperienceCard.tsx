@@ -22,7 +22,7 @@ interface ExperienceCardProps {
   resumeAction: LandingAction;
 }
 
-const DEFAULT_VISIBLE_EXPERIENCE_ITEMS = 4;
+const DEFAULT_VISIBLE_EXPERIENCE_ITEMS = 3;
 
 export function ExperienceCard({
   title,

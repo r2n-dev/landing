@@ -148,22 +148,26 @@ function getLandingContent(locale: LandingLocale): LandingContent {
     ],
     principles: [
       {
-        title: isSpanish ? "Arquitectura orientada al sistema" : "System-first architecture",
+        title: isSpanish ? "Migración con continuidad" : "Migration with continuity",
         description: isSpanish
-          ? "Construyo patrones y componentes reutilizables que aceleran la entrega manteniendo consistencia y escalabilidad a través de múltiples equipos y productos."
-          : "I build reusable patterns and components that accelerate delivery while preserving consistency and scalability across multiple teams and products.",
+          ? "Lidero migraciones AngularJS → Angular → React en entregas por fases, actualizando librerías y refactorizando sin frenar la salida continua de producto."
+          : "I lead AngularJS → Angular → React migrations in phased releases, upgrading libraries and refactoring safely while the product keeps shipping.",
       },
       {
-        title: isSpanish ? "Interacción accesible" : "Accessible interaction",
+        title: isSpanish
+          ? "Sistemas de componentes escalables"
+          : "Component systems that scale",
         description: isSpanish
-          ? "Diseño experiencias legibles, navegables por teclado y compatibles entre navegadores, confiables bajo restricciones del mundo real y diversos contextos de usuario."
-          : "I design keyboard-friendly, readable, cross-browser interfaces that stay reliable under real-world constraints and diverse user contexts.",
+          ? "Diseño librerías de UI reutilizables para React y Angular, incluyendo componentes en StencilJS e interfaces para extensiones web, para acelerar equipos con una UX consistente."
+          : "I design reusable UI libraries for React and Angular, including StencilJS components and browser-extension interfaces, so teams move faster with consistent UX.",
       },
       {
-        title: isSpanish ? "Ejecución pragmática" : "Pragmatic execution",
+        title: isSpanish
+          ? "Calidad en producción, no solo en demos"
+          : "Quality in production, not just in demos",
         description: isSpanish
-          ? "Balanceo tiempos de entrega de producto con calidad de ingeniería mediante decisiones claras y mantenibles, colaborando estrechamente con equipos de QA y diseño."
-          : "I balance product delivery speed with engineering quality through clear and maintainable tradeoffs, collaborating closely with QA and design teams.",
+          ? "Trabajo de cerca con QA y diseño, fortalezco la observabilidad con herramientas como Sentry e Intercom y optimizo rendimiento y SEO para mantener productos confiables a escala."
+          : "I work closely with QA and design, strengthen observability with tools like Sentry and Intercom, and optimize performance and SEO to keep products reliable at scale.",
       },
     ],
     experience: getAllExperience(locale),
