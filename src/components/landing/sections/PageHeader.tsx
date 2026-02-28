@@ -3,6 +3,7 @@ import type { LandingLocale } from "@/components/landing/i18n";
 import { ColorSchemeToggle } from "@/components/theme/ColorSchemeToggle";
 import { LanguageSelector } from "@/components/theme/LanguageSelector";
 import type { LandingControlCopy } from "../landing.types";
+import { LogoLink } from "./LogoLink";
 import styles from "./PageHeader.module.scss";
 
 interface PageHeaderProps {
@@ -16,7 +17,7 @@ export function PageHeader({ locale, controls, onLocaleChange }: PageHeaderProps
     <header className={styles.header}>
       <Container size="lg">
         <Group justify="space-between" align="center">
-          <div className={styles.logo}>R2N</div>
+          <LogoLink />
           <Group gap="xs" wrap="nowrap">
             <LanguageSelector
               value={locale}

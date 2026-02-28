@@ -1,3 +1,62 @@
 .card {
-  background: var(--mantine-color-default-hover);
+  background: linear-gradient(
+    160deg,
+    var(--mantine-color-body) 10%,
+    var(--mantine-color-default-hover) 100%
+  );
+  border: 1px solid var(--mantine-color-default-border);
+  overflow: hidden;
+  position: relative;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.card::before {
+  content: "";
+  height: 3px;
+  left: 0;
+  opacity: 0.85;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.card:hover {
+  border-color: var(--mantine-primary-color-light-color);
+  box-shadow: var(--mantine-shadow-sm);
+  transform: translateY(-2px);
+}
+
+.cardBlue::before {
+  background: var(--mantine-color-blue-6);
+}
+
+.cardTeal::before {
+  background: var(--mantine-color-teal-6);
+}
+
+.cardGrape::before {
+  background: var(--mantine-color-grape-6);
+}
+
+.copy {
+  min-width: 0;
+}
+
+.value {
+  font-size: clamp(2rem, 2.8vw, 2.35rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: var(--mantine-spacing-xs);
+}
+
+.label {
+  max-width: 28ch;
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-left: var(--mantine-spacing-sm);
 }

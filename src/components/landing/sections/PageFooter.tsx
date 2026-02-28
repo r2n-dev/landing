@@ -2,6 +2,7 @@ import { Anchor, Container, Group, Text } from "@mantine/core";
 import {
   IconBrandGithub,
   IconBrandLinkedin,
+  IconBrandWhatsapp,
   IconHeart,
   IconMail,
 } from "@tabler/icons-react";
@@ -12,6 +13,7 @@ interface PageFooterProps {
   email: string;
   linkedinHref: string;
   githubHref: string;
+  whatsappHref: string;
   madeWithLabel: string;
   inCountryLabel: string;
 }
@@ -21,6 +23,7 @@ export function PageFooter({
   email,
   linkedinHref,
   githubHref,
+  whatsappHref,
   madeWithLabel,
   inCountryLabel,
 }: PageFooterProps) {
@@ -43,6 +46,10 @@ export function PageFooter({
             <Anchor href={githubHref} target="_blank" rel="noreferrer" c="dimmed" size="sm" className={styles.link}>
               <IconBrandGithub size={16} />
               <span>GitHub</span>
+            </Anchor>
+            <Anchor href={whatsappHref} target="_blank" rel="noreferrer" c="dimmed" size="sm" className={styles.link}>
+              <IconBrandWhatsapp size={16} />
+              <span>WhatsApp</span>
             </Anchor>
           </Group>
           <Group gap={4} wrap="nowrap">

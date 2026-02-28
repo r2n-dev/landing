@@ -16,7 +16,7 @@ interface PrinciplesCardProps {
 
 export function PrinciplesCard({ title, principles }: PrinciplesCardProps) {
   return (
-    <Card className={styles.card} padding="xl">
+    <Card padding="xl">
       <Title order={2} size="h3" className={styles.heading}>
         {title}
       </Title>

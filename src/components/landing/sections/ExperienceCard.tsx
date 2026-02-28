@@ -19,7 +19,7 @@ interface ExperienceCardProps {
 
 export function ExperienceCard({ title, experience, resumeAction }: ExperienceCardProps) {
   return (
-    <Card className={styles.card} padding="xl" id="experience">
+    <Card padding="xl" id="experience">
       <Title order={2} size="h3" className={styles.heading}>
         {title}
       </Title>

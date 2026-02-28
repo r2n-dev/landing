@@ -1,11 +1,18 @@
 export type LandingActionVariant = "filled" | "light" | "default";
+export type LandingActionIcon =
+  | "mail"
+  | "linkedin"
+  | "github"
+  | "whatsapp"
+  | "briefcase"
+  | "message";
 
 export interface LandingAction {
   href: string;
   label: string;
   external?: boolean;
   variant?: LandingActionVariant;
-  icon?: string;
+  icon?: LandingActionIcon;
 }
 
 export interface LandingStat {

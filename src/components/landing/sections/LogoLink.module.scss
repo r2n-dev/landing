@@ -1,0 +1,21 @@
+.logo {
+  color: var(--mantine-primary-color-filled);
+  font-family: var(--font-logo), sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.logo:hover {
+  color: var(--mantine-primary-color-filled-hover);
+  text-decoration: none;
+}
+
+.logo:focus-visible {
+  border-radius: var(--mantine-radius-xs);
+  outline: 2px solid var(--mantine-primary-color-filled);
+  outline-offset: 4px;
+}

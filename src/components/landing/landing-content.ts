@@ -101,17 +101,20 @@ function getLandingContent(locale: LandingLocale): LandingContent {
         href: "#experience",
         label: isSpanish ? "Ver experiencia" : "View experience",
         variant: "filled",
+        icon: "briefcase",
       },
       {
         href: "#contact",
         label: isSpanish ? "Iniciar conversación" : "Start a conversation",
         variant: "light",
+        icon: "message",
       },
       {
         href: andresProfileData.links.linkedin.href,
         label: andresProfileData.links.linkedin.label,
         external: true,
         variant: "default",
+        icon: "linkedin",
       },
     ],
     stats: [
@@ -182,6 +185,13 @@ function getLandingContent(locale: LandingLocale): LandingContent {
         external: true,
         variant: "default",
         icon: "github",
+      },
+      {
+        href: andresProfileData.links.whatsapp.href,
+        label: andresProfileData.links.whatsapp.label,
+        external: true,
+        variant: "light",
+        icon: "whatsapp",
       },
     ],
   };

@@ -44,6 +44,7 @@ export interface CandidateProfile {
   links: {
     linkedin: ProfileLink;
     github: ProfileLink;
+    whatsapp: ProfileLink;
     website: ProfileLink;
   };
   resumeAssets: Record<LandingLocale, string>;
@@ -80,6 +81,10 @@ export const andresProfileData: CandidateProfile = {
     github: {
       label: "GitHub",
       href: "https://github.com/andres-artunduaga",
+    },
+    whatsapp: {
+      label: "WhatsApp",
+      href: "https://wa.me/573195036643",
     },
     website: {
       label: "r2n.dev",

@@ -51,23 +51,25 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
             <StatsGrid stats={content.stats} />
 
             <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
-              <PrinciplesCard
-                title={content.sections.principlesTitle}
-                principles={content.principles}
-              />
-              <ExperienceCard
-                title={content.sections.experienceTitle}
-                experience={content.experience}
-                resumeAction={content.resumeAction}
-              />
-            </SimpleGrid>
+              <Stack gap="lg">
+                <PrinciplesCard
+                  title={content.sections.principlesTitle}
+                  principles={content.principles}
+                />
+                <EducationCard
+                  title={content.sections.educationTitle}
+                  items={content.education.items}
+                />
+              </Stack>
 
-            <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
-              <EducationCard
-                title={content.sections.educationTitle}
-                items={content.education.items}
-              />
-              <SkillsCard skills={content.skills} />
+              <Stack gap="lg">
+                <ExperienceCard
+                  title={content.sections.experienceTitle}
+                  experience={content.experience}
+                  resumeAction={content.resumeAction}
+                />
+                <SkillsCard skills={content.skills} />
+              </Stack>
             </SimpleGrid>
 
             <ContactCard
@@ -84,6 +86,7 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
         email={andresProfileData.email}
         linkedinHref={andresProfileData.links.linkedin.href}
         githubHref={andresProfileData.links.github.href}
+        whatsappHref={andresProfileData.links.whatsapp.href}
         madeWithLabel={content.footer.madeWithLabel}
         inCountryLabel={content.footer.inCountryLabel}
       />
