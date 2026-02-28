@@ -8,13 +8,25 @@ import {
 } from "@mantine/core";
 import { IconMoonStars, IconSunHigh } from "@tabler/icons-react";
 
-export function ColorSchemeToggle() {
+interface ColorSchemeToggleProps {
+  labels?: {
+    switchToLightMode: string;
+    switchToDarkMode: string;
+  };
+}
+
+const defaultLabels: NonNullable<ColorSchemeToggleProps["labels"]> = {
+  switchToLightMode: "Switch to light mode",
+  switchToDarkMode: "Switch to dark mode",
+};
+
+export function ColorSchemeToggle({ labels = defaultLabels }: ColorSchemeToggleProps) {
   const { setColorScheme } = useMantineColorScheme();
   const computedColorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
   });
   const isDark = computedColorScheme === "dark";
-  const label = isDark ? "Switch to light mode" : "Switch to dark mode";
+  const label = isDark ? labels.switchToLightMode : labels.switchToDarkMode;
 
   return (
     <Tooltip label={label} withArrow>

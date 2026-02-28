@@ -1,6 +1,11 @@
 import { LandingPage } from "@/components/landing/LandingPage";
-import { landingContent } from "@/components/landing/landing-content";
+import { landingContentByLocale } from "@/components/landing/landing-content";
+import { resolveLandingLocaleFromHeaders } from "@/components/landing/i18n";
+import { headers } from "next/headers";
 
-export default function HomePage() {
-  return <LandingPage content={landingContent} />;
+export default async function HomePage() {
+  const requestHeaders = await headers();
+  const initialLocale = resolveLandingLocaleFromHeaders(requestHeaders);
+
+  return <LandingPage contentByLocale={landingContentByLocale} initialLocale={initialLocale} />;
 }

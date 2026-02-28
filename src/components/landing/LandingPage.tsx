@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   Badge,
@@ -5,11 +8,13 @@ import {
   Card,
   Container,
   Group,
+  List,
   SimpleGrid,
   Stack,
   Text,
   ThemeIcon,
   Timeline,
+  TimelineItem,
   Title,
 } from "@mantine/core";
 import {
@@ -18,12 +23,20 @@ import {
   IconDeviceDesktopAnalytics,
   IconRocket,
 } from "@tabler/icons-react";
+import {
+  landingLocaleStorageKey,
+  normalizeLandingLocale,
+  resolveLandingLocaleFromBrowser,
+  type LandingLocale,
+} from "@/components/landing/i18n";
 import { ColorSchemeToggle } from "@/components/theme/ColorSchemeToggle";
+import { LanguageSelector } from "@/components/theme/LanguageSelector";
 import type { LandingAction, LandingContent } from "./landing.types";
 import styles from "./LandingPage.module.scss";
 
 interface LandingPageProps {
-  content: LandingContent;
+  initialLocale: LandingLocale;
+  contentByLocale: Record<LandingLocale, LandingContent>;
 }
 
 const principleIcons = [IconCode, IconDeviceDesktopAnalytics, IconRocket];
@@ -48,7 +61,31 @@ function LandingActions({ actions }: { actions: LandingAction[] }) {
   );
 }
 
-export function LandingPage({ content }: LandingPageProps) {
+export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps) {
+  const [locale, setLocale] = useState<LandingLocale>(initialLocale);
+  const content = contentByLocale[locale];
+
+  useEffect(() => {
+    const storedLocale = normalizeLandingLocale(
+      window.localStorage.getItem(landingLocaleStorageKey),
+    );
+
+    if (storedLocale) {
+      setLocale(storedLocale);
+      return;
+    }
+
+    const browserLocale = resolveLandingLocaleFromBrowser();
+    if (browserLocale !== initialLocale) {
+      setLocale(browserLocale);
+    }
+  }, [initialLocale]);
+
+  useEffect(() => {
+    window.localStorage.setItem(landingLocaleStorageKey, locale);
+    document.documentElement.lang = locale;
+  }, [locale]);
+
   return (
     <main className={styles.page}>
       <Container size="lg" className={styles.container}>
@@ -56,9 +93,17 @@ export function LandingPage({ content }: LandingPageProps) {
           <Card className={styles.heroCard} padding="xl">
             <Group justify="space-between" className={styles.heroMeta}>
               <Badge variant="light" size="lg">
-                Open to frontend opportunities
+                {content.availabilityBadge}
               </Badge>
-              <ColorSchemeToggle />
+
+              <Group gap="xs" wrap="nowrap">
+                <LanguageSelector
+                  value={locale}
+                  ariaLabel={content.controls.languageSelectorLabel}
+                  onChange={setLocale}
+                />
+                <ColorSchemeToggle labels={content.controls} />
+              </Group>
             </Group>
 
             <div className={styles.heroGrid}>
@@ -103,7 +148,7 @@ export function LandingPage({ content }: LandingPageProps) {
           <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
             <Card className={styles.principlesCard} padding="xl">
               <Title order={2} size="h3" className={styles.sectionHeading}>
-                How I Work
+                {content.sections.principlesTitle}
               </Title>
 
               <Stack gap="lg">
@@ -129,12 +174,12 @@ export function LandingPage({ content }: LandingPageProps) {
 
             <Card className={styles.experienceCard} padding="xl" id="experience">
               <Title order={2} size="h3" className={styles.sectionHeading}>
-                Recent Experience
+                {content.sections.experienceTitle}
               </Title>
 
               <Timeline active={content.experience.length} bulletSize={22} lineWidth={2}>
                 {content.experience.map((item) => (
-                  <Timeline.Item
+                  <TimelineItem
                     key={`${item.company}-${item.period}`}
                     title={
                       <Text fw={600} className={styles.timelineItemTitle}>
@@ -145,21 +190,43 @@ export function LandingPage({ content }: LandingPageProps) {
                     <Text size="xs" c="dimmed" mb={4}>
                       {item.period}
                     </Text>
+                    {item.location ? (
+                      <Text size="xs" c="dimmed" mb={6}>
+                        {item.location}
+                      </Text>
+                    ) : null}
                     <Text size="sm" c="dimmed">
                       {item.summary}
                     </Text>
-                  </Timeline.Item>
+
+                    {item.highlights && item.highlights.length > 0 ? (
+                      <List size="sm" c="dimmed" mt={8}>
+                        {item.highlights.map((highlight) => (
+                          <List.Item key={highlight}>{highlight}</List.Item>
+                        ))}
+                      </List>
+                    ) : null}
+                  </TimelineItem>
                 ))}
               </Timeline>
+
+              <Button
+                component="a"
+                href={content.resumeAction.href}
+                variant={content.resumeAction.variant ?? "light"}
+                className={styles.resumeButton}
+                download
+              >
+                {content.resumeAction.label}
+              </Button>
             </Card>
           </SimpleGrid>
 
           <Card className={styles.contactCard} padding="xl" id="contact">
             <Stack gap="md">
-              <Title order={2}>Let&apos;s Build Something Valuable</Title>
+              <Title order={2}>{content.sections.contactTitle}</Title>
               <Text c="dimmed" size="lg">
-                Looking for a senior frontend engineer focused on architecture,
-                maintainability, and product outcomes.
+                {content.sections.contactIntro}
               </Text>
               <LandingActions actions={content.contactActions} />
             </Stack>
