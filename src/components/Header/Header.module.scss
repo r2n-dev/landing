@@ -1,11 +1,47 @@
-
-@use 'sizes' as *;
-@use 'shadows' as *;
-
 .header {
-    align-items: center;
-    box-shadow: $shadow-3;
-    display: flex;
-    padding: $size-3 $size-4;
-    width: 100%;
+  background: color-mix(in srgb, var(--color-bg-surface) 94%, transparent);
+  border-bottom: 1px solid var(--color-border-subtle);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: var(--z-header);
+}
+
+.inner {
+  align-items: center;
+  display: flex;
+  gap: var(--space-5);
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: var(--content-max-xl);
+  padding: var(--space-4) var(--space-5);
+}
+
+.nav {
+  align-items: center;
+  display: flex;
+  gap: var(--space-5);
+}
+
+.nav a {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: color var(--motion-base);
+}
+
+.nav a:hover {
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 767px) {
+  .inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nav {
+    gap: var(--space-4);
+  }
 }

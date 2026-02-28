@@ -1,0 +1,11 @@
+import React from "react";
+import styles from "./__NAME__.module.scss";
+
+type __NAME__Props = {
+  className?: string;
+  children?: React.ReactNode;
+};
+
+export const __NAME__: React.FC<__NAME__Props> = ({ className = "", children }) => {
+  return <div className={`${styles.root} ${className}`.trim()}>{children}</div>;
+};

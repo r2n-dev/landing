@@ -1,23 +1,24 @@
-@use 'sizes' as *;
-@use 'shadows' as *;
-@use 'palette' as *;
-
 .logo {
-  display: flex;
-  font-size: $size-9;
-  user-select: none;
+  color: var(--color-text-primary);
   cursor: pointer;
-  color: $color-primary;
+  display: flex;
+  letter-spacing: 0.08em;
+  user-select: none;
+}
 
-  &.small {
-    font-size: $size-5;
-  }
+.logo:hover {
+  color: var(--color-accent);
+  transition: color var(--motion-base);
+}
 
-  &.medium {
-    font-size: $size-7;
-  }
+.small {
+  font-size: var(--font-size-h5);
+}
 
-  &.large {
-    font-size: $size-9;
-  }
+.medium {
+  font-size: var(--font-size-h3);
+}
+
+.large {
+  font-size: var(--font-size-h2);
 }

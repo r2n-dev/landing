@@ -1,53 +1,40 @@
-@use '@/app/styles/sizes' as *;
-@use '@/app/styles/palette' as *;
-
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: $size-4;
+  padding: var(--space-8) 0;
 }
 
-.card {
+.formWrapper {
   width: 100%;
-  max-width: 400px;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: $size-4;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: $size-4;
+  gap: var(--space-5);
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: $size-2;
-
-  label {
-    font-weight: bold;
-  }
-
-  input {
-    padding: $size-2;
-    border: 2px solid $color-gray-300;
-    border-radius: $size-2;
-    font-size: $size-4;
-
-    &:focus {
-      outline: none;
-      border-color: $color-primary;
-    }
-  }
+  gap: var(--space-2);
 }
 
-.submitButton {
-  margin-top: $size-4;
-  width: 100%;
-} 
+.formGroup label {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+}
+
+.formGroup input {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body);
+  min-height: 2.5rem;
+  padding: var(--space-3) var(--space-4);
+}
+
+.formGroup input:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  outline: none;
+}

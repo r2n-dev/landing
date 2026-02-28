@@ -1,0 +1,3 @@
+display_name: Portfolio Feature Builder
+short_description: Add or refactor portfolio sections using design-system primitives.
+default_prompt: Build a responsive, theme-safe portfolio section using existing design-system components first.

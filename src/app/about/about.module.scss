@@ -1,51 +1,49 @@
-@use 'sizes' as *;
-@use 'palette' as *;
-
 .about {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
+  width: 100%;
 }
 
 .card {
-    max-width: 800px;
+  margin: 0 auto;
 }
 
 .title {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    color: $color-primary;
+  align-items: center;
+  display: flex;
+  gap: var(--space-4);
+  justify-content: space-between;
+  width: 100%;
 }
 
 .content {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: $size-5;
+  align-items: center;
+  display: grid;
+  gap: var(--space-7);
+  grid-template-columns: 220px minmax(0, 1fr);
 }
 
 .left {
-    margin-right: $size-5;
-    .image {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        border: 2px solid $color-primary;
-    }
+  display: flex;
+  justify-content: center;
 }
 
-.text {
-    line-height: 1.6;
-    text-align: justify;
+.image {
+  border: 2px solid var(--color-border-strong);
+  border-radius: 50%;
+  height: auto;
+  width: 100%;
 }
 
-.actions {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
+.right {
+  max-width: 60ch;
+}
+
+@media (max-width: 900px) {
+  .title {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+  }
 }
