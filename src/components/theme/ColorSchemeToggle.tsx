@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import {
   ActionIcon,
   Tooltip,
@@ -25,7 +26,13 @@ export function ColorSchemeToggle({ labels = defaultLabels }: ColorSchemeToggleP
   const computedColorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
   });
-  const isDark = computedColorScheme === "dark";
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted ? computedColorScheme === "dark" : false;
   const label = isDark ? labels.switchToLightMode : labels.switchToDarkMode;
 
   return (
