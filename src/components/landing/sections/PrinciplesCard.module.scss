@@ -4,10 +4,27 @@
 
 .item {
   align-items: flex-start;
+  background: var(--mantine-color-body);
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: var(--mantine-radius-md);
   display: flex;
   gap: var(--mantine-spacing-sm);
+  padding: var(--mantine-spacing-sm);
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.item:hover {
+  border-color: var(--mantine-primary-color-light-color);
+  transform: translateY(-1px);
+}
+
+.icon {
+  flex-shrink: 0;
 }
 
 .text {
   flex: 1;
+  min-width: 0;
 }

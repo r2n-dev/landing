@@ -115,14 +115,14 @@ function getLandingContent(locale: LandingLocale): LandingContent {
         href: andresProfileData.links.linkedin.href,
         label: andresProfileData.links.linkedin.label,
         external: true,
-        variant: "default",
+        variant: "light",
         icon: "linkedin",
       },
       {
         href: andresProfileData.links.whatsapp.href,
         label: andresProfileData.links.whatsapp.label,
         external: true,
-        variant: "default",
+        variant: "light",
         icon: "whatsapp",
       },
     ],
@@ -148,26 +148,48 @@ function getLandingContent(locale: LandingLocale): LandingContent {
     ],
     principles: [
       {
-        title: isSpanish ? "Migración con continuidad" : "Migration with continuity",
+        title: isSpanish ? "Estrategia orientada a producto" : "Product-driven strategy",
         description: isSpanish
-          ? "Lidero migraciones AngularJS → Angular → React en entregas por fases, actualizando librerías y refactorizando sin frenar la salida continua de producto."
-          : "I lead AngularJS → Angular → React migrations in phased releases, upgrading libraries and refactoring safely while the product keeps shipping.",
+          ? "Conecto decisiones técnicas con objetivos de negocio y entrego por incrementos para mover roadmap sin comprometer estabilidad."
+          : "I align technical decisions with business outcomes and ship in increments to keep roadmap velocity without sacrificing stability.",
       },
       {
         title: isSpanish
-          ? "Sistemas de componentes escalables"
-          : "Component systems that scale",
+          ? "Arquitectura frontend escalable"
+          : "Scalable frontend architecture",
         description: isSpanish
-          ? "Diseño librerías de UI reutilizables para React y Angular, incluyendo componentes en StencilJS e interfaces para extensiones web, para acelerar equipos con una UX consistente."
-          : "I design reusable UI libraries for React and Angular, including StencilJS components and browser-extension interfaces, so teams move faster with consistent UX.",
+          ? "Organizo aplicaciones con límites claros, tipado fuerte y patrones mantenibles que facilitan crecimiento y ownership entre equipos."
+          : "I structure applications with clear boundaries, strong typing, and maintainable patterns that support growth and ownership across teams.",
       },
       {
         title: isSpanish
-          ? "Calidad en producción, no solo en demos"
-          : "Quality in production, not just in demos",
+          ? "Sistemas de componentes reutilizables"
+          : "Reusable component systems",
         description: isSpanish
-          ? "Trabajo de cerca con QA y diseño, fortalezco la observabilidad con herramientas como Sentry e Intercom y optimizo rendimiento y SEO para mantener productos confiables a escala."
-          : "I work closely with QA and design, strengthen observability with tools like Sentry and Intercom, and optimize performance and SEO to keep products reliable at scale.",
+          ? "Construyo librerías y patrones compartidos que aceleran entregas, reducen inconsistencias visuales y mejoran la experiencia de desarrollo."
+          : "I build shared libraries and patterns that speed delivery, reduce visual drift, and improve developer experience.",
+      },
+      {
+        title: isSpanish
+          ? "Rendimiento y accesibilidad desde el inicio"
+          : "Performance and accessibility by default",
+        description: isSpanish
+          ? "Priorizo interfaces rápidas, navegables por teclado y compatibles entre navegadores para asegurar experiencias confiables en contextos reales."
+          : "I prioritize fast, keyboard-friendly, cross-browser interfaces so product experiences stay reliable in real-world conditions.",
+      },
+      {
+        title: isSpanish
+          ? "Colaboración de diseño a QA"
+          : "Cross-functional collaboration",
+        description: isSpanish
+          ? "Trabajo de cerca con diseño, producto y QA para reducir riesgos temprano, mejorar handoff y mantener una calidad consistente en cada release."
+          : "I work closely with design, product, and QA to reduce risk early, improve handoff quality, and keep releases consistent.",
+      },
+      {
+        title: isSpanish ? "Confiabilidad operativa" : "Operational reliability",
+        description: isSpanish
+          ? "Fortalezco monitoreo, observabilidad y feedback loops para detectar problemas antes, responder rápido y sostener la calidad en producción."
+          : "I strengthen monitoring, observability, and feedback loops to catch issues early, respond quickly, and sustain production quality.",
       },
     ],
     experience: getAllExperience(locale),
@@ -196,7 +218,7 @@ function getLandingContent(locale: LandingLocale): LandingContent {
         href: andresProfileData.links.github.href,
         label: andresProfileData.links.github.label,
         external: true,
-        variant: "default",
+        variant: "light",
         icon: "github",
       },
       {

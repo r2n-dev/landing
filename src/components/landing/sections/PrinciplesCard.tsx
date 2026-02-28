@@ -1,13 +1,25 @@
-import { Card, Stack, Text, ThemeIcon, Title } from "@mantine/core";
+import { Card, SimpleGrid, Text, ThemeIcon, Title } from "@mantine/core";
 import {
+  IconBolt,
   IconCode,
   IconDeviceDesktopAnalytics,
+  IconGauge,
   IconRocket,
+  IconShieldCheck,
+  IconUsers,
 } from "@tabler/icons-react";
 import type { LandingPrinciple } from "../landing.types";
 import styles from "./PrinciplesCard.module.scss";
 
-const principleIcons = [IconCode, IconDeviceDesktopAnalytics, IconRocket];
+const principleIcons = [
+  IconRocket,
+  IconCode,
+  IconBolt,
+  IconGauge,
+  IconUsers,
+  IconShieldCheck,
+  IconDeviceDesktopAnalytics,
+];
 
 interface PrinciplesCardProps {
   title: string;
@@ -21,13 +33,13 @@ export function PrinciplesCard({ title, principles }: PrinciplesCardProps) {
         {title}
       </Title>
 
-      <Stack gap="lg">
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
         {principles.map((principle, index) => {
           const Icon = principleIcons[index % principleIcons.length];
 
           return (
             <div key={principle.title} className={styles.item}>
-              <ThemeIcon size="lg" variant="light" radius="xl">
+              <ThemeIcon size="lg" variant="light" radius="xl" className={styles.icon}>
                 <Icon size={18} />
               </ThemeIcon>
               <div className={styles.text}>
@@ -39,7 +51,7 @@ export function PrinciplesCard({ title, principles }: PrinciplesCardProps) {
             </div>
           );
         })}
-      </Stack>
+      </SimpleGrid>
     </Card>
   );
 }

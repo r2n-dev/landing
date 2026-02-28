@@ -1,0 +1,52 @@
+.group {
+  align-items: center;
+}
+
+.button {
+  border-width: 1px;
+  border-style: solid;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.button:hover {
+  box-shadow: var(--mantine-shadow-sm);
+  transform: translateY(-1px);
+}
+
+.buttonFilled {
+  background: linear-gradient(
+    135deg,
+    var(--mantine-primary-color-filled),
+    var(--mantine-color-cyan-6)
+  );
+  border-color: transparent;
+}
+
+.buttonSecondary {
+  background: var(--mantine-color-default-hover);
+  border-color: var(--mantine-color-default-border);
+  color: var(--mantine-color-text);
+}
+
+.buttonSecondary:hover {
+  border-color: var(--mantine-primary-color-light-color);
+}
+
+.section {
+  opacity: 0.9;
+}
+
+@media (max-width: 36em) {
+  .group {
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
