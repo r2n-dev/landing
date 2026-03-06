@@ -9,11 +9,13 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  DOKPLOY_ENVIRONMENT: ${{ vars.DOKPLOY_ENVIRONMENT || 'production' }}
   DOKPLOY_WEBHOOK_URL: ${{ secrets.DOKPLOY_WEBHOOK_URL }}
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment: ${{ vars.DOKPLOY_ENVIRONMENT || 'production' }}
     permissions:
       contents: read
       packages: write
@@ -46,6 +48,42 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+      - name: Validate Dokploy webhook secret
+        run: |
+          if [ -z "$DOKPLOY_WEBHOOK_URL" ]; then
+            echo "::error::DOKPLOY_WEBHOOK_URL is empty."
+            echo "::error::If you stored it as an Environment secret, put it in the '$DOKPLOY_ENVIRONMENT' environment or set vars.DOKPLOY_ENVIRONMENT to your environment name."
+            echo "::error::If you do not use Environment secrets, add DOKPLOY_WEBHOOK_URL to repository secrets."
+            exit 1
+          fi
+
       - name: Trigger Dokploy webhook
-        if: ${{ success() && env.DOKPLOY_WEBHOOK_URL != '' }}
-        run: curl --fail --show-error --silent -X POST "$DOKPLOY_WEBHOOK_URL"
+        run: |
+          response_file="$(mktemp)"
+          set +e
+          http_status="$(curl --request POST \
+            --silent \
+            --show-error \
+            --location \
+            --retry 3 \
+            --retry-delay 2 \
+            --max-time 30 \
+            --output "$response_file" \
+            --write-out "%{http_code}" \
+            "$DOKPLOY_WEBHOOK_URL")"
+          curl_exit_code=$?
+          set -e
+
+          if [ "$curl_exit_code" -ne 0 ]; then
+            echo "::error::Dokploy webhook call failed before receiving an HTTP response (curl exit code $curl_exit_code)."
+            exit 1
+          fi
+
+          if [ "$http_status" -lt 200 ] || [ "$http_status" -ge 300 ]; then
+            echo "::error::Dokploy webhook call failed with HTTP $http_status."
+            echo "::error::Response body:"
+            cat "$response_file"
+            exit 1
+          fi
+
+          echo "Dokploy webhook triggered successfully (HTTP $http_status)."
