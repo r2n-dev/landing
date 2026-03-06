@@ -51,3 +51,5 @@ Start from:
 1. `AI_CONTEXT.md`
 2. `docs/ai/RULES.md`
 3. `docs/ai/TASK_SPEC_TEMPLATE.md`
+
+# Test automatic deploy
