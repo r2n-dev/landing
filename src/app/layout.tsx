@@ -7,6 +7,8 @@ import "./globals.scss";
 import { audiowide, jetBrainsMono, manrope } from "./fonts";
 import { resolveLandingLocaleFromHeaders } from "@/components/landing/i18n";
 import { andresProfileData } from "@/components/landing/profile-data";
+import { ColorSchemeSync } from "@/components/theme/ColorSchemeSync";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { mantineTheme } from "@/theme/mantine-theme";
 import { seo, siteOrigin, siteUrl } from "./seo";
 
@@ -76,14 +78,21 @@ export default async function RootLayout({
   const locale = resolveLandingLocaleFromHeaders(requestHeaders);
 
   return (
-    <html lang={locale} {...mantineHtmlProps}>
+    <html
+      lang={locale}
+      {...mantineHtmlProps}
+      className={`${manrope.variable} ${jetBrainsMono.variable} ${audiowide.variable}`}
+    >
       <head>
         <ColorSchemeScript defaultColorScheme="auto" />
       </head>
-      <body className={`${manrope.variable} ${jetBrainsMono.variable} ${audiowide.variable}`}>
-        <MantineProvider theme={mantineTheme} defaultColorScheme="auto">
-          {children}
-        </MantineProvider>
+      <body>
+        <ThemeProvider>
+          <MantineProvider theme={mantineTheme} defaultColorScheme="auto">
+            <ColorSchemeSync />
+            {children}
+          </MantineProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
