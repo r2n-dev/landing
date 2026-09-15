@@ -1,6 +1,5 @@
 "use client";
 
-import { Container, SimpleGrid, Stack } from "@mantine/core";
 import type { LandingLocale } from "@/components/landing/i18n";
 import type { LandingContent } from "./landing.types";
 import { useLocaleManager } from "./hooks/useLocaleManager";
@@ -16,7 +15,6 @@ import {
   SkillsCard,
   StatsGrid,
 } from "./sections";
-import styles from "./LandingPage.module.scss";
 
 interface LandingPageProps {
   initialLocale: LandingLocale;
@@ -28,16 +26,16 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
   const content = contentByLocale[locale];
 
   return (
-    <div className={styles.layout}>
+    <div className="flex min-h-screen flex-col">
       <PageHeader
         locale={locale}
         controls={content.controls}
         onLocaleChange={setLocale}
       />
 
-      <main className={styles.page}>
-        <Container size="lg" className={styles.container}>
-          <Stack gap="xl">
+      <main className="relative flex-1 pt-[clamp(2rem,4vw,4rem)] pb-[clamp(3rem,5vw,5rem)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_0%_10%,var(--primary-light)_0%,transparent_45%),radial-gradient(circle_at_90%_20%,var(--cyan-light)_0%,transparent_30%)] before:opacity-75">
+        <div className="relative z-1 mx-auto max-w-page px-4">
+          <div className="flex flex-col gap-8">
             <HeroSection
               availabilityBadge={content.availabilityBadge}
               role={content.role}
@@ -50,8 +48,8 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
 
             <StatsGrid stats={content.stats} />
 
-            <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
-              <Stack gap="lg">
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <div className="flex flex-col gap-5">
                 <PrinciplesCard
                   title={content.sections.principlesTitle}
                   principles={content.principles}
@@ -60,9 +58,9 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
                   title={content.sections.educationTitle}
                   items={content.education.items}
                 />
-              </Stack>
+              </div>
 
-              <Stack gap="lg">
+              <div className="flex flex-col gap-5">
                 <ExperienceCard
                   title={content.sections.experienceTitle}
                   showMoreLabel={content.sections.experienceShowMoreLabel}
@@ -71,16 +69,16 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
                   resumeAction={content.resumeAction}
                 />
                 <SkillsCard skills={content.skills} />
-              </Stack>
-            </SimpleGrid>
+              </div>
+            </div>
 
             <ContactCard
               title={content.sections.contactTitle}
               intro={content.sections.contactIntro}
               actions={content.contactActions}
             />
-          </Stack>
-        </Container>
+          </div>
+        </div>
       </main>
 
       <PageFooter
