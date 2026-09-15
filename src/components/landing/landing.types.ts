@@ -47,6 +47,21 @@ export interface LandingEducationSection {
   items: LandingEducationItem[];
 }
 
+export interface LandingCertificationItem {
+  name: string;
+  issuer: string;
+  /** Localized validity line, e.g. "Issued Sep 2026 · Expires Sep 2027" */
+  validity: string;
+  badgeImageUrl: string;
+  verificationUrl: string;
+}
+
+export interface LandingCertificationsSection {
+  title: string;
+  verifyLabel: string;
+  items: LandingCertificationItem[];
+}
+
 export interface LandingSkillsSection {
   title: string;
   technicalLabel: string;
@@ -54,7 +69,7 @@ export interface LandingSkillsSection {
   languagesLabel: string;
   technical: string[];
   soft: string[];
-  languages: { language: string; level: string }[];
+  languages: { language: string; levels: string[] }[];
 }
 
 export interface LandingSectionCopy {
@@ -63,6 +78,7 @@ export interface LandingSectionCopy {
   experienceShowMoreLabel: string;
   experienceShowLessLabel: string;
   educationTitle: string;
+  certificationsTitle: string;
   skillsTitle: string;
   contactTitle: string;
   contactIntro: string;
@@ -95,6 +111,7 @@ export interface LandingContent {
   principles: LandingPrinciple[];
   experience: LandingExperienceItem[];
   education: LandingEducationSection;
+  certifications: LandingCertificationsSection;
   skills: LandingSkillsSection;
   resumeAction: LandingAction;
   contactActions: LandingAction[];

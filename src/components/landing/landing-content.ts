@@ -1,6 +1,7 @@
 import type { LandingLocale } from "./i18n";
 import { andresProfileData, type LocalizedCopy } from "./profile-data";
 import type {
+  LandingCertificationsSection,
   LandingContent,
   LandingEducationSection,
   LandingExperienceItem,
@@ -38,6 +39,35 @@ function getEducation(locale: LandingLocale): LandingEducationSection {
   };
 }
 
+function formatMonthYear(locale: LandingLocale, isoDate: string): string {
+  return new Intl.DateTimeFormat(locale, {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(isoDate));
+}
+
+function getCertifications(locale: LandingLocale): LandingCertificationsSection {
+  const isSpanish = locale === "es";
+  return {
+    title: isSpanish ? "Certificaciones" : "Certifications",
+    verifyLabel: isSpanish ? "Verificar en Credly" : "Verify on Credly",
+    items: andresProfileData.certifications.map((item) => {
+      const issued = `${isSpanish ? "Emitida" : "Issued"} ${formatMonthYear(locale, item.issuedOn)}`;
+      const expires = item.expiresOn
+        ? `${isSpanish ? "Vence" : "Expires"} ${formatMonthYear(locale, item.expiresOn)}`
+        : undefined;
+      return {
+        name: item.name,
+        issuer: item.issuer,
+        validity: expires ? `${issued} · ${expires}` : issued,
+        badgeImageUrl: item.badgeImageUrl,
+        verificationUrl: item.verificationUrl,
+      };
+    }),
+  };
+}
+
 function getSkills(locale: LandingLocale): LandingSkillsSection {
   const isSpanish = locale === "es";
   return {
@@ -49,7 +79,7 @@ function getSkills(locale: LandingLocale): LandingSkillsSection {
     soft: andresProfileData.skills.soft.map((s) => getCopy(locale, s)),
     languages: andresProfileData.skills.languages.map((l) => ({
       language: getCopy(locale, l.language),
-      level: getCopy(locale, l.level),
+      levels: l.levels.map((level) => getCopy(locale, level)),
     })),
   };
 }
@@ -77,6 +107,7 @@ function getLandingContent(locale: LandingLocale): LandingContent {
       experienceShowMoreLabel: isSpanish ? "Ver experiencia completa" : "Show full experience",
       experienceShowLessLabel: isSpanish ? "Ver menos experiencia" : "Show less experience",
       educationTitle: isSpanish ? "Educación" : "Education",
+      certificationsTitle: isSpanish ? "Certificaciones" : "Certifications",
       skillsTitle: isSpanish ? "Habilidades" : "Skills",
       contactTitle: isSpanish
         ? "Construyamos algo valioso"
@@ -194,6 +225,7 @@ function getLandingContent(locale: LandingLocale): LandingContent {
     ],
     experience: getAllExperience(locale),
     education: getEducation(locale),
+    certifications: getCertifications(locale),
     skills: getSkills(locale),
     resumeAction: {
       href: andresProfileData.resumeAssets[locale],

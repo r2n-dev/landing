@@ -40,9 +40,11 @@ export function SkillsCard({ skills }: SkillsCardProps) {
             {skills.languages.map((lang) => (
               <div key={lang.language} className="flex flex-wrap items-center gap-2.5">
                 <p className="text-sm">{lang.language}</p>
-                <Badge variant="outline" size="sm">
-                  {lang.level}
-                </Badge>
+                {lang.levels.map((level) => (
+                  <Badge key={level} variant="outline" size="sm">
+                    {level}
+                  </Badge>
+                ))}
               </div>
             ))}
           </div>
