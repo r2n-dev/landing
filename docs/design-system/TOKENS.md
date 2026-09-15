@@ -64,6 +64,7 @@ Mantine `gray[0..9]` and `dark[0..9]` are available as `--color-gray-N` / `--col
 | `--mantine-color-dimmed` | `--muted-foreground` | `#868e96` | `#828282` |
 | `--mantine-color-default-border` | `--border`, `--input` | `#ced4da` | `#424242` |
 | `--mantine-color-error` | `--destructive` | `#fa5252` | `#e03131` |
+| `--mantine-color-anchor` | `--anchor` | `#3b95ff` | `#61a9ff` |
 | `--mantine-color-cyan-light` | `--cyan-light` | `rgba(21,170,191,.1)` | `rgba(34,184,207,.15)` |
 
 ### Radius

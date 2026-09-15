@@ -153,6 +153,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-anchor: var(--anchor);
   --color-cyan-light: var(--cyan-light);
 }
 
@@ -186,6 +187,7 @@
   --border: #ced4da;
   --input: #ced4da;
   --ring: #3b95ff;
+  --anchor: #3b95ff;
   --cyan-light: rgba(21, 170, 191, 0.1);
 }
 
@@ -217,6 +219,7 @@
   --border: #424242;
   --input: #424242;
   --ring: #2d80e4;
+  --anchor: #61a9ff;
   --cyan-light: rgba(34, 184, 207, 0.15);
 }
 
