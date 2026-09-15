@@ -1,5 +1,7 @@
 # AI Context
 
+> **Migration in progress: Mantine → Tailwind CSS + shadcn/ui.** The snapshot below describes the current Mantine runtime, which stays in place until Phase 7. The target stack is Tailwind CSS v4 + shadcn/ui; see the phase list in `AGENTS.md`.
+
 ## Project Snapshot
 - Framework: Next.js (App Router) + TypeScript.
 - UI library: Mantine (`@mantine/core`, `@mantine/hooks`).

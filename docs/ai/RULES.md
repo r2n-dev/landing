@@ -1,5 +1,7 @@
 # AI Rules
 
+> **Migration in progress: Mantine → Tailwind CSS + shadcn/ui.** The Mantine-first rules below apply only to code not yet migrated. Work that belongs to the current migration phase (Tailwind, shadcn/ui, `next-themes`, `src/components/ui/*`) is not a rule violation. See the phase list in `AGENTS.md`.
+
 ## Mandatory
 - Use Mantine components before building custom UI primitives.
 - Keep changes scoped to the requested task.

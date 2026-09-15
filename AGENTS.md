@@ -1,5 +1,20 @@
 # AGENTS
 
+> **Migration in progress: Mantine → Tailwind CSS + shadcn/ui**
+>
+> The target stack is Tailwind CSS v4 + shadcn/ui. Mantine is being phased out phase by phase; until Phase 7 lands, the app still runs on Mantine and the Mantine rules below remain in force for code that has not been migrated yet. Do not block or revert work that belongs to the current migration phase, and do not migrate ahead of the current phase.
+>
+> Phases (run in order, one per session, each committed before the next):
+> 0. Governance notice (this note)
+> 1. Install Tailwind + shadcn alongside Mantine
+> 2. Port theme tokens to CSS variables (`docs/design-system/TOKENS.md` mapping)
+> 3. Dark mode via `next-themes`, parallel to Mantine
+> 4. Add shadcn primitives (`card`, `badge`, `button`, `avatar`, `separator`)
+> 5. Custom `Timeline` in `src/components/ui/timeline.tsx`
+> 6. Migrate `src/components/landing/sections/*` one component at a time
+> 7. Remove Mantine
+> 8. Rewrite governance docs + add `@shadcn/lint`
+
 This repository is optimized for AI-assisted development.
 
 ## Mission
