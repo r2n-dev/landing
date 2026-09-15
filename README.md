@@ -40,9 +40,9 @@ Color scheme is managed by next-themes (`light`, `dark`, `system`) and persisted
 ## Localization
 - Supported locales: English (`en`) and Spanish (`es`).
 - Initial locale is resolved from request headers (`x-vercel-ip-country` / `accept-language`) and persisted in local storage.
-- Resume assets are served from:
-  - `public/assets/resume/Andres-Artunduaga-CV-EN.pdf`
-  - `public/assets/resume/Andres-Artunduaga-CV-ES.pdf`
+- Resume PDFs are generated at build time from the profile data with `@react-pdf/renderer`:
+  - `/resume-en.pdf`, `/resume-es.pdf` (layout: `src/components/resume/ResumeDocument.tsx`)
+  - `/resume-en`, `/resume-es` show an HTML version with a download button
 
 ## AI Contributor Pack
 - Root policies: `AGENTS.md`, `AI_CONTEXT.md`, `CONTRIBUTING.md`

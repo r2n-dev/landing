@@ -104,8 +104,8 @@ export const andresProfileData: CandidateProfile = {
     },
   },
   resumeAssets: {
-    en: "/assets/resume/Andres-Artunduaga-CV-EN.pdf",
-    es: "/assets/resume/Andres-Artunduaga-CV-ES.pdf",
+    en: "/resume-en.pdf",
+    es: "/resume-es.pdf",
   },
   experiences: [
     {
