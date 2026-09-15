@@ -1,30 +1,26 @@
 # Tokens
 
 ## Source of Truth
-Mantine theme tokens from `src/theme/mantine-theme.ts` and generated CSS variables.
+`src/app/globals.css`:
+- `@theme` — static scales: brand, gray and dark palettes, accent colors, breakpoints, container width, font sizes, heading sizes, radius, shadows.
+- `:root` / `.dark` — semantic color variables for light and dark.
+- `@theme inline` — exposes semantic variables and font families as Tailwind utilities.
 
 ## Primary Token Groups
-- Color palette (`theme.colors`, `theme.primaryColor`, `theme.primaryShade`)
-- Typography (`theme.fontFamily`, `theme.headings`)
-- Radius (`theme.defaultRadius`)
-- Component defaults (`theme.components`)
-
-## Common CSS Variable Examples
-- `--mantine-color-body`
-- `--mantine-color-text`
-- `--mantine-color-default-border`
-- `--mantine-primary-color-filled`
-- `--mantine-radius-lg`
-- `--mantine-spacing-md`
+- Semantic colors: `background`, `foreground`, `card`, `card-border`, `primary` (+ `-hover`, `-light`, `-light-hover`, `-light-foreground`, `-outline`), `secondary`, `surface` (+ `-foreground`, `-hover`), `muted`, `accent`, `destructive`, `border`, `input`, `ring`, `anchor`, `cyan-light`.
+- Palettes: `brand-0`…`brand-9`, `gray-0`…`gray-9`, `dark-0`…`dark-9`, `blue`, `cyan`, `teal`, `grape`.
+- Typography: `font-sans`, `font-heading`, `font-mono`, `font-logo`; `text-xs`…`text-xl`; `text-h1`…`text-h3`.
+- Radius: `--radius` (0.5rem) and the `rounded-xs`…`rounded-4xl` scale.
+- Breakpoints: `xs` 36em, `sm` 48em, `md` 62em, `lg` 75em, `xl` 88em.
 
 ## Rules
-- Prefer Mantine props and variants first.
-- Use theme-level overrides before per-component custom CSS.
-- Keep custom SCSS focused on structure/layout, not duplicating theme values.
+- Use semantic utilities (`bg-card`, `text-muted-foreground`) in components; palettes are for primitives and accents without a semantic role.
+- Add or rename tokens in `globals.css` and update this file in the same change.
+- Avoid arbitrary values when a token exists.
 
-## Mantine → Tailwind/shadcn Token Mapping (migration)
+## Mantine → Tailwind/shadcn Token Mapping (historical)
 
-Parallel token set defined in `src/app/globals.css` for the Mantine → Tailwind CSS + shadcn/ui migration. Values are copied from `src/theme/mantine-theme.ts` and the Mantine defaults it inherits (read from the running app's computed `--mantine-*` variables), so this is a format change, not a rebrand. Dark values live under `.dark`.
+Reference for the Mantine → Tailwind CSS + shadcn/ui migration. Token values were copied from the former `src/theme/mantine-theme.ts` and the Mantine defaults it inherited (read from the running app's computed `--mantine-*` variables), so the migration changed the token format, not the brand. Dark values live under `.dark`.
 
 ### Brand palette
 | Mantine | CSS variable | Tailwind class example | Value |

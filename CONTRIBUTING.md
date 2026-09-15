@@ -10,14 +10,14 @@
 - Lint code: `npm run lint`.
 
 ## UI System Rules
-- Use Mantine components first.
-- Keep theme overrides in `src/theme/mantine-theme.ts`.
+- Use the primitives in `src/components/ui/*` first; add variants instead of restyling with `className`.
+- Keep theme tokens in `src/app/globals.css`.
 - Keep landing page composition in `src/components/landing/*`.
-- Use SCSS modules only for structural/custom styling not covered by Mantine props.
+- Style with Tailwind utilities; no CSS/SCSS modules.
 
 ## Pull Request Checklist
 - [ ] Scope is limited to the task.
-- [ ] UI aligns with Mantine theme and component patterns.
+- [ ] UI uses theme tokens and primitive variants.
 - [ ] Responsive layout checked at mobile and desktop widths.
 - [ ] Keyboard focus visible for interactive elements.
 - [ ] `npm run lint` passes.

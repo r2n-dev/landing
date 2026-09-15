@@ -83,9 +83,10 @@ export function ExperienceCard({
       {shouldShowToggle ? (
         <Button
           variant="ghost"
+          size="flush"
           onClick={() => setIsExpanded((prev) => !prev)}
           aria-expanded={isExpanded}
-          className="mt-3 ps-0"
+          className="mt-3"
         >
           {isExpanded ? showLessLabel : showMoreLabel}
         </Button>

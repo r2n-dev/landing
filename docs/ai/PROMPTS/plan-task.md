@@ -1,6 +1,6 @@
 # Prompt: Plan Task
 
-You are working in this Mantine-based repository. Produce a decision-complete implementation plan.
+You are working in this Tailwind CSS + shadcn/ui repository. Produce a decision-complete implementation plan.
 
 ## Goal
 {{goal}}

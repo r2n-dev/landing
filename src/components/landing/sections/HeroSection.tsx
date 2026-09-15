@@ -24,7 +24,7 @@ export function HeroSection({
   actions,
 }: HeroSectionProps) {
   return (
-    <Card padding="xl" className="bg-background backdrop-blur-[6px]">
+    <Card variant="page" padding="xl">
       <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
         <Badge variant="secondary" size="lg">
           {availabilityBadge}

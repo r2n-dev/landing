@@ -8,9 +8,14 @@ import { cn } from "cn"
  * Card padding prop (xs 10px, sm 12px, md 16px, lg 20px, xl 32px).
  */
 const cardVariants = cva(
-  "group/card relative flex flex-col overflow-hidden rounded-2xl border border-card-border bg-card p-(--card-spacing) text-card-foreground",
+  "group/card relative flex flex-col overflow-hidden rounded-2xl border border-card-border p-(--card-spacing) text-card-foreground",
   {
     variants: {
+      variant: {
+        default: "bg-card",
+        // Page background with a light blur, for cards over decorative backdrops
+        page: "bg-background backdrop-blur-[6px]",
+      },
       padding: {
         xs: "[--card-spacing:--spacing(2.5)]",
         sm: "[--card-spacing:--spacing(3)]",
@@ -20,6 +25,7 @@ const cardVariants = cva(
       },
     },
     defaultVariants: {
+      variant: "default",
       padding: "md",
     },
   }
@@ -27,14 +33,16 @@ const cardVariants = cva(
 
 function Card({
   className,
+  variant = "default",
   padding = "md",
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof cardVariants>) {
   return (
     <div
       data-slot="card"
+      data-variant={variant}
       data-padding={padding}
-      className={cn(cardVariants({ padding }), className)}
+      className={cn(cardVariants({ variant, padding }), className)}
       {...props}
     />
   )

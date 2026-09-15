@@ -41,6 +41,8 @@ const buttonVariants = cva(
         // Mantine sm (Mantine Button default)
         default:
           "h-9 gap-2.5 px-4.5 text-sm leading-none has-data-[icon=inline-end]:pe-3 has-data-[icon=inline-start]:ps-3",
+        // Mantine sm with no start padding (inline text toggles)
+        flush: "h-9 gap-2.5 ps-0 pe-4.5 text-sm leading-none",
         // Mantine md
         lg: "h-10.5 gap-2.5 px-5.5 text-base leading-none has-data-[icon=inline-end]:pe-[calc(var(--spacing)*5.5/1.5)] has-data-[icon=inline-start]:ps-[calc(var(--spacing)*5.5/1.5)]",
         // Mantine ActionIcon sizes (radius md)

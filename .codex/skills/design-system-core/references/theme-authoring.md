@@ -1,16 +1,15 @@
 # Theme Authoring
 
 ## Steps
-1. Add theme ID and label in theme constants/types.
-2. Add semantic token block in `src/design-system/styles/themes.scss`.
-3. Ensure ThemeSwitcher displays the new theme.
-4. Validate contrast for text, borders, and interactive states.
-5. Update `docs/design-system/THEMES.md`.
+1. Add or change semantic variables in `:root` (light) and `.dark` in `src/app/globals.css`.
+2. Expose new variables in `@theme inline` as `--color-<name>: var(--<name>)`.
+3. Use the new utilities in primitives or sections.
+4. Validate contrast for text, borders, and interactive states in both schemes.
+5. Update `docs/design-system/THEMES.md` and `TOKENS.md`.
 
-## Theme Requirements
-- Distinct visual identity.
-- Professional readability.
-- Coherent accent and hover/active states.
+## Runtime
+- `ThemeProvider` (next-themes) in `src/app/layout.tsx` sets `class="light|dark"` on `<html>`.
+- Supported schemes: `light`, `dark`, `system`.
 
 ## Persistence
-- Theme selection persists in `localStorage` key `r2n_theme`.
+- Scheme selection persists in `localStorage` key `mantine-color-scheme-value`.

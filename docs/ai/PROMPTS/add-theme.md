@@ -1,13 +1,13 @@
 # Prompt: Add Theme
 
-Update Mantine theme configuration for this repository.
+Update theme tokens for this repository.
 
 ## Goal
 {{goal}}
 
 ## Scope
-- Extend `src/theme/mantine-theme.ts`
-- Keep runtime compatibility with `ColorSchemeScript` and `MantineProvider`
+- Edit the `:root` / `.dark` variables and `@theme` blocks in `src/app/globals.css`
+- Keep runtime compatibility with next-themes (`ThemeProvider` in `src/app/layout.tsx`)
 - Update docs in `docs/design-system/THEMES.md`
 
 ## Constraints

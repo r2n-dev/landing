@@ -1,6 +1,6 @@
 # Prompt: Add Page Section
 
-Add or update a landing page section using Mantine components.
+Add or update a landing page section using the design system primitives.
 
 ## Goal
 {{goal}}
@@ -11,7 +11,7 @@ Add or update a landing page section using Mantine components.
 - Keep layout responsive
 
 ## Constraints
-- Mantine-first composition
+- Primitive-first composition with theme tokens
 - Keep custom components pure and typed
 - Keep motion subtle
 
