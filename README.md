@@ -28,6 +28,28 @@ Single-page portfolio built with Next.js App Router, TypeScript, Tailwind CSS an
 - `npm run start` - run production server
 - `npm run check:ds` - lint + build validation gate
 
+## Supabase
+Resume content is moving to Supabase. The connection is configured through env vars (see `.env.example`):
+1. Copy `.env.example` to `.env.local` and set `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` from the Supabase dashboard (Project Settings > API Keys).
+2. Verify the connection:
+   ```bash
+   npm run supabase:check
+   ```
+3. Use `getSupabaseClient()` from `src/lib/supabase/server.ts` in server components and route handlers only.
+
+Database schema lives in `supabase/` (Supabase CLI, installed as a dev dependency):
+- `supabase/config.toml` - CLI and local stack configuration
+- `supabase/migrations/` - SQL migrations, applied in order
+
+Link the CLI to the hosted project once per machine:
+```bash
+npx supabase login
+npx supabase link --project-ref grmssymmxvewwekivvjj
+```
+Then create migrations with `npx supabase migration new <name>` and apply them with `npx supabase db push`.
+
+In production (Dokploy), set the same variables on the service.
+
 ## UI Architecture
 - Runtime shell: `src/app/layout.tsx`
 - Theme tokens: `src/app/globals.css`
