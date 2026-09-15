@@ -28,6 +28,17 @@ export interface ProfileEducation {
   location: string;
 }
 
+export interface ProfileCertification {
+  name: string;
+  issuer: string;
+  /** ISO 8601 date */
+  issuedOn: string;
+  /** ISO 8601 date */
+  expiresOn?: string;
+  badgeImageUrl: string;
+  verificationUrl: string;
+}
+
 export interface ProfileLanguage {
   language: LocalizedCopy;
   level: LocalizedCopy;
@@ -55,6 +66,7 @@ export interface CandidateProfile {
     languages: ProfileLanguage[];
   };
   education: ProfileEducation[];
+  certifications: ProfileCertification[];
 }
 
 export const andresProfileData: CandidateProfile = {
@@ -434,6 +446,16 @@ export const andresProfileData: CandidateProfile = {
       institution: "Universidad del Valle",
       period: "2011 - 2017",
       location: "Santiago de Cali",
+    },
+  ],
+  certifications: [
+    {
+      name: "Claude Certified Developer – Foundations",
+      issuer: "Anthropic",
+      issuedOn: "2026-09-11",
+      expiresOn: "2027-09-11",
+      badgeImageUrl: "/assets/certifications/claude-certified-developer-foundations.png",
+      verificationUrl: "https://www.credly.com/badges/b7c1ad14-f61a-4d58-b6e3-df30b17f366d",
     },
   ],
 };

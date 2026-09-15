@@ -5,6 +5,7 @@ export { StatsGrid } from "./StatsGrid";
 export { PrinciplesCard } from "./PrinciplesCard";
 export { ExperienceCard } from "./ExperienceCard";
 export { EducationCard } from "./EducationCard";
+export { CertificationsCard } from "./CertificationsCard";
 export { SkillsCard } from "./SkillsCard";
 export { ContactCard } from "./ContactCard";
 export { PageFooter } from "./PageFooter";

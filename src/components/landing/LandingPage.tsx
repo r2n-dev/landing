@@ -5,6 +5,7 @@ import type { LandingContent } from "./landing.types";
 import { useLocaleManager } from "./hooks/useLocaleManager";
 import { andresProfileData } from "./profile-data";
 import {
+  CertificationsCard,
   ContactCard,
   EducationCard,
   ExperienceCard,
@@ -57,6 +58,11 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
                 <EducationCard
                   title={content.sections.educationTitle}
                   items={content.education.items}
+                />
+                <CertificationsCard
+                  title={content.sections.certificationsTitle}
+                  verifyLabel={content.certifications.verifyLabel}
+                  items={content.certifications.items}
                 />
               </div>
 

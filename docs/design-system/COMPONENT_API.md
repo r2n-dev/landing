@@ -48,7 +48,7 @@ Props:
 - `contentByLocale: Record<LandingLocale, LandingContent>`
 
 Behavior:
-- Composes the full single-page landing experience: header, hero, stats, principles, education, experience, skills, contact and footer.
+- Composes the full single-page landing experience: header, hero, stats, principles, education, certifications, experience, skills, contact and footer.
 - Manages the active locale with `useLocaleManager`.
 
 ### Sections (`src/components/landing/sections/*`)
@@ -57,6 +57,7 @@ Behavior:
 - `StatsGrid`: `stats`.
 - `PrinciplesCard`: `title`, `principles`.
 - `EducationCard`: `title`, `items`.
+- `CertificationsCard`: `title`, `verifyLabel`, `items` (badge image, name, issuer, localized validity and an external verification link).
 - `ExperienceCard`: `title`, `showMoreLabel`, `showLessLabel`, `experience`, `resumeAction`.
 - `SkillsCard`: `skills`.
 - `ContactCard`: `title`, `intro`, `actions`.
