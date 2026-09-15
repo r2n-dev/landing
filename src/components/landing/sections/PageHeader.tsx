@@ -1,10 +1,8 @@
-import { Container, Group } from "@mantine/core";
 import type { LandingLocale } from "@/components/landing/i18n";
 import { ColorSchemeToggle } from "@/components/theme/ColorSchemeToggle";
 import { LanguageSelector } from "@/components/theme/LanguageSelector";
 import type { LandingControlCopy } from "../landing.types";
 import { LogoLink } from "./LogoLink";
-import styles from "./PageHeader.module.scss";
 
 interface PageHeaderProps {
   locale: LandingLocale;
@@ -14,20 +12,20 @@ interface PageHeaderProps {
 
 export function PageHeader({ locale, controls, onLocaleChange }: PageHeaderProps) {
   return (
-    <header className={styles.header}>
-      <Container size="lg">
-        <Group justify="space-between" align="center">
+    <header className="sticky top-0 z-100 border-b border-border bg-background py-3">
+      <div className="mx-auto max-w-page px-4">
+        <div className="flex flex-wrap items-center justify-between gap-4">
           <LogoLink />
-          <Group gap="xs" wrap="nowrap">
+          <div className="flex flex-nowrap items-center gap-2.5">
             <LanguageSelector
               value={locale}
               ariaLabel={controls.languageSelectorLabel}
               onChange={onLocaleChange}
             />
             <ColorSchemeToggle labels={controls} />
-          </Group>
-        </Group>
-      </Container>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }

@@ -1,6 +1,6 @@
 ---
 name: design-system-core
-description: Maintain and extend the portfolio design system. Use when working on theme tokens, semantic color mapping, ThemeProvider behavior, reusable primitives in src/design-system/components, or any UI refactor that must follow tokenized multi-theme conventions.
+description: Maintain and extend the portfolio design system. Use when working on Tailwind theme tokens in src/app/globals.css, light/dark color schemes (next-themes), shadcn/ui primitives in src/components/ui, or any UI refactor that must follow the token and variant conventions.
 ---
 
 # Design System Core
@@ -14,16 +14,16 @@ Implement design-system changes with strict token and API discipline.
 4. If validating work, read `references/qa-playbook.md`.
 
 ## Enforce Token Rules
-- Use semantic CSS variables in component styles.
-- Avoid direct raw color values in component/module styles.
-- Keep token names stable unless migration is intentional and documented.
+- Use semantic Tailwind utilities backed by `src/app/globals.css` variables.
+- Avoid raw color values in components.
+- Keep token names stable unless a rename is intentional and documented.
 
 ## Enforce Component Rules
 - Keep public component props typed and minimal.
-- Use variants/sizes/tones rather than one-off classes.
+- Add variants/sizes to primitives instead of restyling them with `className` (`shadcn/no-restyle`).
 - Preserve semantic HTML for links and buttons.
 
 ## Update Documentation
 - Update `docs/design-system/COMPONENT_API.md` for public API changes.
-- Update `docs/design-system/TOKENS.md` for token contract changes.
-- Update `docs/design-system/THEMES.md` for theme changes.
+- Update `docs/design-system/TOKENS.md` for token changes.
+- Update `docs/design-system/THEMES.md` for color scheme changes.

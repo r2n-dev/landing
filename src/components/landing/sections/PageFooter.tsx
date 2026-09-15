@@ -1,4 +1,3 @@
-import { Anchor, Container, Group, Text } from "@mantine/core";
 import {
   IconBrandGithub,
   IconBrandLinkedin,
@@ -6,7 +5,6 @@ import {
   IconHeart,
   IconMail,
 } from "@tabler/icons-react";
-import styles from "./PageFooter.module.scss";
 
 interface PageFooterProps {
   name: string;
@@ -18,6 +16,9 @@ interface PageFooterProps {
   inCountryLabel: string;
 }
 
+const linkClassName =
+  "inline-flex items-center gap-1 text-sm text-muted-foreground hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
+
 export function PageFooter({
   name,
   email,
@@ -28,37 +29,37 @@ export function PageFooter({
   inCountryLabel,
 }: PageFooterProps) {
   return (
-    <footer className={styles.footer}>
-      <Container size="lg">
-        <Group justify="space-between" align="center" wrap="wrap">
-          <Text size="sm" c="dimmed" suppressHydrationWarning>
+    <footer className="border-t border-border py-5">
+      <div className="mx-auto max-w-page px-4">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground" suppressHydrationWarning>
             &copy; {new Date().getFullYear()} {name}
-          </Text>
-          <Group gap="md">
-            <Anchor href={`mailto:${email}`} c="dimmed" size="sm" className={styles.link}>
+          </p>
+          <div className="flex flex-wrap items-center gap-4">
+            <a href={`mailto:${email}`} className={linkClassName}>
               <IconMail size={16} />
               <span>{email}</span>
-            </Anchor>
-            <Anchor href={linkedinHref} target="_blank" rel="noreferrer" c="dimmed" size="sm" className={styles.link}>
+            </a>
+            <a href={linkedinHref} target="_blank" rel="noreferrer" className={linkClassName}>
               <IconBrandLinkedin size={16} />
               <span>LinkedIn</span>
-            </Anchor>
-            <Anchor href={githubHref} target="_blank" rel="noreferrer" c="dimmed" size="sm" className={styles.link}>
+            </a>
+            <a href={githubHref} target="_blank" rel="noreferrer" className={linkClassName}>
               <IconBrandGithub size={16} />
               <span>GitHub</span>
-            </Anchor>
-            <Anchor href={whatsappHref} target="_blank" rel="noreferrer" c="dimmed" size="sm" className={styles.link}>
+            </a>
+            <a href={whatsappHref} target="_blank" rel="noreferrer" className={linkClassName}>
               <IconBrandWhatsapp size={16} />
               <span>WhatsApp</span>
-            </Anchor>
-          </Group>
-          <Group gap={4} wrap="nowrap">
-            <Text size="xs" c="dimmed">{madeWithLabel}</Text>
-            <IconHeart size={14} color="var(--mantine-color-dimmed)" />
-            <Text size="xs" c="dimmed">{inCountryLabel}</Text>
-          </Group>
-        </Group>
-      </Container>
+            </a>
+          </div>
+          <div className="flex flex-nowrap items-center gap-1">
+            <p className="text-xs text-muted-foreground">{madeWithLabel}</p>
+            <IconHeart size={14} className="text-muted-foreground" />
+            <p className="text-xs text-muted-foreground">{inCountryLabel}</p>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 }

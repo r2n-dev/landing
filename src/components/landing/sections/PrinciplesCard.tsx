@@ -1,4 +1,3 @@
-import { Card, SimpleGrid, Text, ThemeIcon, Title } from "@mantine/core";
 import {
   IconBolt,
   IconCode,
@@ -8,8 +7,9 @@ import {
   IconShieldCheck,
   IconUsers,
 } from "@tabler/icons-react";
+import { Card } from "@/components/ui/card";
+import { IconBadge } from "@/components/ui/icon-badge";
 import type { LandingPrinciple } from "../landing.types";
-import styles from "./PrinciplesCard.module.scss";
 
 const principleIcons = [
   IconRocket,
@@ -29,29 +29,28 @@ interface PrinciplesCardProps {
 export function PrinciplesCard({ title, principles }: PrinciplesCardProps) {
   return (
     <Card padding="xl">
-      <Title order={2} size="h3" className={styles.heading}>
-        {title}
-      </Title>
+      <h2 className="mb-4 font-heading text-h3">{title}</h2>
 
-      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {principles.map((principle, index) => {
           const Icon = principleIcons[index % principleIcons.length];
 
           return (
-            <div key={principle.title} className={styles.item}>
-              <ThemeIcon size="lg" variant="light" radius="xl" className={styles.icon}>
+            <div
+              key={principle.title}
+              className="flex items-start gap-3 rounded-lg border border-border bg-background p-3 transition-[border-color,transform] duration-200 ease-[ease] hover:-translate-y-px hover:border-primary-light-foreground"
+            >
+              <IconBadge size="lg">
                 <Icon size={18} />
-              </ThemeIcon>
-              <div className={styles.text}>
-                <Text fw={600}>{principle.title}</Text>
-                <Text c="dimmed" size="sm">
-                  {principle.description}
-                </Text>
+              </IconBadge>
+              <div className="min-w-0 flex-1">
+                <p className="font-semibold">{principle.title}</p>
+                <p className="text-sm text-muted-foreground">{principle.description}</p>
               </div>
             </div>
           );
         })}
-      </SimpleGrid>
+      </div>
     </Card>
   );
 }

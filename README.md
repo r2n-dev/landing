@@ -1,13 +1,14 @@
 # R2N Portfolio Landing
 
-Single-page portfolio built with Next.js App Router, TypeScript, and Mantine.
+Single-page portfolio built with Next.js App Router, TypeScript, Tailwind CSS and shadcn/ui.
 
 ## Tech Stack
 - Next.js 15
 - React 19
 - TypeScript
-- Mantine (`@mantine/core`, `@mantine/hooks`)
-- SCSS modules (for structural styling)
+- Tailwind CSS v4
+- shadcn/ui primitives (Radix)
+- next-themes
 
 ## Local Setup
 1. Use Node version from `.nvmrc`.
@@ -22,18 +23,19 @@ Single-page portfolio built with Next.js App Router, TypeScript, and Mantine.
 
 ## Scripts
 - `npm run dev` - start development server
-- `npm run lint` - run lint checks
+- `npm run lint` - run lint checks (Next.js rules + `shadcn/no-restyle`)
 - `npm run build` - build production bundle
 - `npm run start` - run production server
 - `npm run check:ds` - lint + build validation gate
 
-## Mantine Architecture
+## UI Architecture
 - Runtime shell: `src/app/layout.tsx`
-- Theme contract: `src/theme/mantine-theme.ts`
+- Theme tokens: `src/app/globals.css`
+- UI primitives: `src/components/ui/*`
 - Landing components: `src/components/landing/*`
 - Theme controls: `src/components/theme/ColorSchemeToggle.tsx`, `src/components/theme/LanguageSelector.tsx`
 
-Color scheme is managed by Mantine (`light`, `dark`, `auto`) and persisted automatically.
+Color scheme is managed by next-themes (`light`, `dark`, `system`) and persisted automatically.
 
 ## Localization
 - Supported locales: English (`en`) and Spanish (`es`).
@@ -45,7 +47,7 @@ Color scheme is managed by Mantine (`light`, `dark`, `auto`) and persisted autom
 ## AI Contributor Pack
 - Root policies: `AGENTS.md`, `AI_CONTEXT.md`, `CONTRIBUTING.md`
 - Model-agnostic docs: `docs/ai/*`
-- Mantine workflow docs: `docs/design-system/*`
+- Design system docs: `docs/design-system/*`
 
 Start from:
 1. `AI_CONTEXT.md`

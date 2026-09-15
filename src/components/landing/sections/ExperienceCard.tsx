@@ -1,18 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import {
-  Anchor,
-  Button,
-  Card,
-  List,
-  Text,
-  Timeline,
-  TimelineItem,
-  Title,
-} from "@mantine/core";
-import type { LandingAction, LandingExperienceItem } from "../landing.types";
-import styles from "./ExperienceCard.module.scss";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Timeline, TimelineItem } from "@/components/ui/timeline";
+import type { LandingAction, LandingActionVariant, LandingExperienceItem } from "../landing.types";
 
 interface ExperienceCardProps {
   title: string;
@@ -23,6 +15,12 @@ interface ExperienceCardProps {
 }
 
 const DEFAULT_VISIBLE_EXPERIENCE_ITEMS = 3;
+
+const buttonVariantByActionVariant = {
+  filled: "default",
+  light: "secondary",
+  default: "outline",
+} as const satisfies Record<LandingActionVariant, string>;
 
 export function ExperienceCard({
   title,
@@ -41,45 +39,42 @@ export function ExperienceCard({
 
   return (
     <Card padding="xl" id="experience">
-      <Title order={2} size="h3" className={styles.heading}>
-        {title}
-      </Title>
+      <h2 className="mb-4 font-heading text-h3">{title}</h2>
 
       <Timeline active={visibleExperience.length} bulletSize={22} lineWidth={2}>
         {visibleExperience.map((item) => (
           <TimelineItem
             key={`${item.company}-${item.period}`}
             title={
-              <Text fw={600} className={styles.timelineTitle}>
+              <p className="leading-[1.35] font-semibold">
                 {item.role} –{" "}
                 {item.companyUrl ? (
-                  <Anchor href={item.companyUrl} target="_blank" rel="noreferrer" inherit>
+                  <a
+                    href={item.companyUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-anchor hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                  >
                     {item.company}
-                  </Anchor>
+                  </a>
                 ) : (
                   item.company
                 )}
-              </Text>
+              </p>
             }
           >
-            <Text size="xs" c="dimmed" mb={4}>
-              {item.period}
-            </Text>
+            <p className="mb-1 text-xs text-muted-foreground">{item.period}</p>
             {item.location ? (
-              <Text size="xs" c="dimmed" mb={6}>
-                {item.location}
-              </Text>
+              <p className="mb-1.5 text-xs text-muted-foreground">{item.location}</p>
             ) : null}
-            <Text size="sm" c="dimmed">
-              {item.summary}
-            </Text>
+            <p className="text-sm text-muted-foreground">{item.summary}</p>
 
             {item.highlights && item.highlights.length > 0 ? (
-              <List size="sm" c="dimmed" mt={8}>
+              <ul className="mt-2 list-outside list-disc ps-5 text-sm text-muted-foreground">
                 {item.highlights.map((highlight) => (
-                  <List.Item key={highlight}>{highlight}</List.Item>
+                  <li key={highlight}>{highlight}</li>
                 ))}
-              </List>
+              </ul>
             ) : null}
           </TimelineItem>
         ))}
@@ -87,23 +82,24 @@ export function ExperienceCard({
 
       {shouldShowToggle ? (
         <Button
-          variant="subtle"
+          variant="ghost"
+          size="flush"
           onClick={() => setIsExpanded((prev) => !prev)}
           aria-expanded={isExpanded}
-          className={styles.expandButton}
+          className="mt-3"
         >
           {isExpanded ? showLessLabel : showMoreLabel}
         </Button>
       ) : null}
 
       <Button
-        component="a"
-        href={resumeAction.href}
-        variant={resumeAction.variant ?? "light"}
-        className={styles.resumeButton}
-        download
+        asChild
+        variant={buttonVariantByActionVariant[resumeAction.variant ?? "light"]}
+        className="mt-4"
       >
-        {resumeAction.label}
+        <a href={resumeAction.href} download>
+          {resumeAction.label}
+        </a>
       </Button>
     </Card>
   );

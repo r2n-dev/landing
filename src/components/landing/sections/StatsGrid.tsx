@@ -1,44 +1,44 @@
-import { Card, Group, SimpleGrid, Text, ThemeIcon } from "@mantine/core";
 import {
   IconCode,
   IconDeviceDesktopAnalytics,
   IconRocket,
 } from "@tabler/icons-react";
+import { IconBadge } from "@/components/ui/icon-badge";
 import type { LandingStat } from "../landing.types";
-import styles from "./StatsGrid.module.scss";
 
 interface StatsGridProps {
   stats: LandingStat[];
 }
 
 const statIcons = [IconCode, IconDeviceDesktopAnalytics, IconRocket];
-const statVariantClasses = [styles.cardBlue, styles.cardTeal, styles.cardGrape];
+const statAccentClasses = ["before:bg-blue", "before:bg-teal", "before:bg-grape"];
 
 export function StatsGrid({ stats }: StatsGridProps) {
   return (
-    <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="md">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
       {stats.map((item, index) => {
         const Icon = statIcons[index % statIcons.length];
-        const variantClass = statVariantClasses[index % statVariantClasses.length];
+        const accentClass = statAccentClasses[index % statAccentClasses.length];
 
         return (
-          <Card key={item.label} className={`${styles.card} ${variantClass}`} padding="lg">
-            <Group justify="space-between" align="flex-start" wrap="nowrap">
-              <div className={styles.copy}>
-                <Text fw={800} className={styles.value}>
+          <div
+            key={item.label}
+            className={`relative flex flex-col overflow-hidden rounded-2xl border border-border bg-linear-160/srgb from-background from-10% to-surface-hover p-5 text-foreground transition-[transform,box-shadow,border-color] duration-200 ease-[ease] before:absolute before:inset-x-0 before:top-0 before:h-0.75 before:opacity-85 hover:-translate-y-0.5 hover:border-primary-light-foreground hover:shadow-sm ${accentClass}`}
+          >
+            <div className="flex flex-nowrap items-start justify-between gap-4">
+              <div className="min-w-0">
+                <p className="mb-2.5 text-[clamp(2rem,2.8vw,2.35rem)] leading-none font-extrabold tracking-[-0.03em]">
                   {item.value}
-                </Text>
-                <Text c="dimmed" size="sm" className={styles.label}>
-                  {item.label}
-                </Text>
+                </p>
+                <p className="max-w-[28ch] text-sm text-muted-foreground">{item.label}</p>
               </div>
-              <ThemeIcon size={40} radius="xl" variant="light" className={styles.icon}>
+              <IconBadge className="ml-3 size-10">
                 <Icon size={20} />
-              </ThemeIcon>
-            </Group>
-          </Card>
+              </IconBadge>
+            </div>
+          </div>
         );
       })}
-    </SimpleGrid>
+    </div>
   );
 }

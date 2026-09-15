@@ -1,7 +1,7 @@
 # Example: Add Component Prompt (Badge)
 
 ## Goal
-Add a reusable `StatusBadge` component built with Mantine `Badge`.
+Add a reusable `StatusBadge` component built on the `Badge` primitive (`src/components/ui/badge.tsx`).
 
 ## Scope
 - Create `src/components/StatusBadge/StatusBadge.tsx`
@@ -9,7 +9,7 @@ Add a reusable `StatusBadge` component built with Mantine `Badge`.
 - Document props in `docs/design-system/COMPONENT_API.md`
 
 ## Constraints
-- Mantine-first composition
+- Compose the `Badge` primitive; add variants there if needed
 - Variants: `neutral`, `success`, `warning`, `danger`, `accent`
 - Sizes: `sm`, `md`
 - Accessible contrast in light and dark schemes

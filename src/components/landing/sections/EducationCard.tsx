@@ -1,5 +1,6 @@
-import { Card, Group, Stack, Text, ThemeIcon, Title } from "@mantine/core";
 import { IconSchool } from "@tabler/icons-react";
+import { Card } from "@/components/ui/card";
+import { IconBadge } from "@/components/ui/icon-badge";
 import type { LandingEducationItem } from "../landing.types";
 
 interface EducationCardProps {
@@ -10,28 +11,24 @@ interface EducationCardProps {
 export function EducationCard({ title, items }: EducationCardProps) {
   return (
     <Card padding="xl">
-      <Title order={2} size="h3" mb="md">
-        {title}
-      </Title>
+      <h2 className="mb-4 font-heading text-h3">{title}</h2>
 
-      <Stack gap="lg">
+      <div className="flex flex-col gap-5">
         {items.map((item) => (
-          <Group key={`${item.institution}-${item.period}`} gap="sm" align="flex-start" wrap="nowrap">
-            <ThemeIcon size="lg" variant="light" radius="xl">
+          <div key={`${item.institution}-${item.period}`} className="flex flex-nowrap items-start gap-3">
+            <IconBadge size="lg">
               <IconSchool size={18} />
-            </ThemeIcon>
+            </IconBadge>
             <div>
-              <Text fw={600}>{item.degree}</Text>
-              <Text size="sm" c="dimmed">
-                {item.institution}
-              </Text>
-              <Text size="xs" c="dimmed">
+              <p className="font-semibold">{item.degree}</p>
+              <p className="text-sm text-muted-foreground">{item.institution}</p>
+              <p className="text-xs text-muted-foreground">
                 {item.period} · {item.location}
-              </Text>
+              </p>
             </div>
-          </Group>
+          </div>
         ))}
-      </Stack>
+      </div>
     </Card>
   );
 }

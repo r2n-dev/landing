@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { Anchor } from "@mantine/core";
-import styles from "./LogoLink.module.scss";
 
 interface LogoLinkProps {
   href?: string;
@@ -9,14 +7,12 @@ interface LogoLinkProps {
 
 export function LogoLink({ href = "/", label = "R2N" }: LogoLinkProps) {
   return (
-    <Anchor
-      component={Link}
+    <Link
       href={href}
-      underline="never"
-      className={styles.logo}
       aria-label="Go to home"
+      className="font-logo text-[2rem] leading-none tracking-[0.05em] text-primary select-none hover:text-primary-hover focus-visible:rounded-xs focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
     >
       {label}
-    </Anchor>
+    </Link>
   );
 }

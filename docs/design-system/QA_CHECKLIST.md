@@ -7,7 +7,7 @@
 
 ## Functional
 - [ ] Landing page sections render correctly.
-- [ ] Color scheme toggle works and persists.
+- [ ] Color scheme toggle works and persists across reloads without a flash.
 - [ ] External links and anchors work as expected.
 
 ## Accessibility
@@ -16,5 +16,5 @@
 - [ ] Contrast is adequate for text and controls.
 
 ## Commands
-- [ ] `npm run lint`
+- [ ] `npm run lint` (Next.js rules + `shadcn/no-restyle`)
 - [ ] `npm run build`

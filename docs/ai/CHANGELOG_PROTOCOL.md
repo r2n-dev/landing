@@ -1,6 +1,6 @@
 # Changelog Protocol
 
-Use this protocol when a task changes public component contracts, Mantine theme behavior, or workflow conventions.
+Use this protocol when a task changes public component contracts, theme tokens or color scheme behavior, or workflow conventions.
 
 ## Entry Structure
 - Date
@@ -11,7 +11,7 @@ Use this protocol when a task changes public component contracts, Mantine theme 
 
 ## Required for
 - New reusable components in `src/components/*`
-- Theme changes in `src/theme/mantine-theme.ts`
+- Token changes in `src/app/globals.css`
 - Changes to color scheme runtime behavior
 - Significant AI workflow/rules changes
 

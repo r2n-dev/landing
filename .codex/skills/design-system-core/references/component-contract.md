@@ -1,22 +1,26 @@
 # Component Contract
 
-## Public Primitives
+## Public Primitives (`src/components/ui/*`)
 - Button
 - Card
-- Text
-- Stack
-- Container
-- ThemeSwitcher
+- Badge
+- IconBadge
+- Timeline
+- ToggleGroup / Toggle
+- Tooltip
+- Avatar
+- Separator
 
 ## API Expectations
-- Typed props with constrained unions for variants/sizes.
+- Typed props with `cva` variants and sizes.
 - Defaults for all optional variant props.
-- Reusable behavior not tied to a single route.
+- Reusable behavior not tied to a single section.
 
 ## Styling Expectations
-- CSS modules only.
+- Tailwind utilities with semantic tokens; no CSS/SCSS modules.
 - No inline style objects for static styling.
-- Focus-visible styling for keyboard accessibility.
+- Visible `focus-visible` outline (2px, ring color).
+- Consumers may pass layout classes only; new looks become variants.
 
 ## Documentation
 Update `docs/design-system/COMPONENT_API.md` whenever public props change.

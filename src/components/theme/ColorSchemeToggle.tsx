@@ -1,13 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  ActionIcon,
-  Tooltip,
-  useComputedColorScheme,
-  useMantineColorScheme,
-} from "@mantine/core";
 import { IconMoonStars, IconSunHigh } from "@tabler/icons-react";
+import { useTheme } from "next-themes";
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface ColorSchemeToggleProps {
   labels?: {
@@ -22,29 +19,31 @@ const defaultLabels: NonNullable<ColorSchemeToggleProps["labels"]> = {
 };
 
 export function ColorSchemeToggle({ labels = defaultLabels }: ColorSchemeToggleProps) {
-  const { setColorScheme } = useMantineColorScheme();
-  const computedColorScheme = useComputedColorScheme("light", {
-    getInitialValueInEffect: true,
-  });
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const isDark = mounted ? computedColorScheme === "dark" : false;
+  const isDark = mounted ? resolvedTheme === "dark" : false;
   const label = isDark ? labels.switchToLightMode : labels.switchToDarkMode;
 
   return (
-    <Tooltip label={label} withArrow>
-      <ActionIcon
-        aria-label={label}
-        variant="default"
-        size="lg"
-        onClick={() => setColorScheme(isDark ? "light" : "dark")}
-      >
-        {isDark ? <IconSunHigh size={18} /> : <IconMoonStars size={18} />}
-      </ActionIcon>
-    </Tooltip>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            aria-label={label}
+            onClick={() => setTheme(isDark ? "light" : "dark")}
+          >
+            {isDark ? <IconSunHigh size={18} /> : <IconMoonStars size={18} />}
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>{label}</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }

@@ -4,10 +4,10 @@
 - [ ] Behavior matches requested scope.
 - [ ] Only intended route(s) and components changed.
 
-## Mantine System
-- [ ] Mantine components/variants used before custom CSS.
-- [ ] Theme changes are centralized in `src/theme/mantine-theme.ts`.
-- [ ] No legacy design-system runtime/tokens reintroduced.
+## Design System
+- [ ] Primitives and their variants used before custom markup.
+- [ ] Token changes are centralized in `src/app/globals.css`.
+- [ ] No Mantine, CSS/SCSS modules or legacy design-system runtime reintroduced.
 
 ## Accessibility
 - [ ] Keyboard navigation works.

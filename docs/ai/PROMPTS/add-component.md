@@ -1,6 +1,6 @@
 # Prompt: Add Component
 
-Create a reusable Mantine-oriented component in this repo.
+Create a reusable component in this repo.
 
 ## Goal
 {{goal}}
@@ -11,7 +11,7 @@ Create a reusable Mantine-oriented component in this repo.
 - Document API updates in `docs/design-system/COMPONENT_API.md`
 
 ## Constraints
-- Compose with Mantine primitives first
+- Compose with primitives from `src/components/ui/*` first
 - Include accessible keyboard/focus behavior
 - Provide typed variants/sizes if relevant
 - Keep component pure and presentational when possible

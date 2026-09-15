@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { Badge, Card, Group, Stack, Text, Title } from "@mantine/core";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import type { LandingAction } from "../landing.types";
 import { LandingActions } from "./LandingActions";
-import styles from "./HeroSection.module.scss";
 
 interface HeroSectionProps {
   availabilityBadge: string;
@@ -24,34 +24,32 @@ export function HeroSection({
   actions,
 }: HeroSectionProps) {
   return (
-    <Card className={styles.card} padding="xl">
-      <Group justify="space-between" className={styles.meta}>
-        <Badge variant="light" size="lg">
+    <Card variant="page" padding="xl">
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
+        <Badge variant="secondary" size="lg">
           {availabilityBadge}
         </Badge>
-      </Group>
+      </div>
 
-      <div className={styles.grid}>
-        <Stack gap="md">
-          <Text className={styles.role} fw={700} c="dimmed" size="sm">
+      <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1.2fr)_minmax(220px,320px)]">
+        <div className="flex flex-col gap-4">
+          <p className="text-sm font-bold tracking-[0.08em] text-muted-foreground uppercase">
             {role}
-          </Text>
-          <Title order={1}>{name}</Title>
-          <Text size="lg" c="dimmed">
-            {intro}
-          </Text>
-          <Text>{about}</Text>
+          </p>
+          <h1 className="font-heading text-h1">{name}</h1>
+          <p className="text-lg text-muted-foreground">{intro}</p>
+          <p>{about}</p>
           <LandingActions actions={actions} />
-        </Stack>
+        </div>
 
-        <div className={styles.portraitFrame}>
+        <div className="w-full max-w-[320px] self-stretch justify-self-center overflow-hidden rounded-2xl border border-border bg-background md:w-auto md:max-w-none md:justify-self-auto">
           <Image
             src={portraitUrl}
             alt={name}
             width={540}
             height={540}
             priority
-            className={styles.portrait}
+            className="block h-full w-full object-cover"
           />
         </div>
       </div>

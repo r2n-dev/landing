@@ -1,16 +1,16 @@
 # QA Playbook
 
 ## Mandatory Checks
-- Run `npm run lint`.
+- Run `npm run lint` (includes `shadcn/no-restyle`).
 - Run `npm run build`.
-- Verify all 4 themes manually on major routes.
+- Verify light and dark schemes on the landing page.
 
 ## Manual UI Checks
 - Keyboard focus visibility.
 - Hover/active states.
-- No clipping on mobile layouts.
+- No clipping on mobile layouts (down to 320px).
 - No contrast regressions.
 
 ## Regression Checks
-- Header, footer, and page wrapper remain stable.
-- Existing route content still renders correctly.
+- Header, footer, and page layout remain stable.
+- Color scheme toggle persists across reloads without a flash.

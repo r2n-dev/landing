@@ -1,27 +1,22 @@
 # Token Contract
 
 ## Layers
-- Core tokens define scales (spacing, radius, typography, motion, shadows).
-- Semantic tokens define UI meaning (surface, text, border, accent).
+- `@theme` in `src/app/globals.css` defines static scales: palettes, breakpoints, font sizes, radius, shadows.
+- `:root` / `.dark` define semantic color variables for light and dark.
+- `@theme inline` exposes semantic variables as Tailwind colors (`bg-card`, `text-muted-foreground`).
 
-## Required Semantic Tokens
-- `--color-bg-canvas`
-- `--color-bg-surface`
-- `--color-bg-elevated`
-- `--color-text-primary`
-- `--color-text-secondary`
-- `--color-text-inverse`
-- `--color-border-subtle`
-- `--color-border-default`
-- `--color-border-strong`
-- `--color-accent`
-- `--color-accent-hover`
-- `--color-accent-active`
-- `--color-accent-contrast`
-- `--color-focus-ring`
-- `--color-link`
-- `--color-link-hover`
+## Semantic Tokens
+- `--background`, `--foreground`
+- `--card`, `--card-foreground`, `--card-border`
+- `--popover`, `--popover-foreground`
+- `--primary`, `--primary-foreground`, `--primary-hover`, `--primary-light`, `--primary-light-hover`, `--primary-light-foreground`, `--primary-outline`
+- `--secondary`, `--secondary-foreground`
+- `--surface`, `--surface-foreground`, `--surface-hover`
+- `--muted`, `--muted-foreground`
+- `--accent`, `--accent-foreground`
+- `--destructive`, `--border`, `--input`, `--ring`, `--anchor`, `--cyan-light`
 
 ## Rules
-- Components must consume semantic tokens only.
-- Core token changes require updating docs and validating all themes.
+- Components consume semantic tokens; palettes (`brand-*`, `gray-*`, `dark-*`) are for primitives and accents without a semantic role.
+- Every token needs a light value in `:root` and, if it differs, a dark value in `.dark`.
+- Token changes require updating `docs/design-system/TOKENS.md`.
