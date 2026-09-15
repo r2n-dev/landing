@@ -1,14 +1,3 @@
-/*
- * Cascade layer order for the Mantine → Tailwind/shadcn migration.
- * Must be the first stylesheet loaded (see src/app/layout.tsx).
- *
- * - theme/base: Tailwind tokens and preflight reset (lowest priority).
- * - mantine: @mantine/core/styles.layer.css, so Mantine still wins over preflight.
- * - app: legacy global overrides from globals.scss that must beat Mantine.
- * - components/utilities: Tailwind classes win over Mantine and legacy globals.
- */
-@layer theme, base, mantine, app, components, utilities;
-
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -16,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Token values are ported 1:1 from src/theme/mantine-theme.ts and the Mantine
- * defaults it inherits. See docs/design-system/TOKENS.md for the mapping.
+ * Token values were ported 1:1 from the former Mantine theme and the Mantine
+ * defaults it inherited. See docs/design-system/TOKENS.md for the mapping.
  */
 @theme {
   /* Brand tuple (Mantine colors.brand[0..9]) */
@@ -228,11 +217,15 @@
     @apply border-border outline-ring/50;
   }
 
+  html,
+  body {
+    @apply min-h-full w-full;
+  }
+
   html {
     @apply font-sans;
   }
 
-  /* Mantine body defaults; Mantine's own body rule still wins until Phase 7. */
   body {
     @apply bg-background text-base text-foreground antialiased;
   }

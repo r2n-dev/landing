@@ -5,8 +5,8 @@ import { cn } from "cn"
  * Replaces Mantine Timeline/TimelineItem with the same props and geometry
  * (left alignment): offset = bulletSize / 2 + lineWidth / 2, items spaced
  * 32px apart, inactive line/bullet in the card border color, active ones in
- * primary. The bullet center uses the page background, as the legacy
- * `.mantine-Timeline-itemBullet` override in globals.scss did.
+ * primary. The bullet center uses the page background, as the site's former
+ * Mantine Timeline override did.
  */
 
 interface TimelineItemState {

@@ -5,13 +5,14 @@ import { Slot } from "radix-ui"
 
 /*
  * Defaults mirror Mantine Badge: pill radius, uppercase, weight 700,
- * 0.25px tracking, 1px border, line-height = height - 2px.
+ * 0.25px tracking, 1px border, line-height = height - 2px. Like Mantine, it
+ * can shrink inside a flex row and truncates its label with an ellipsis.
  *
  * Mantine variant → shadcn variant: filled → default, light → secondary,
  * default → outline, outline → primary-outline.
  */
 const badgeVariants = cva(
-  "group/badge inline-flex w-fit shrink-0 items-center justify-center gap-1.25 overflow-hidden rounded-full border border-transparent font-bold tracking-[0.25px] whitespace-nowrap uppercase focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring [&>svg]:pointer-events-none [&>svg]:size-3!",
+  "group/badge inline-flex w-fit max-w-full items-center justify-center gap-1.25 overflow-hidden rounded-full border border-transparent font-bold tracking-[0.25px] whitespace-nowrap uppercase focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring [&>svg]:pointer-events-none [&>svg]:size-3!",
   {
     variants: {
       variant: {
@@ -42,6 +43,7 @@ function Badge({
   variant = "default",
   size = "default",
   asChild = false,
+  children,
   ...props
 }: React.ComponentProps<"span"> &
   VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
@@ -54,7 +56,9 @@ function Badge({
       data-size={size}
       className={cn(badgeVariants({ variant, size }), className)}
       {...props}
-    />
+    >
+      {asChild ? children : <span className="truncate">{children}</span>}
+    </Comp>
   )
 }
 

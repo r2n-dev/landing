@@ -3,9 +3,8 @@
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 /**
- * Same key as Mantine's localStorageColorSchemeManager, so a scheme saved
- * before the migration is still honored. next-themes stores "system" where
- * Mantine stored "auto"; the app never persists "auto" (see ColorSchemeSync).
+ * Same key the Mantine version of the site used, so a light/dark choice saved
+ * before the migration is still honored.
  */
 export const colorSchemeStorageKey = "mantine-color-scheme-value";
 

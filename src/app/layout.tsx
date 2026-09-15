@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
-import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from "@mantine/core";
 import { headers } from "next/headers";
 import "./globals.css";
-import "@mantine/core/styles.layer.css";
-import "./globals.scss";
 import { audiowide, jetBrainsMono, manrope } from "./fonts";
 import { resolveLandingLocaleFromHeaders } from "@/components/landing/i18n";
 import { andresProfileData } from "@/components/landing/profile-data";
-import { ColorSchemeSync } from "@/components/theme/ColorSchemeSync";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
-import { mantineTheme } from "@/theme/mantine-theme";
 import { seo, siteOrigin, siteUrl } from "./seo";
 
 export const metadata: Metadata = {
@@ -80,19 +75,11 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      {...mantineHtmlProps}
       className={`${manrope.variable} ${jetBrainsMono.variable} ${audiowide.variable}`}
+      suppressHydrationWarning
     >
-      <head>
-        <ColorSchemeScript defaultColorScheme="auto" />
-      </head>
       <body>
-        <ThemeProvider>
-          <MantineProvider theme={mantineTheme} defaultColorScheme="auto">
-            <ColorSchemeSync />
-            {children}
-          </MantineProvider>
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
