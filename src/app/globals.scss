@@ -1,32 +1,40 @@
-* {
-  box-sizing: border-box;
+// Layered so Tailwind utilities can override these during the migration.
+// See the layer order in globals.css.
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    min-height: 100%;
+    width: 100%;
+  }
+
+  // Must stay below Mantine so Anchor colors keep winning.
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
-html,
-body {
-  min-height: 100%;
-  width: 100%;
-}
+@layer app {
+  // Must beat Mantine's body rule: --font-sans is only defined on <body>.
+  body {
+    background: var(--mantine-color-body);
+    color: var(--mantine-color-text);
+    font-family:
+      var(--font-sans),
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+    margin: 0;
+  }
 
-body {
-  background: var(--mantine-color-body);
-  color: var(--mantine-color-text);
-  font-family:
-    var(--font-sans),
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* Fix timeline bullet center to match background in both light and dark mode */
-.mantine-Timeline-itemBullet,
-.mantine-Timeline-itemBullet[data-active] {
-  background-color: var(--mantine-color-body);
+  /* Fix timeline bullet center to match background in both light and dark mode */
+  .mantine-Timeline-itemBullet,
+  .mantine-Timeline-itemBullet[data-active] {
+    background-color: var(--mantine-color-body);
+  }
 }

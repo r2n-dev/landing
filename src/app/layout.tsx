@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from "@mantine/core";
 import { headers } from "next/headers";
-import "@mantine/core/styles.css";
+import "./globals.css";
+import "@mantine/core/styles.layer.css";
 import "./globals.scss";
 import { audiowide, jetBrainsMono, manrope } from "./fonts";
 import { resolveLandingLocaleFromHeaders } from "@/components/landing/i18n";
