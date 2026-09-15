@@ -10,7 +10,8 @@ import { Slot } from "radix-ui"
  * 10px section gap, start/end padding ÷ 1.5 next to an icon, 2px focus ring.
  *
  * Mantine variant → shadcn variant: filled → default, light → secondary,
- * default → outline, subtle → ghost.
+ * default → outline, subtle → ghost. cta/cta-secondary are the landing
+ * page's gradient and neutral calls to action.
  */
 const buttonVariants = cva(
   "group/button relative inline-flex shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-4xl border border-transparent font-semibold whitespace-nowrap select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive [&_svg]:pointer-events-none [&_svg]:shrink-0",
@@ -27,6 +28,10 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:outline-destructive",
         link: "text-primary underline-offset-4 hover:underline",
+        // Landing page calls to action (LandingActions)
+        cta: "bg-linear-135/srgb from-primary to-cyan tracking-[0.01em] text-primary-foreground transition-[transform,box-shadow,border-color] duration-200 ease-[ease] hover:-translate-y-px hover:shadow-sm [&_svg]:opacity-90",
+        "cta-secondary":
+          "border-border bg-surface-hover tracking-[0.01em] text-foreground transition-[transform,box-shadow,border-color] duration-200 ease-[ease] hover:-translate-y-px hover:border-primary-light-foreground hover:bg-primary-light-hover hover:text-primary-light-foreground hover:shadow-sm [&_svg]:opacity-90",
       },
       size: {
         // Mantine compact-sm
