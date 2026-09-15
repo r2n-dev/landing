@@ -90,6 +90,13 @@ export interface LandingControlCopy {
   switchToDarkMode: string;
 }
 
+export interface LandingContactLinks {
+  email: string;
+  linkedinHref: string;
+  githubHref: string;
+  whatsappHref: string;
+}
+
 export interface LandingFooterCopy {
   madeWithLabel: string;
   inCountryLabel: string;
@@ -105,6 +112,7 @@ export interface LandingContent {
   portraitUrl: string;
   sections: LandingSectionCopy;
   controls: LandingControlCopy;
+  contact: LandingContactLinks;
   footer: LandingFooterCopy;
   actions: LandingAction[];
   stats: LandingStat[];

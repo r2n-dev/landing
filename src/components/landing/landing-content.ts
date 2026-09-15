@@ -1,5 +1,5 @@
 import type { LandingLocale } from "./i18n";
-import { andresProfileData, type LocalizedCopy } from "./profile-data";
+import type { CandidateProfile, LocalizedCopy } from "./profile-data";
 import type {
   LandingCertificationsSection,
   LandingContent,
@@ -14,8 +14,8 @@ function getCopy(locale: LandingLocale, copy: LocalizedCopy): string {
   return copy[locale];
 }
 
-function getAllExperience(locale: LandingLocale): LandingExperienceItem[] {
-  return andresProfileData.experiences.map((item) => ({
+function getAllExperience(profile: CandidateProfile, locale: LandingLocale): LandingExperienceItem[] {
+  return profile.experiences.map((item) => ({
     period: getCopy(locale, item.period),
     role: getCopy(locale, item.role),
     company: item.company,
@@ -26,11 +26,11 @@ function getAllExperience(locale: LandingLocale): LandingExperienceItem[] {
   }));
 }
 
-function getEducation(locale: LandingLocale): LandingEducationSection {
+function getEducation(profile: CandidateProfile, locale: LandingLocale): LandingEducationSection {
   const isSpanish = locale === "es";
   return {
     title: isSpanish ? "Educación" : "Education",
-    items: andresProfileData.education.map((item) => ({
+    items: profile.education.map((item) => ({
       degree: getCopy(locale, item.degree),
       institution: item.institution,
       period: item.period,
@@ -47,12 +47,12 @@ function formatMonthYear(locale: LandingLocale, isoDate: string): string {
   }).format(new Date(isoDate));
 }
 
-function getCertifications(locale: LandingLocale): LandingCertificationsSection {
+function getCertifications(profile: CandidateProfile, locale: LandingLocale): LandingCertificationsSection {
   const isSpanish = locale === "es";
   return {
     title: isSpanish ? "Certificaciones" : "Certifications",
     verifyLabel: isSpanish ? "Verificar en Credly" : "Verify on Credly",
-    items: andresProfileData.certifications.map((item) => {
+    items: profile.certifications.map((item) => {
       const issued = `${isSpanish ? "Emitida" : "Issued"} ${formatMonthYear(locale, item.issuedOn)}`;
       const expires = item.expiresOn
         ? `${isSpanish ? "Vence" : "Expires"} ${formatMonthYear(locale, item.expiresOn)}`
@@ -68,23 +68,23 @@ function getCertifications(locale: LandingLocale): LandingCertificationsSection 
   };
 }
 
-function getSkills(locale: LandingLocale): LandingSkillsSection {
+function getSkills(profile: CandidateProfile, locale: LandingLocale): LandingSkillsSection {
   const isSpanish = locale === "es";
   return {
     title: isSpanish ? "Habilidades" : "Skills",
     technicalLabel: isSpanish ? "Técnicas" : "Technical",
     softLabel: isSpanish ? "Blandas" : "Soft",
     languagesLabel: isSpanish ? "Idiomas" : "Languages",
-    technical: andresProfileData.skills.technical,
-    soft: andresProfileData.skills.soft.map((s) => getCopy(locale, s)),
-    languages: andresProfileData.skills.languages.map((l) => ({
+    technical: profile.skills.technical,
+    soft: profile.skills.soft.map((s) => getCopy(locale, s)),
+    languages: profile.skills.languages.map((l) => ({
       language: getCopy(locale, l.language),
       levels: l.levels.map((level) => getCopy(locale, level)),
     })),
   };
 }
 
-function getLandingContent(locale: LandingLocale): LandingContent {
+function getLandingContent(profile: CandidateProfile, locale: LandingLocale): LandingContent {
   const isSpanish = locale === "es";
 
   return {
@@ -92,15 +92,15 @@ function getLandingContent(locale: LandingLocale): LandingContent {
     availabilityBadge: isSpanish
       ? "Disponible para oportunidades frontend"
       : "Open to frontend opportunities",
-    role: getCopy(locale, andresProfileData.role),
-    name: andresProfileData.name,
+    role: getCopy(locale, profile.role),
+    name: profile.name,
     intro: isSpanish
       ? "Soy un desarrollador de software bilingüe con más de 10 años de experiencia especializado en la construcción de aplicaciones web escalables y de alto rendimiento. Diseño y entrego interfaces de producto resilientes con React, TypeScript y arquitectura basada en componentes, trabajando eficazmente en equipos ágiles globales."
       : "I am a bilingual software developer with over 10 years of experience specializing in building scalable, high-performance web applications. I design and ship resilient product interfaces with React, TypeScript, and component-driven architecture, collaborating effectively in global agile teams.",
     about: isSpanish
       ? "Me apasiona trabajar con sistemas de diseño, crear componentes reutilizables y construir experiencias de usuario fluidas y accesibles. Utilizo herramientas y tecnologías web modernas para ofrecer soluciones de alta calidad, y actualmente exploro herramientas de inteligencia artificial para integrarlas en mi flujo de trabajo diario y aumentar la productividad."
       : "I am passionate about design systems, creating reusable components, and building seamless, accessible user experiences. I leverage modern web tools and technologies to deliver high-quality solutions, and I am currently exploring artificial intelligence tools to integrate into my daily workflow and boost productivity.",
-    portraitUrl: andresProfileData.portraitUrl,
+    portraitUrl: profile.portraitUrl,
     sections: {
       principlesTitle: isSpanish ? "Cómo trabajo" : "How I Work",
       experienceTitle: isSpanish ? "Experiencia" : "Experience",
@@ -125,6 +125,12 @@ function getLandingContent(locale: LandingLocale): LandingContent {
         ? "Cambiar a modo oscuro"
         : "Switch to dark mode",
     },
+    contact: {
+      email: profile.email,
+      linkedinHref: profile.links.linkedin.href,
+      githubHref: profile.links.github.href,
+      whatsappHref: profile.links.whatsapp.href,
+    },
     footer: {
       madeWithLabel: isSpanish ? "Hecho con" : "Made with",
       inCountryLabel: isSpanish ? "en Colombia" : "in Colombia",
@@ -143,15 +149,15 @@ function getLandingContent(locale: LandingLocale): LandingContent {
         icon: "message",
       },
       {
-        href: andresProfileData.links.linkedin.href,
-        label: andresProfileData.links.linkedin.label,
+        href: profile.links.linkedin.href,
+        label: profile.links.linkedin.label,
         external: true,
         variant: "light",
         icon: "linkedin",
       },
       {
-        href: andresProfileData.links.whatsapp.href,
-        label: andresProfileData.links.whatsapp.label,
+        href: profile.links.whatsapp.href,
+        label: profile.links.whatsapp.label,
         external: true,
         variant: "light",
         icon: "whatsapp",
@@ -223,39 +229,39 @@ function getLandingContent(locale: LandingLocale): LandingContent {
           : "I strengthen monitoring, observability, and feedback loops to catch issues early, respond quickly, and sustain production quality.",
       },
     ],
-    experience: getAllExperience(locale),
-    education: getEducation(locale),
-    certifications: getCertifications(locale),
-    skills: getSkills(locale),
+    experience: getAllExperience(profile, locale),
+    education: getEducation(profile, locale),
+    certifications: getCertifications(profile, locale),
+    skills: getSkills(profile, locale),
     resumeAction: {
-      href: andresProfileData.resumeAssets[locale],
+      href: profile.resumeAssets[locale],
       label: isSpanish ? "Descargar hoja de vida" : "Download resume",
       variant: "light",
     },
     contactActions: [
       {
-        href: `mailto:${andresProfileData.email}`,
+        href: `mailto:${profile.email}`,
         label: isSpanish ? "Correo" : "Email",
         variant: "filled",
         icon: "mail",
       },
       {
-        href: andresProfileData.links.linkedin.href,
-        label: andresProfileData.links.linkedin.label,
+        href: profile.links.linkedin.href,
+        label: profile.links.linkedin.label,
         external: true,
         variant: "light",
         icon: "linkedin",
       },
       {
-        href: andresProfileData.links.github.href,
-        label: andresProfileData.links.github.label,
+        href: profile.links.github.href,
+        label: profile.links.github.label,
         external: true,
         variant: "light",
         icon: "github",
       },
       {
-        href: andresProfileData.links.whatsapp.href,
-        label: andresProfileData.links.whatsapp.label,
+        href: profile.links.whatsapp.href,
+        label: profile.links.whatsapp.label,
         external: true,
         variant: "light",
         icon: "whatsapp",
@@ -264,7 +270,9 @@ function getLandingContent(locale: LandingLocale): LandingContent {
   };
 }
 
-export const landingContentByLocale: LandingContentByLocale = {
-  en: getLandingContent("en"),
-  es: getLandingContent("es"),
-};
+export function getLandingContentByLocale(profile: CandidateProfile): LandingContentByLocale {
+  return {
+    en: getLandingContent(profile, "en"),
+    es: getLandingContent(profile, "es"),
+  };
+}

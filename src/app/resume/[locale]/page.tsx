@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { IconDownload } from "@tabler/icons-react";
 import { landingLocales, normalizeLandingLocale } from "@/components/landing/i18n";
-import { landingContentByLocale } from "@/components/landing/landing-content";
-import { andresProfileData } from "@/components/landing/profile-data";
+import { getLandingContentByLocale } from "@/components/landing/landing-content";
+import { getResume } from "@/lib/resume/get-resume";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -20,9 +20,9 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
   if (!locale) {
     notFound();
   }
-  const content = landingContentByLocale[locale];
+  const profile = await getResume();
+  const content = getLandingContentByLocale(profile)[locale];
   const isSpanish = locale === "es";
-  const profile = andresProfileData;
 
   return (
     <main className="mx-auto flex max-w-3xl flex-col gap-6 bg-background px-6 py-10 text-sm text-foreground print:max-w-none print:bg-white print:p-0 print:text-black">

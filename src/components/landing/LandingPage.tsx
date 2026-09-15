@@ -3,7 +3,6 @@
 import type { LandingLocale } from "@/components/landing/i18n";
 import type { LandingContent } from "./landing.types";
 import { useLocaleManager } from "./hooks/useLocaleManager";
-import { andresProfileData } from "./profile-data";
 import {
   CertificationsCard,
   ContactCard,
@@ -89,10 +88,10 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
 
       <PageFooter
         name={content.name}
-        email={andresProfileData.email}
-        linkedinHref={andresProfileData.links.linkedin.href}
-        githubHref={andresProfileData.links.github.href}
-        whatsappHref={andresProfileData.links.whatsapp.href}
+        email={content.contact.email}
+        linkedinHref={content.contact.linkedinHref}
+        githubHref={content.contact.githubHref}
+        whatsappHref={content.contact.whatsappHref}
         madeWithLabel={content.footer.madeWithLabel}
         inCountryLabel={content.footer.inCountryLabel}
       />

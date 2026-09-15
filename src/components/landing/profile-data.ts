@@ -1,73 +1,15 @@
-import type { LandingLocale } from "./i18n";
+import type { ResumeData } from "@/lib/resume/schema";
 
-export interface LocalizedCopy {
-  en: string;
-  es: string;
-}
+export type {
+  LocalizedCopy,
+  ProfileCertification,
+  ProfileEducation,
+  ProfileExperience,
+  ProfileLanguage,
+  ProfileLink,
+} from "@/lib/resume/schema";
 
-export interface ProfileLink {
-  label: string;
-  href: string;
-}
-
-export interface ProfileExperience {
-  id: string;
-  period: LocalizedCopy;
-  role: LocalizedCopy;
-  company: string;
-  companyUrl?: string;
-  location: LocalizedCopy;
-  summary: LocalizedCopy;
-  highlights: LocalizedCopy[];
-}
-
-export interface ProfileEducation {
-  degree: LocalizedCopy;
-  institution: string;
-  period: string;
-  location: string;
-}
-
-export interface ProfileCertification {
-  name: string;
-  issuer: string;
-  /** ISO 8601 date */
-  issuedOn: string;
-  /** ISO 8601 date */
-  expiresOn?: string;
-  badgeImageUrl: string;
-  verificationUrl: string;
-}
-
-export interface ProfileLanguage {
-  language: LocalizedCopy;
-  levels: LocalizedCopy[];
-}
-
-export interface CandidateProfile {
-  name: string;
-  role: LocalizedCopy;
-  location: string;
-  phone: string;
-  email: string;
-  portraitUrl: string;
-  summary: LocalizedCopy;
-  links: {
-    linkedin: ProfileLink;
-    github: ProfileLink;
-    whatsapp: ProfileLink;
-    website: ProfileLink;
-  };
-  resumeAssets: Record<LandingLocale, string>;
-  experiences: ProfileExperience[];
-  skills: {
-    technical: string[];
-    soft: LocalizedCopy[];
-    languages: ProfileLanguage[];
-  };
-  education: ProfileEducation[];
-  certifications: ProfileCertification[];
-}
+export type CandidateProfile = ResumeData;
 
 export const andresProfileData: CandidateProfile = {
   name: "Andres Artunduaga",
