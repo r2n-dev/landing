@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { IconDownload } from "@tabler/icons-react";
 import { landingLocales, normalizeLandingLocale } from "@/components/landing/i18n";
 import { landingContentByLocale } from "@/components/landing/landing-content";
 import { andresProfileData } from "@/components/landing/profile-data";
-import { PrintButton } from "./PrintButton";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: `${andresProfileData.name} | Resume`,
+  title: "Resume",
   robots: { index: false },
 };
 
@@ -26,7 +27,12 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
   return (
     <main className="mx-auto flex max-w-3xl flex-col gap-6 bg-background px-6 py-10 text-sm text-foreground print:max-w-none print:bg-white print:p-0 print:text-black">
       <div className="flex justify-end print:hidden">
-        <PrintButton label={isSpanish ? "Guardar como PDF" : "Save as PDF"} />
+        <Button asChild>
+          <a href={`/resume-${locale}.pdf`} download>
+            <IconDownload size={16} data-icon="inline-start" />
+            {isSpanish ? "Descargar PDF" : "Download PDF"}
+          </a>
+        </Button>
       </div>
 
       <header>

@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       { source: "/json-:locale", destination: "/json/:locale" },
+      { source: "/resume-:locale.pdf", destination: "/resume/:locale/pdf" },
       { source: "/resume-:locale", destination: "/resume/:locale" },
     ];
   },
