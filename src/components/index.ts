@@ -1,5 +1,5 @@
 export { LandingPage } from "./landing/LandingPage";
-export { landingContentByLocale } from "./landing/landing-content";
+export { getLandingContentByLocale } from "./landing/landing-content";
 export { andresProfileData } from "./landing/profile-data";
 export type {
   LandingAction,
@@ -9,6 +9,7 @@ export type {
   LandingEducationItem,
   LandingEducationSection,
   LandingExperienceItem,
+  LandingContactLinks,
   LandingFooterCopy,
   LandingPrinciple,
   LandingSectionCopy,

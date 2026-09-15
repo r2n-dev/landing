@@ -1,25 +1,26 @@
 import { LandingPage } from "@/components/landing/LandingPage";
-import { landingContentByLocale } from "@/components/landing/landing-content";
+import { getLandingContentByLocale } from "@/components/landing/landing-content";
 import { resolveLandingLocaleFromHeaders } from "@/components/landing/i18n";
-import { andresProfileData } from "@/components/landing/profile-data";
+import { getResume } from "@/lib/resume/get-resume";
 import { headers } from "next/headers";
 import { seo, siteOrigin } from "./seo";
 
 export default async function HomePage() {
   const requestHeaders = await headers();
   const initialLocale = resolveLandingLocaleFromHeaders(requestHeaders);
-  const currentCompany = andresProfileData.experiences[0];
+  const profile = await getResume();
+  const currentCompany = profile.experiences[0];
   const personSchema = {
     "@type": "Person",
     "@id": `${siteOrigin}/#person`,
-    name: andresProfileData.name,
+    name: profile.name,
     alternateName: ["Andres Artunduaga Frontend Developer", "Andres Artunduaga Software Engineer"],
     url: siteOrigin,
-    image: andresProfileData.portraitUrl,
+    image: profile.portraitUrl,
     jobTitle: "Senior Frontend Engineer",
     description: seo.description,
-    email: `mailto:${andresProfileData.email}`,
-    telephone: andresProfileData.phone,
+    email: `mailto:${profile.email}`,
+    telephone: profile.phone,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Bogota D.C.",
@@ -32,12 +33,12 @@ export default async function HomePage() {
         url: currentCompany.companyUrl ?? undefined,
       }
       : undefined,
-    alumniOf: andresProfileData.education.map((item) => ({
+    alumniOf: profile.education.map((item) => ({
       "@type": "CollegeOrUniversity",
       name: item.institution,
     })),
-    knowsAbout: andresProfileData.skills.technical,
-    knowsLanguage: andresProfileData.skills.languages.map((language) => language.language.en),
+    knowsAbout: profile.skills.technical,
+    knowsLanguage: profile.skills.languages.map((language) => language.language.en),
     sameAs: seo.socialProfiles,
   };
   const websiteSchema = {
@@ -62,7 +63,7 @@ export default async function HomePage() {
       "@id": `${siteOrigin}/#person`,
     },
     sameAs: [
-      andresProfileData.links.website.href,
+      profile.links.website.href,
       ...seo.socialProfiles,
     ],
   };
@@ -78,7 +79,7 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
-      <LandingPage contentByLocale={landingContentByLocale} initialLocale={initialLocale} />
+      <LandingPage contentByLocale={getLandingContentByLocale(profile)} initialLocale={initialLocale} />
     </>
   );
 }

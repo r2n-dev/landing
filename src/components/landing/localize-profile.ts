@@ -1,5 +1,5 @@
 import type { LandingLocale } from "./i18n";
-import { andresProfileData } from "./profile-data";
+import type { CandidateProfile } from "./profile-data";
 
 /** Replaces every `{ en, es }` copy object in the value with the string for `locale`. */
 function localize(value: unknown, locale: LandingLocale): unknown {
@@ -17,6 +17,6 @@ function localize(value: unknown, locale: LandingLocale): unknown {
   return value;
 }
 
-export function getLocalizedProfile(locale: LandingLocale) {
-  return localize(andresProfileData, locale);
+export function getLocalizedProfile(profile: CandidateProfile, locale: LandingLocale) {
+  return localize(profile, locale);
 }
