@@ -59,6 +59,19 @@ After schema changes, regenerate the database types:
 npx supabase gen types typescript --linked --schema public > src/lib/supabase/database.types.ts
 ```
 
+## Resume admin
+`/admin` lets the site owner update the resume with an AI assistant and publish new versions.
+
+- Sign-in: Supabase magic link, limited to `ADMIN_EMAIL` (also enforced by the RLS insert policy in `supabase/migrations/*_resume_versions_admin_insert.sql`; keep both emails in sync).
+- Assistant: the Vercel AI SDK (`src/lib/resume/assistant.ts`) sends the current draft and the request to the model in `AI_MODEL` (`google:gemini-3.8-flash` by default, or e.g. `anthropic:claude-opus-5`) and gets back the full updated resume, validated with the Zod schema.
+- The draft is reviewed as a diff (or edited as JSON) and nothing changes on the site until **Publish**, which inserts a new `resume_versions` row and refreshes the cache. **Restore** publishes a copy of an older version.
+
+Setup:
+1. Set `ADMIN_EMAIL`, `AI_MODEL` and the provider key (`GOOGLE_GENERATIVE_AI_API_KEY` or `ANTHROPIC_API_KEY`) in `.env.local` and on the Dokploy service.
+2. In Supabase, Authentication > URL Configuration: set the Site URL to `https://r2n.dev` and add `https://r2n.dev/auth/callback` and `http://localhost:3000/auth/callback` to the redirect URLs.
+3. Apply the migration with `npx supabase db push`.
+4. Optional: after your first sign-in, disable new sign-ups in Authentication > Sign In / Providers.
+
 ## UI Architecture
 - Runtime shell: `src/app/layout.tsx`
 - Theme tokens: `src/app/globals.css`
