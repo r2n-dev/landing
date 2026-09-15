@@ -1,4 +1,5 @@
-import { Badge, Card, Group, Stack, Text, Title } from "@mantine/core";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import type { LandingSkillsSection } from "../landing.types";
 
 interface SkillsCardProps {
@@ -8,45 +9,45 @@ interface SkillsCardProps {
 export function SkillsCard({ skills }: SkillsCardProps) {
   return (
     <Card padding="xl">
-      <Title order={2} size="h3" mb="md">
-        {skills.title}
-      </Title>
+      <h2 className="mb-4 font-heading text-h3">{skills.title}</h2>
 
-      <Stack gap="lg">
+      <div className="flex flex-col gap-5">
         <div>
-          <Text fw={600} mb="sm">{skills.technicalLabel}</Text>
-          <Group gap="xs">
+          <p className="mb-3 font-semibold">{skills.technicalLabel}</p>
+          <div className="flex flex-wrap items-center gap-2.5">
             {skills.technical.map((skill) => (
-              <Badge key={skill} variant="light" size="lg">
+              <Badge key={skill} variant="secondary" size="lg">
                 {skill}
               </Badge>
             ))}
-          </Group>
+          </div>
         </div>
 
         <div>
-          <Text fw={600} mb="sm">{skills.softLabel}</Text>
-          <Group gap="xs">
+          <p className="mb-3 font-semibold">{skills.softLabel}</p>
+          <div className="flex flex-wrap items-center gap-2.5">
             {skills.soft.map((skill) => (
-              <Badge key={skill} variant="outline" size="lg">
+              <Badge key={skill} variant="primary-outline" size="lg">
                 {skill}
               </Badge>
             ))}
-          </Group>
+          </div>
         </div>
 
         <div>
-          <Text fw={600} mb="sm">{skills.languagesLabel}</Text>
-          <Stack gap="xs">
+          <p className="mb-3 font-semibold">{skills.languagesLabel}</p>
+          <div className="flex flex-col gap-2.5">
             {skills.languages.map((lang) => (
-              <Group key={lang.language} gap="xs">
-                <Text size="sm">{lang.language}</Text>
-                <Badge variant="default" size="sm">{lang.level}</Badge>
-              </Group>
+              <div key={lang.language} className="flex flex-wrap items-center gap-2.5">
+                <p className="text-sm">{lang.language}</p>
+                <Badge variant="outline" size="sm">
+                  {lang.level}
+                </Badge>
+              </div>
             ))}
-          </Stack>
+          </div>
         </div>
-      </Stack>
+      </div>
     </Card>
   );
 }
