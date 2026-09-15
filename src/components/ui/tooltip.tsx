@@ -31,11 +31,12 @@ function TooltipTrigger({
 
 /*
  * Content mirrors Mantine Tooltip: gray-9/white (dark: gray-2/black),
- * 5px 10px padding, text-sm, radius md, offset 5px, fade transition.
+ * 5px 10px padding, text-sm, radius md, 4px arrow, 7px gap, fade transition.
  */
 function TooltipContent({
   className,
-  sideOffset = 5,
+  // Radix adds the rendered arrow height (4px), giving Mantine's 7px gap.
+  sideOffset = 3,
   children,
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Content>) {
@@ -51,7 +52,11 @@ function TooltipContent({
         {...props}
       >
         {children}
-        <TooltipPrimitive.Arrow className="z-50 size-2 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[1px] bg-gray-9 fill-gray-9 dark:bg-gray-2 dark:fill-gray-2" />
+        <TooltipPrimitive.Arrow
+          width={4}
+          height={2}
+          className="z-50 size-1 translate-y-[-50%] rotate-45 bg-gray-9 fill-gray-9 dark:bg-gray-2 dark:fill-gray-2"
+        />
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Portal>
   )

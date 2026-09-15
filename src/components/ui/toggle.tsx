@@ -14,7 +14,7 @@ const toggleVariants = cva(
         outline: "border border-input bg-transparent shadow-xs hover:bg-muted",
         // Mantine SegmentedControl label (use inside ToggleGroup variant="segmented")
         segmented:
-          "rounded-lg bg-transparent font-medium text-gray-7 transition-colors focus-visible:outline-offset-0 duration-200 hover:bg-transparent hover:text-black aria-pressed:bg-transparent data-[state=on]:bg-white data-[state=on]:text-black data-[state=on]:shadow-xs dark:text-dark-1 dark:hover:text-white dark:data-[state=on]:bg-dark-5 dark:data-[state=on]:text-white dark:data-[state=on]:shadow-none",
+          "rounded-lg bg-transparent font-medium text-gray-7 transition-[color] focus-visible:outline-offset-0 duration-200 hover:bg-transparent hover:text-black aria-pressed:bg-transparent data-[state=on]:bg-white data-[state=on]:text-black data-[state=on]:shadow-xs dark:text-dark-1 dark:hover:text-white dark:data-[state=on]:bg-dark-5 dark:data-[state=on]:text-white dark:data-[state=on]:shadow-none",
       },
       size: {
         default:
