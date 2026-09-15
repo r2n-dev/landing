@@ -45,7 +45,8 @@ Mantine `gray[0..9]` and `dark[0..9]` are available as `--color-gray-N` / `--col
 ### Semantic colors (`primaryShade: { light: 6, dark: 7 }`)
 | Mantine variable | shadcn variable | Light | Dark |
 | --- | --- | --- | --- |
-| `--mantine-color-body` | `--background`, `--card`, `--popover` | `#fff` | `#242424` |
+| `--mantine-color-body` | `--background`, `--popover` | `#fff` | `#242424` |
+| Card background (`white` / `dark-6`) | `--card` | `#fff` | `#2e2e2e` |
 | `--mantine-color-text` | `--foreground`, `--card-foreground`, `--popover-foreground` | `#000` | `#c9c9c9` |
 | Card `withBorder` border (`gray-3` / `dark-4`) | `--card-border` | `#dee2e6` | `#424242` |
 | `--mantine-primary-color-filled` | `--primary`, `--ring` | `#3b95ff` | `#2d80e4` |
