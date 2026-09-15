@@ -37,18 +37,25 @@ Resume content is moving to Supabase. The connection is configured through env v
    ```
 3. Use `getSupabaseClient()` from `src/lib/supabase/server.ts` in server components and route handlers only.
 
+In production (Dokploy), set the same variables on the service.
+
 Database schema lives in `supabase/` (Supabase CLI, installed as a dev dependency):
 - `supabase/config.toml` - CLI and local stack configuration
 - `supabase/migrations/` - SQL migrations, applied in order
+- `supabase/seed.sql` - version 1 of the resume (only inserted into an empty table)
+
+Resume content lives in one append-only table, `resume_versions`: each row stores the whole resume as `data` (jsonb) with its `schema_version`, a `note` and `created_at`. The newest row is the current resume; a rollback inserts a copy of an older row. The JSON shape is defined with Zod in `src/lib/resume/schema.ts` (bump `RESUME_SCHEMA_VERSION` on breaking shape changes). RLS allows public reads only; new versions are added from the Supabase dashboard for now.
 
 Link the CLI to the hosted project once per machine:
 ```bash
 npx supabase login
 npx supabase link --project-ref grmssymmxvewwekivvjj
 ```
-Then create migrations with `npx supabase migration new <name>` and apply them with `npx supabase db push`.
-
-In production (Dokploy), set the same variables on the service.
+Then create migrations with `npx supabase migration new <name>` and apply them with `npx supabase db push` (add `--include-seed` to load `seed.sql`).
+After schema changes, regenerate the database types:
+```bash
+npx supabase gen types typescript --linked --schema public > src/lib/supabase/database.types.ts
+```
 
 ## UI Architecture
 - Runtime shell: `src/app/layout.tsx`

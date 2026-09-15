@@ -1,12 +1,13 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import type { Database } from "./database.types";
 
-let client: SupabaseClient | undefined;
+let client: SupabaseClient<Database> | undefined;
 
 /**
  * Server-side Supabase client for reading public resume content.
  * Reads env vars at call time so the Docker image can be configured at runtime.
  */
-export function getSupabaseClient(): SupabaseClient {
+export function getSupabaseClient(): SupabaseClient<Database> {
   if (client) {
     return client;
   }
@@ -17,7 +18,7 @@ export function getSupabaseClient(): SupabaseClient {
     throw new Error("Missing SUPABASE_URL or SUPABASE_PUBLISHABLE_KEY. Copy .env.example to .env.local and fill them in.");
   }
 
-  client = createClient(url, key, {
+  client = createClient<Database>(url, key, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
   return client;
