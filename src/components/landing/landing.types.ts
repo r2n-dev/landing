@@ -69,7 +69,7 @@ export interface LandingSkillsSection {
   languagesLabel: string;
   technical: string[];
   soft: string[];
-  languages: { language: string; level: string }[];
+  languages: { language: string; levels: string[] }[];
 }
 
 export interface LandingSectionCopy {

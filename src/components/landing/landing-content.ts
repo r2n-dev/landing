@@ -79,7 +79,7 @@ function getSkills(locale: LandingLocale): LandingSkillsSection {
     soft: andresProfileData.skills.soft.map((s) => getCopy(locale, s)),
     languages: andresProfileData.skills.languages.map((l) => ({
       language: getCopy(locale, l.language),
-      level: getCopy(locale, l.level),
+      levels: l.levels.map((level) => getCopy(locale, level)),
     })),
   };
 }

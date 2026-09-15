@@ -41,7 +41,7 @@ export interface ProfileCertification {
 
 export interface ProfileLanguage {
   language: LocalizedCopy;
-  level: LocalizedCopy;
+  levels: LocalizedCopy[];
 }
 
 export interface CandidateProfile {
@@ -420,20 +420,28 @@ export const andresProfileData: CandidateProfile = {
           en: "Spanish",
           es: "Español",
         },
-        level: {
-          en: "Native",
-          es: "Nativo",
-        },
+        levels: [
+          {
+            en: "Native",
+            es: "Nativo",
+          },
+        ],
       },
       {
         language: {
           en: "English",
           es: "Inglés",
         },
-        level: {
-          en: "C1",
-          es: "C1",
-        },
+        levels: [
+          {
+            en: "Advanced",
+            es: "Avanzado",
+          },
+          {
+            en: "C1",
+            es: "C1",
+          },
+        ],
       },
     ],
   },
