@@ -41,12 +41,41 @@ export type Database = {
         }
         Relationships: []
       }
+      public_ai_usage: {
+        Row: {
+          created_at: string
+          feature: string
+          id: number
+          ip_hash: string
+        }
+        Insert: {
+          created_at?: string
+          feature: string
+          id?: never
+          ip_hash: string
+        }
+        Update: {
+          created_at?: string
+          feature?: string
+          id?: never
+          ip_hash?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      check_and_record_usage: {
+        Args: {
+          p_feature: string
+          p_ip_hash: string
+          p_limit: number
+          p_window: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

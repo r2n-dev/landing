@@ -1,6 +1,7 @@
 "use client";
 
 import type { LandingLocale } from "@/components/landing/i18n";
+import { FloatingLauncher } from "@/components/public-assistant/FloatingLauncher";
 import type { LandingContent } from "./landing.types";
 import { useLocaleManager } from "./hooks/useLocaleManager";
 import {
@@ -95,6 +96,8 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
         madeWithLabel={content.footer.madeWithLabel}
         inCountryLabel={content.footer.inCountryLabel}
       />
+
+      <FloatingLauncher />
     </div>
   );
 }
