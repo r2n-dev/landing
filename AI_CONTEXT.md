@@ -6,7 +6,7 @@
 - UI primitives: shadcn/ui (Radix base, `components.json`) in `src/components/ui/*`.
 - Color scheme runtime: `next-themes`.
 - Icons: `@tabler/icons-react`.
-- Active route scope: single landing page at `/`.
+- Active route scope: landing page at `/`, resume pages/PDFs/JSON, and the owner-only resume admin at `/admin` (Supabase auth + AI assistant).
 
 ## Critical Paths
 - Root runtime: `src/app/layout.tsx`
