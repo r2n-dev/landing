@@ -37,7 +37,7 @@ Resume content is moving to Supabase. The connection is configured through env v
    ```
 3. Use `getSupabaseClient()` from `src/lib/supabase/server.ts` in server components and route handlers only.
 
-In production (Dokploy), set the same variables (plus `RESUME_REVALIDATE_SECRET`) on the service. The Docker build does not need them: pages built without Supabase use the fallback data and refresh at runtime.
+See [Deployment](#deployment) for the production variables. A build without them is not a failure: pages fall back to `profile-data.ts` and pick up Supabase at runtime.
 
 Database schema lives in `supabase/` (Supabase CLI, installed as a dev dependency):
 - `supabase/config.toml` - CLI and local stack configuration
@@ -67,7 +67,7 @@ npx supabase gen types typescript --linked --schema public > src/lib/supabase/da
 - The draft is reviewed as a diff (or edited as JSON) and nothing changes on the site until **Publish**, which inserts a new `resume_versions` row and refreshes the cache. **Restore** publishes a copy of an older version.
 
 Setup:
-1. Set `ADMIN_EMAIL`, `AI_MODEL` and the provider key (`GOOGLE_GENERATIVE_AI_API_KEY` or `ANTHROPIC_API_KEY`) in `.env.local` and on the Dokploy service.
+1. Set `ADMIN_EMAIL`, `AI_MODEL` and the provider key (`GOOGLE_GENERATIVE_AI_API_KEY` or `ANTHROPIC_API_KEY`) in `.env.local` and in the hosting provider.
 2. In Supabase, Authentication > URL Configuration: set the Site URL to `https://r2n.dev` and add `https://r2n.dev/auth/callback` and `http://localhost:3000/auth/callback` to the redirect URLs.
 3. Apply the migration with `npx supabase db push`.
 4. Optional: after your first sign-in, disable new sign-ups in Authentication > Sign In / Providers.
@@ -87,6 +87,22 @@ Color scheme is managed by next-themes (`light`, `dark`, `system`) and persisted
 - The landing page, `/json-en`, `/json-es`, the resume pages and the PDFs render the latest resume version from Supabase (`getResume()` in `src/lib/resume/get-resume.ts`), falling back to `src/components/landing/profile-data.ts` when Supabase is unavailable:
   - `/resume-en.pdf`, `/resume-es.pdf` (layout: `src/components/resume/ResumeDocument.tsx`, rendered with `@react-pdf/renderer` and cached per resume version)
   - `/resume-en`, `/resume-es` show an HTML version with a download button
+
+## Deployment
+Hosted on Vercel. Set these environment variables for Production and Preview, then redeploy (existing deployments keep the values they were built with):
+
+| Variable | Notes |
+| --- | --- |
+| `SUPABASE_URL` | Project URL |
+| `SUPABASE_PUBLISHABLE_KEY` | Publishable (public) key, never the secret key |
+| `RESUME_REVALIDATE_SECRET` | Random string; also used by the Supabase webhook header |
+| `ADMIN_EMAIL` | Owner email allowed into `/admin` |
+| `AI_MODEL` | `google:gemini-3.8-flash` (or `anthropic:claude-opus-5`) |
+| `GOOGLE_GENERATIVE_AI_API_KEY` | Key for the provider in `AI_MODEL` (`ANTHROPIC_API_KEY` for Anthropic) |
+
+Also add the deployed callback URL to Supabase (Authentication > URL Configuration): `https://r2n.dev/auth/callback`, plus a preview wildcard such as `https://*-<team>.vercel.app/**` to sign in on preview deployments.
+
+The repository also carries a `Dockerfile` (`output: "standalone"`) and a GitHub Actions workflow that deploys to Dokploy on pushes to `main`; Vercel ignores both.
 
 ## AI Contributor Pack
 - Root policies: `AGENTS.md`, `AI_CONTEXT.md`, `CONTRIBUTING.md`
