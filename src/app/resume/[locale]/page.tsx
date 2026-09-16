@@ -4,6 +4,7 @@ import { IconDownload } from "@tabler/icons-react";
 import { landingLocales, normalizeLandingLocale } from "@/components/landing/i18n";
 import { getLandingContentByLocale } from "@/components/landing/landing-content";
 import { getResume } from "@/lib/resume/get-resume";
+import { FloatingLauncher } from "@/components/public-assistant/FloatingLauncher";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -114,6 +115,10 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
           {content.skills.languages.map((l) => `${l.language} (${l.levels.join(", ")})`).join(", ")}
         </p>
       </section>
+
+      <div className="print:hidden">
+        <FloatingLauncher />
+      </div>
     </main>
   );
 }

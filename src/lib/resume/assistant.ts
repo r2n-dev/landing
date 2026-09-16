@@ -1,12 +1,8 @@
-import { anthropic } from "@ai-sdk/anthropic";
-import { google } from "@ai-sdk/google";
-import { generateText, jsonSchema, NoObjectGeneratedError, Output, type LanguageModel, type ModelMessage } from "ai";
+import { generateText, jsonSchema, NoObjectGeneratedError, Output, type ModelMessage } from "ai";
 import type { JSONSchema7 } from "json-schema";
 import { z } from "zod";
+import { getModel, toModelJsonSchema } from "@/lib/assistant/model";
 import { resumeDataSchema, type ResumeData } from "./schema";
-
-/** `provider:model`, e.g. `google:gemini-3.8-flash` or `anthropic:claude-opus-5`. */
-const DEFAULT_AI_MODEL = "google:gemini-3.8-flash";
 
 export const MAX_ASSISTANT_TURNS = 12;
 export const MAX_ASSISTANT_MESSAGE_LENGTH = 4000;
@@ -31,24 +27,6 @@ const assistantResponseSchema = z.strictObject({
 
 export type AssistantResponse = z.infer<typeof assistantResponseSchema>;
 
-// Gemini accepts only a subset of JSON Schema. Send it a copy without the unsupported
-// keywords and keep validating the response against the full Zod schema.
-const MODEL_SUPPORTED_FORMATS = new Set(["date", "date-time", "time"]);
-
-function toModelJsonSchema(value: unknown): unknown {
-  if (Array.isArray(value)) {
-    return value.map(toModelJsonSchema);
-  }
-  if (!value || typeof value !== "object") {
-    return value;
-  }
-  return Object.fromEntries(
-    Object.entries(value)
-      .filter(([key, item]) => key !== "$schema" && key !== "pattern" && !(key === "format" && !MODEL_SUPPORTED_FORMATS.has(String(item))))
-      .map(([key, item]) => [key, toModelJsonSchema(item)]),
-  );
-}
-
 const assistantOutputSchema = jsonSchema<AssistantResponse>(
   toModelJsonSchema(z.toJSONSchema(assistantResponseSchema)) as JSONSchema7,
   {
@@ -70,27 +48,11 @@ Rules:
 - Dates in certifications are ISO dates (YYYY-MM-DD). Period labels follow the existing style ("Aug 2023 - Present" / "Agosto 2023 - Presente").
 - Keep "reply" brief. Reply in the language the owner used.`;
 
-function getModel(): LanguageModel {
-  const [provider, ...rest] = (process.env.AI_MODEL || DEFAULT_AI_MODEL).split(":");
-  const modelId = rest.join(":");
-  if (!modelId) {
-    throw new Error(`Invalid AI_MODEL "${process.env.AI_MODEL}". Use provider:model, e.g. ${DEFAULT_AI_MODEL}.`);
-  }
-  switch (provider) {
-    case "google":
-      return google(modelId);
-    case "anthropic":
-      return anthropic(modelId);
-    default:
-      throw new Error(`Unsupported AI provider "${provider}". Use "google" or "anthropic".`);
-  }
-}
-
 /** Asks the model to apply the latest request in `turns` to `resume`. */
 export async function proposeResumeEdit(
   resume: ResumeData,
   turns: AssistantTurn[],
-  model: LanguageModel = getModel(),
+  model = getModel(),
 ): Promise<AssistantResponse> {
   const history = turns.slice(-MAX_ASSISTANT_TURNS);
   const request = history.at(-1);
