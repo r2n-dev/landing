@@ -56,7 +56,7 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
 
       <section>
         <h2 className="mb-2 border-b border-border font-heading text-h3">{content.sections.experienceTitle}</h2>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-6">
           {content.experience.map((item) => (
             <article key={`${item.company}-${item.period}`} className="break-inside-avoid">
               <p className="font-semibold">
@@ -66,21 +66,21 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
                 {item.period}
                 {item.location ? ` · ${item.location}` : ""}
               </p>
-              <p className="mt-1">{item.summary}</p>
+              <p className="mt-2">{item.summary}</p>
               {item.highlights?.length ? (
-                <ul className="mt-1 list-disc ps-5">
+                <ul className="mt-2 list-disc space-y-1.5 ps-5">
                   {item.highlights.map((highlight) => (
                     <li key={highlight}>{highlight}</li>
                   ))}
                 </ul>
               ) : null}
               {item.aiUsage ? (
-                <p className="mt-1">
+                <p className="mt-2">
                   <span className="font-semibold">{content.sections.experienceAiUsageLabel}:</span> {item.aiUsage}
                 </p>
               ) : null}
               {item.stack?.length ? (
-                <p className="mt-1 text-xs text-muted-foreground print:text-black">
+                <p className="mt-2 text-xs text-muted-foreground print:text-black">
                   <span className="font-semibold">{content.sections.experienceStackLabel}:</span>{" "}
                   {item.stack.join(", ")}
                 </p>

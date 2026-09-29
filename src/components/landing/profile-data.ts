@@ -110,7 +110,13 @@ export const andresProfileData: CandidateProfile = {
             "Actualmente continúo con migraciones, actualización de librerías, refactorización de código y optimización de rendimiento.",
         },
       ],
-      stack: ["Angular 13", "NX", "React", "TypeScript", "Design System", "Figma", "Browser extensions"],
+      aiUsage: {
+        en:
+          "GitHub Copilot is my main day-to-day AI tool. I created prompts, rules, and other context documents so AI agents understand the codebase, its architecture, and the project's basic rules, making their suggestions consistent with how the team builds.",
+        es:
+          "GitHub Copilot es mi herramienta de AI principal en el día a día. Creé prompts, reglas y otros documentos de contexto para que los agentes de AI comprendan la base de código, su arquitectura y las reglas básicas del proyecto, logrando sugerencias coherentes con la forma de trabajo del equipo.",
+      },
+      stack: ["Angular 13", "NX", "React", "TypeScript", "Design System", "Figma", "Browser extensions", "GitHub Copilot"],
     },
     {
       id: "newfire",
