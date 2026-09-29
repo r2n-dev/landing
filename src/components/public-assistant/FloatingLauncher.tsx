@@ -19,7 +19,7 @@ export function FloatingLauncher() {
   }
 
   return (
-    <Sheet>
+    <Sheet modal={false}>
       <SheetTrigger asChild>
         <button
           type="button"
@@ -29,7 +29,7 @@ export function FloatingLauncher() {
           <IconMessageChatbot size={24} />
         </button>
       </SheetTrigger>
-      <SheetContent className="sm:max-w-sm">
+      <SheetContent side="floating" onInteractOutside={(event) => event.preventDefault()}>
         <SheetHeader>
           <SheetTitle>Ask about me</SheetTitle>
           <ToggleGroup type="single" variant="segmented" value={mode} onValueChange={changeMode} aria-label="Assistant mode" className="mt-1">
