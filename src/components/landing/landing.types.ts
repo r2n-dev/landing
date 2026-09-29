@@ -33,6 +33,8 @@ export interface LandingExperienceItem {
   location?: string;
   summary: string;
   highlights?: string[];
+  stack?: string[];
+  aiUsage?: string;
 }
 
 export interface LandingEducationItem {
@@ -77,6 +79,8 @@ export interface LandingSectionCopy {
   experienceTitle: string;
   experienceShowMoreLabel: string;
   experienceShowLessLabel: string;
+  experienceStackLabel: string;
+  experienceAiUsageLabel: string;
   educationTitle: string;
   certificationsTitle: string;
   skillsTitle: string;

@@ -25,6 +25,10 @@ export const profileExperienceSchema = z.strictObject({
   location: localizedCopySchema,
   summary: localizedCopySchema,
   highlights: z.array(localizedCopySchema),
+  /** Technologies and tools used in this role. Rows saved before this field existed parse as []. */
+  stack: z.array(z.string()).default([]),
+  /** How AI tools (LLMs, APIs, Copilot, Claude…) were used in this role and their impact. */
+  aiUsage: localizedCopySchema.optional(),
 });
 
 export const profileEducationSchema = z.strictObject({

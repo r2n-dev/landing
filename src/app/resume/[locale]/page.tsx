@@ -74,6 +74,17 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
                   ))}
                 </ul>
               ) : null}
+              {item.aiUsage ? (
+                <p className="mt-1">
+                  <span className="font-semibold">{content.sections.experienceAiUsageLabel}:</span> {item.aiUsage}
+                </p>
+              ) : null}
+              {item.stack?.length ? (
+                <p className="mt-1 text-xs text-muted-foreground print:text-black">
+                  <span className="font-semibold">{content.sections.experienceStackLabel}:</span>{" "}
+                  {item.stack.join(", ")}
+                </p>
+              ) : null}
             </article>
           ))}
         </div>

@@ -214,6 +214,18 @@ export function ResumeDocument({ locale, content, profile }: ResumeDocumentProps
                   <Text style={styles.bulletText}>{highlight}</Text>
                 </View>
               ))}
+              {item.aiUsage ? (
+                <Text style={styles.paragraph}>
+                  <Text style={{ fontWeight: 700 }}>{content.sections.experienceAiUsageLabel}: </Text>
+                  {item.aiUsage}
+                </Text>
+              ) : null}
+              {item.stack?.length ? (
+                <Text style={styles.meta}>
+                  <Text style={{ fontWeight: 700 }}>{content.sections.experienceStackLabel}: </Text>
+                  {item.stack.join(", ")}
+                </Text>
+              ) : null}
             </View>
           ))}
         </Section>

@@ -71,6 +71,8 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
                   title={content.sections.experienceTitle}
                   showMoreLabel={content.sections.experienceShowMoreLabel}
                   showLessLabel={content.sections.experienceShowLessLabel}
+                  stackLabel={content.sections.experienceStackLabel}
+                  aiUsageLabel={content.sections.experienceAiUsageLabel}
                   experience={content.experience}
                   resumeAction={content.resumeAction}
                 />
