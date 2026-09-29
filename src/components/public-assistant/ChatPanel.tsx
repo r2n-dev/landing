@@ -3,11 +3,19 @@
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import { IconSend } from "@tabler/icons-react";
 import { askAboutMe } from "@/app/actions";
+import type { LandingLocale } from "@/components/landing/i18n";
 import type { ChatTurn } from "@/lib/assistant/chat";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { assistantCopy } from "./assistant-copy";
+import { Markdown } from "./Markdown";
 
-export function ChatPanel() {
+interface ChatPanelProps {
+  locale: LandingLocale;
+}
+
+export function ChatPanel({ locale }: ChatPanelProps) {
+  const copy = assistantCopy[locale].chat;
   const [turns, setTurns] = useState<ChatTurn[]>([]);
   const [text, setText] = useState("");
   const [pending, setPending] = useState(false);
@@ -29,7 +37,7 @@ export function ChatPanel() {
     const nextTurns: ChatTurn[] = [...turns, { role: "user", text: message }];
     setTurns(nextTurns);
     setPending(true);
-    const result = await askAboutMe(nextTurns);
+    const result = await askAboutMe(nextTurns, locale);
     setPending(false);
 
     if (!result.ok) {
@@ -52,10 +60,7 @@ export function ChatPanel() {
     <div className="flex flex-1 flex-col gap-3 overflow-hidden">
       <div className="flex flex-1 flex-col gap-3 overflow-y-auto" aria-live="polite">
         {turns.length === 0 ? (
-          <p className="text-sm text-muted-foreground">
-            Ask me anything about my experience, skills, or background — I&apos;ll answer from my
-            actual resume.
-          </p>
+          <p className="text-sm text-muted-foreground">{copy.intro}</p>
         ) : null}
         {turns.map((turn, index) => (
           <div
@@ -63,14 +68,14 @@ export function ChatPanel() {
             className={
               turn.role === "user"
                 ? "ms-8 self-end rounded-lg bg-primary-light px-3 py-2 text-sm whitespace-pre-wrap text-primary-light-foreground"
-                : "me-8 self-start rounded-lg bg-muted px-3 py-2 text-sm whitespace-pre-wrap"
+                : "me-8 self-start rounded-lg bg-muted px-3 py-2 text-sm"
             }
           >
-            <span className="sr-only">{turn.role === "user" ? "You: " : "Assistant: "}</span>
-            {turn.text}
+            <span className="sr-only">{turn.role === "user" ? copy.you : copy.assistant}</span>
+            {turn.role === "assistant" ? <Markdown>{turn.text}</Markdown> : turn.text}
           </div>
         ))}
-        {pending ? <p className="text-sm text-muted-foreground">Thinking…</p> : null}
+        {pending ? <p className="text-sm text-muted-foreground">{copy.thinking}</p> : null}
         {error ? (
           <p role="alert" className="text-sm text-destructive">
             {error}
@@ -84,13 +89,13 @@ export function ChatPanel() {
           value={text}
           onChange={(event) => setText(event.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Ask a question…"
+          placeholder={copy.placeholder}
           rows={1}
           disabled={pending}
-          aria-label="Your question"
+          aria-label={copy.questionLabel}
           className="min-h-9 resize-none"
         />
-        <Button type="submit" size="icon" disabled={pending || !text.trim()} aria-label="Send">
+        <Button type="submit" size="icon" disabled={pending || !text.trim()} aria-label={copy.send}>
           <IconSend size={16} />
         </Button>
       </form>

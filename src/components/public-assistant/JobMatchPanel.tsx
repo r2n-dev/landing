@@ -2,11 +2,13 @@
 
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { IconPaperclip, IconX } from "@tabler/icons-react";
+import type { LandingLocale } from "@/components/landing/i18n";
 import { matchJob } from "@/app/actions";
 import type { JobMatchResult as JobMatchResultData } from "@/lib/assistant/job-match";
 import { MAX_JOB_DESCRIPTION_LENGTH, MAX_JOB_DESCRIPTION_PDF_BYTES } from "@/lib/assistant/job-match-constants";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { assistantCopy } from "./assistant-copy";
 import { JobMatchResult } from "./JobMatchResult";
 
 const MAX_PDF_MB = Math.round(MAX_JOB_DESCRIPTION_PDF_BYTES / (1024 * 1024));
@@ -23,7 +25,12 @@ function fileToBase64(file: File): Promise<string> {
   });
 }
 
-export function JobMatchPanel() {
+interface JobMatchPanelProps {
+  locale: LandingLocale;
+}
+
+export function JobMatchPanel({ locale }: JobMatchPanelProps) {
+  const copy = assistantCopy[locale].jobMatch;
   const [text, setText] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [pending, setPending] = useState(false);
@@ -39,12 +46,12 @@ export function JobMatchPanel() {
       return;
     }
     if (selected.type !== "application/pdf") {
-      setError("Please attach a PDF file.");
+      setError(copy.notPdf);
       event.target.value = "";
       return;
     }
     if (selected.size > MAX_JOB_DESCRIPTION_PDF_BYTES) {
-      setError(`That PDF is too large (max ${MAX_PDF_MB} MB).`);
+      setError(copy.pdfTooLarge(MAX_PDF_MB));
       event.target.value = "";
       return;
     }
@@ -68,7 +75,7 @@ export function JobMatchPanel() {
     setResult(null);
 
     const pdfBase64 = file ? await fileToBase64(file) : undefined;
-    const response = await matchJob({ text: text.trim() || undefined, pdfBase64 });
+    const response = await matchJob({ text: text.trim() || undefined, pdfBase64 }, locale);
     setPending(false);
 
     if (!response.ok) {
@@ -80,31 +87,28 @@ export function JobMatchPanel() {
 
   return (
     <div className="flex flex-1 flex-col gap-4 overflow-y-auto">
-      <p className="text-sm text-muted-foreground">
-        Paste a job description, attach it as a PDF, or both — I&apos;ll compare it against my
-        real experience and show you how well it fits.
-      </p>
+      <p className="text-sm text-muted-foreground">{copy.intro}</p>
 
       <form onSubmit={submit} className="flex flex-col gap-3">
         <Textarea
           value={text}
           onChange={(event) => setText(event.target.value.slice(0, MAX_JOB_DESCRIPTION_LENGTH))}
-          placeholder="Paste the job description here…"
+          placeholder={copy.placeholder}
           rows={6}
           disabled={pending}
-          aria-label="Job description"
+          aria-label={copy.textLabel}
         />
 
         <div className="flex items-center gap-2">
           <Button type="button" variant="outline" size="sm" disabled={pending} onClick={() => fileInputRef.current?.click()}>
             <IconPaperclip size={16} data-icon="inline-start" />
-            Attach PDF
+            {copy.attachPdf}
           </Button>
           <input ref={fileInputRef} type="file" accept="application/pdf" onChange={handleFileChange} className="hidden" />
           {file ? (
             <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-xs">
               {file.name}
-              <button type="button" onClick={clearFile} aria-label="Remove attached PDF" className="text-muted-foreground hover:text-foreground">
+              <button type="button" onClick={clearFile} aria-label={copy.removePdf} className="text-muted-foreground hover:text-foreground">
                 <IconX size={12} />
               </button>
             </span>
@@ -112,7 +116,7 @@ export function JobMatchPanel() {
         </div>
 
         <Button type="submit" disabled={pending || (!text.trim() && !file)}>
-          {pending ? "Matching…" : "See my match"}
+          {pending ? copy.submitting : copy.submit}
         </Button>
       </form>
 
@@ -122,7 +126,7 @@ export function JobMatchPanel() {
         </p>
       ) : null}
 
-      {result ? <JobMatchResult result={result} /> : null}
+      {result ? <JobMatchResult result={result} locale={locale} /> : null}
     </div>
   );
 }

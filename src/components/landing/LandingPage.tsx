@@ -99,7 +99,7 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
         inCountryLabel={content.footer.inCountryLabel}
       />
 
-      <FloatingLauncher />
+      <FloatingLauncher locale={locale} />
     </div>
   );
 }

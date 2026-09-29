@@ -35,13 +35,13 @@ function SheetOverlay({ className, ...props }: React.ComponentProps<typeof Sheet
 }
 
 interface SheetContentProps extends React.ComponentProps<typeof SheetPrimitive.Content> {
-  side?: "top" | "right" | "bottom" | "left"
+  side?: "top" | "right" | "bottom" | "left" | "floating"
 }
 
 function SheetContent({ className, children, side = "right", ...props }: SheetContentProps) {
   return (
     <SheetPortal>
-      <SheetOverlay />
+      {side !== "floating" && <SheetOverlay />}
       <SheetPrimitive.Content
         data-slot="sheet-content"
         className={cn(
@@ -54,6 +54,8 @@ function SheetContent({ className, children, side = "right", ...props }: SheetCo
             "inset-x-0 top-0 h-auto border-b border-border data-closed:slide-out-to-top data-open:slide-in-from-top",
           side === "bottom" &&
             "inset-x-0 bottom-0 h-auto border-t border-border data-closed:slide-out-to-bottom data-open:slide-in-from-bottom",
+          side === "floating" &&
+            "inset-x-3 bottom-3 h-[min(38rem,calc(100dvh-1.5rem))] rounded-2xl border border-border shadow-lg data-closed:zoom-out-95 data-closed:fade-out-0 data-closed:slide-out-to-bottom-4 data-open:zoom-in-95 data-open:fade-in-0 data-open:slide-in-from-bottom-4 sm:inset-x-auto sm:right-5 sm:bottom-5 sm:w-96",
           className
         )}
         {...props}
