@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Timeline, TimelineItem } from "@/components/ui/timeline";
@@ -10,6 +11,8 @@ interface ExperienceCardProps {
   title: string;
   showMoreLabel: string;
   showLessLabel: string;
+  stackLabel: string;
+  aiUsageLabel: string;
   experience: LandingExperienceItem[];
   resumeAction: LandingAction;
 }
@@ -26,6 +29,8 @@ export function ExperienceCard({
   title,
   showMoreLabel,
   showLessLabel,
+  stackLabel,
+  aiUsageLabel,
   experience,
   resumeAction,
 }: ExperienceCardProps) {
@@ -67,12 +72,30 @@ export function ExperienceCard({
             {item.location ? (
               <p className="mb-1.5 text-xs text-muted-foreground">{item.location}</p>
             ) : null}
-            <p className="text-sm text-muted-foreground">{item.summary}</p>
+            <p className="mt-2 text-sm text-muted-foreground">{item.summary}</p>
 
             {item.highlights && item.highlights.length > 0 ? (
-              <ul className="mt-2 list-outside list-disc ps-5 text-sm text-muted-foreground">
+              <ul className="mt-3 list-outside list-disc space-y-1.5 ps-5 text-sm text-muted-foreground">
                 {item.highlights.map((highlight) => (
                   <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            ) : null}
+
+            {item.aiUsage ? (
+              <p className="mt-3 text-sm text-muted-foreground">
+                <span className="font-semibold text-foreground">{aiUsageLabel}:</span> {item.aiUsage}
+              </p>
+            ) : null}
+
+            {item.stack && item.stack.length > 0 ? (
+              <ul aria-label={stackLabel} className="mt-3 flex flex-wrap gap-1.5">
+                {item.stack.map((tech) => (
+                  <li key={tech}>
+                    <Badge variant="secondary" size="sm">
+                      {tech}
+                    </Badge>
+                  </li>
                 ))}
               </ul>
             ) : null}

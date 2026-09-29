@@ -46,6 +46,7 @@ Rules:
 - Never invent facts (companies, dates, metrics, certifications). If information is missing, ask for it in "reply" and leave the resume unchanged.
 - Experiences are ordered newest first. New experience ids are short kebab-case slugs of the company.
 - Dates in certifications are ISO dates (YYYY-MM-DD). Period labels follow the existing style ("Aug 2023 - Present" / "Agosto 2023 - Presente").
+- Each experience has a "stack" (technologies used in that role) and an optional "aiUsage" (how AI tools were used and their impact). Only fill "aiUsage" with facts the owner gave you.
 - Keep "reply" brief. Reply in the language the owner used.`;
 
 /** Asks the model to apply the latest request in `turns` to `resume`. */

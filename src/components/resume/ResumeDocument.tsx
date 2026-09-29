@@ -64,16 +64,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: palette.rule,
   },
-  job: { marginBottom: 9 },
+  job: { marginBottom: 13 },
   rowBetween: { flexDirection: "row", justifyContent: "space-between", alignItems: "baseline" },
   jobRole: { fontSize: 10.5, fontWeight: 700 },
   roleSeparator: { color: palette.muted, fontWeight: 400 },
   company: { color: palette.primary, textDecoration: "none", fontWeight: 600 },
-  meta: { fontSize: 8.5, color: palette.muted },
-  paragraph: { fontSize: 9.5, lineHeight: 1.45, marginTop: 2 },
-  bullet: { flexDirection: "row", marginTop: 1.5, paddingLeft: 2 },
+  meta: { fontSize: 8.5, color: palette.muted, marginTop: 1 },
+  paragraph: { fontSize: 9.5, lineHeight: 1.55, marginTop: 4 },
+  bullet: { flexDirection: "row", marginTop: 3, paddingLeft: 2 },
   bulletMark: { width: 10, color: palette.primary },
-  bulletText: { flex: 1, fontSize: 9.5, lineHeight: 1.45 },
+  bulletText: { flex: 1, fontSize: 9.5, lineHeight: 1.55 },
   certRow: { flexDirection: "row", alignItems: "center" },
   badge: { width: 34, height: 34, marginRight: 9 },
   link: { color: palette.primary, textDecoration: "none" },
@@ -214,6 +214,18 @@ export function ResumeDocument({ locale, content, profile }: ResumeDocumentProps
                   <Text style={styles.bulletText}>{highlight}</Text>
                 </View>
               ))}
+              {item.aiUsage ? (
+                <Text style={styles.paragraph}>
+                  <Text style={{ fontWeight: 700 }}>{content.sections.experienceAiUsageLabel}: </Text>
+                  {item.aiUsage}
+                </Text>
+              ) : null}
+              {item.stack?.length ? (
+                <Text style={styles.meta}>
+                  <Text style={{ fontWeight: 700 }}>{content.sections.experienceStackLabel}: </Text>
+                  {item.stack.join(", ")}
+                </Text>
+              ) : null}
             </View>
           ))}
         </Section>

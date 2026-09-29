@@ -23,6 +23,8 @@ function getAllExperience(profile: CandidateProfile, locale: LandingLocale): Lan
     location: getCopy(locale, item.location),
     summary: getCopy(locale, item.summary),
     highlights: item.highlights.map((highlight) => getCopy(locale, highlight)),
+    stack: item.stack,
+    aiUsage: item.aiUsage ? getCopy(locale, item.aiUsage) : undefined,
   }));
 }
 
@@ -106,6 +108,8 @@ function getLandingContent(profile: CandidateProfile, locale: LandingLocale): La
       experienceTitle: isSpanish ? "Experiencia" : "Experience",
       experienceShowMoreLabel: isSpanish ? "Ver experiencia completa" : "Show full experience",
       experienceShowLessLabel: isSpanish ? "Ver menos experiencia" : "Show less experience",
+      experienceStackLabel: isSpanish ? "Stack" : "Stack",
+      experienceAiUsageLabel: isSpanish ? "Uso de AI" : "AI usage",
       educationTitle: isSpanish ? "Educación" : "Education",
       certificationsTitle: isSpanish ? "Certificaciones" : "Certifications",
       skillsTitle: isSpanish ? "Habilidades" : "Skills",
