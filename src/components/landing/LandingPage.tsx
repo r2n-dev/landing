@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import type { LandingLocale } from "@/components/landing/i18n";
 import { FloatingLauncher } from "@/components/public-assistant/FloatingLauncher";
 import type { LandingContent } from "./landing.types";
@@ -25,6 +26,7 @@ interface LandingPageProps {
 export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps) {
   const { locale, setLocale } = useLocaleManager(initialLocale);
   const content = contentByLocale[locale];
+  const [assistantOpen, setAssistantOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -45,6 +47,7 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
               about={content.about}
               portraitUrl={content.portraitUrl}
               actions={content.actions}
+              onOpenAssistant={() => setAssistantOpen(true)}
             />
 
             <StatsGrid stats={content.stats} />
@@ -99,7 +102,7 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
         inCountryLabel={content.footer.inCountryLabel}
       />
 
-      <FloatingLauncher locale={locale} />
+      <FloatingLauncher locale={locale} open={assistantOpen} onOpenChange={setAssistantOpen} />
     </div>
   );
 }

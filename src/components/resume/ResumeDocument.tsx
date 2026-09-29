@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
   header: { marginBottom: 14 },
   name: { fontSize: 24, fontWeight: 800, lineHeight: 1.1, letterSpacing: -0.3 },
   role: { fontSize: 12, fontWeight: 600, color: palette.primary, marginTop: 3 },
-  contactRow: { flexDirection: "row", flexWrap: "wrap", marginTop: 8, color: palette.muted },
-  contactRowNext: { flexDirection: "row", flexWrap: "wrap", marginTop: 1, color: palette.muted },
+  contactRow: { flexDirection: "row", flexWrap: "wrap", justifyContent: "center", marginTop: 8, color: palette.muted },
+  contactRowNext: { flexDirection: "row", flexWrap: "wrap", justifyContent: "center", marginTop: 1, color: palette.muted },
   contactPair: { flexDirection: "row" },
   contactItem: { color: palette.muted, textDecoration: "none" },
   separator: { marginHorizontal: 5, color: palette.rule },
@@ -97,10 +97,6 @@ const styles = StyleSheet.create({
   },
 });
 
-function stripProtocol(href: string) {
-  return href.replace(/^https?:\/\//, "").replace(/\/$/, "");
-}
-
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <View style={styles.section}>
@@ -140,7 +136,7 @@ export function ResumeDocument({ locale, content, profile }: ResumeDocumentProps
       { label: profile.phone, href: profile.links.whatsapp.href },
     ],
     [profile.links.linkedin, profile.links.github, profile.links.website].map((link) => ({
-      label: stripProtocol(link.href),
+      label: link.href.replace(/\/$/, ""),
       href: link.href,
     })),
   ];
