@@ -2,6 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  // pdfkit (via @react-pdf/renderer) loads its font data dynamically, so the tracer misses it.
+  outputFileTracingIncludes: {
+    "/resume/[locale]/pdf": ["./node_modules/pdfkit/js/**/*", "./src/assets/fonts/**/*"],
+  },
   async rewrites() {
     return [
       { source: "/json-:locale", destination: "/json/:locale" },
