@@ -2,7 +2,9 @@ import { generateText, jsonSchema, NoObjectGeneratedError, Output, type FilePart
 import type { JSONSchema7 } from "json-schema";
 import { z } from "zod";
 import { getModel, toModelJsonSchema } from "@/lib/assistant/model";
-import { MAX_JOB_DESCRIPTION_PDF_BYTES } from "@/lib/assistant/job-match-constants";
+import type { LandingLocale } from "@/components/landing/i18n";
+import { assistantServerCopy } from "@/lib/assistant/copy";
+import { JOB_MATCH_CATEGORY_KEYS, MAX_JOB_DESCRIPTION_PDF_BYTES } from "@/lib/assistant/job-match-constants";
 import type { ResumeData } from "@/lib/resume/schema";
 
 const MAX_JOB_MATCH_OUTPUT_TOKENS = 1500;
@@ -15,16 +17,21 @@ export interface JobMatchInput {
 }
 
 const jobMatchCategorySchema = z.strictObject({
-  name: z.string().describe("Short label for this dimension, e.g. 'Technical skills', 'Seniority & scope', 'Domain experience'."),
   score: z.number().min(0).max(100),
-  summary: z.string().describe("1-3 sentences: concrete strengths first, then any gap named plainly but tactfully."),
+  summary: z.string().describe("1-2 sentences: concrete strengths first, then any gap named plainly but tactfully. Plain text, no markdown."),
 });
 
 const jobMatchResultSchema = z.strictObject({
+  isJobDescription: z.boolean().describe("False when the input is not really a job description."),
   overallScore: z.number().min(0).max(100),
-  headline: z.string().describe("One encouraging but honest sentence summarizing the fit."),
-  categories: z.array(jobMatchCategorySchema).min(3).max(6),
-  gaps: z.array(z.string()).max(3).describe("Real, material gaps only -- empty array if none. Never invented."),
+  headline: z.string().describe("One encouraging but honest sentence summarizing the fit. Plain text, no markdown."),
+  categories: z.strictObject(
+    Object.fromEntries(JOB_MATCH_CATEGORY_KEYS.map((key) => [key, jobMatchCategorySchema])) as Record<
+      (typeof JOB_MATCH_CATEGORY_KEYS)[number],
+      typeof jobMatchCategorySchema
+    >,
+  ),
+  gaps: z.array(z.string()).max(3).describe("Real, material gaps only -- empty array if none. Never invented. Plain text, no markdown."),
 });
 
 export type JobMatchResult = z.infer<typeof jobMatchResultSchema>;
@@ -50,14 +57,16 @@ Rules:
 - Where there is a genuine gap, name it in one factual sentence without hedging or apologizing;
   note adjacent or transferable experience where reasonable, but never spin a missing skill
   into a strength.
-- Pick 3 to 6 categories that are actually relevant to this job description (e.g. technical
-  skills, seniority and scope, domain experience, soft skills, language requirements) -- don't
-  force irrelevant categories in.
-- If the input isn't really a job description, or is mostly unrelated to the candidate's field,
-  say so plainly in "headline" and keep scores low rather than fabricating relevance.`;
+- Always score all five categories, every time: technicalSkills, seniorityScope,
+  domainExperience, softSkills, languages. If the job description says nothing about a
+  category, score it against a sensible default expectation and say so in its summary.
+- Keep summaries to 1-2 sentences and "gaps" to at most 3 short items.
+- If the input isn't really a job description, set isJobDescription to false and use zeros.
+- Use plain text only in every field: no markdown, no asterisks, no bullets, no formatting.
+- Write headline, summaries and gaps in the language requested by the user message.`;
 
-function buildContent(text: string | undefined, pdfBytes: Uint8Array | undefined): Array<TextPart | FilePart> {
-  const parts: Array<TextPart | FilePart> = [{ type: "text", text: "Evaluate the job description below (text and/or attached PDF) against the candidate's resume." }];
+function buildContent(text: string | undefined, pdfBytes: Uint8Array | undefined, locale: LandingLocale): Array<TextPart | FilePart> {
+  const parts: Array<TextPart | FilePart> = [{ type: "text", text: `Evaluate the job description below (text and/or attached PDF) against the candidate's resume. Write your response in ${locale === "es" ? "Spanish" : "English"}.` }];
   if (pdfBytes) {
     parts.push({ type: "file", data: pdfBytes, mediaType: "application/pdf" });
   }
@@ -71,21 +80,23 @@ function buildContent(text: string | undefined, pdfBytes: Uint8Array | undefined
 export async function matchJob(
   resume: ResumeData,
   input: JobMatchInput,
+  locale: LandingLocale = "en",
   model = getModel(),
 ): Promise<JobMatchResult> {
   const text = input.text?.trim() || undefined;
   const pdfBytes = input.pdfBase64 ? new Uint8Array(Buffer.from(input.pdfBase64, "base64")) : undefined;
+  const copy = assistantServerCopy[locale];
   if (!text && !pdfBytes) {
-    throw new Error("Paste a job description or attach a PDF.");
+    throw new Error(copy.jobMatchEmpty);
   }
   if (pdfBytes && pdfBytes.byteLength > MAX_JOB_DESCRIPTION_PDF_BYTES) {
-    throw new Error("That PDF is too large (max 4 MB).");
+    throw new Error(copy.pdfTooLarge);
   }
 
   const messages: ModelMessage[] = [
     {
       role: "user",
-      content: buildContent(text, pdfBytes),
+      content: buildContent(text, pdfBytes, locale),
     },
     {
       role: "user",
@@ -99,12 +110,16 @@ export async function matchJob(
       instructions,
       messages,
       maxOutputTokens: MAX_JOB_MATCH_OUTPUT_TOKENS,
+      temperature: 0,
       output: Output.object({ schema: jobMatchOutputSchema, name: "job_match" }),
     });
+    if (!output.isJobDescription) {
+      throw new Error(copy.notAJobDescription);
+    }
     return output;
   } catch (error) {
     if (NoObjectGeneratedError.isInstance(error)) {
-      throw new Error("Could not score that job description. Try pasting it as text instead.");
+      throw new Error(copy.jobMatchFailed);
     }
     throw error;
   }

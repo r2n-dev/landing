@@ -128,7 +128,7 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
       </section>
 
       <div className="print:hidden">
-        <FloatingLauncher />
+        <FloatingLauncher locale={locale} />
       </div>
     </main>
   );
