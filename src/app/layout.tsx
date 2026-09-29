@@ -47,20 +47,11 @@ export const metadata: Metadata = {
     siteName: seo.siteName,
     locale: "en_US",
     alternateLocale: ["es_CO"],
-    images: [
-      {
-        url: andresProfileData.portraitUrl,
-        width: 540,
-        height: 540,
-        alt: `Portrait of ${andresProfileData.name}`,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: seo.title,
     description: seo.description,
-    images: [andresProfileData.portraitUrl],
   },
 };
 
