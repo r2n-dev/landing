@@ -78,6 +78,8 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
                   aiUsageLabel={content.sections.experienceAiUsageLabel}
                   experience={content.experience}
                   resumeAction={content.resumeAction}
+                  name={content.name}
+                  locale={content.locale}
                 />
                 <SkillsCard skills={content.skills} />
               </div>

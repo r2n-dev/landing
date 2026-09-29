@@ -44,7 +44,9 @@ const styles = StyleSheet.create({
    * On the page it hides the page-number render text, and on a wrapping View it breaks pagination.
    */
   prose: { fontSize: 9.5, lineHeight: 1.45 },
-  header: { marginBottom: 14 },
+  header: { marginBottom: 14, flexDirection: "row", alignItems: "center" },
+  headerText: { flex: 1 },
+  portrait: { width: 78, height: 78, borderRadius: 12, objectFit: "cover", marginLeft: 16 },
   name: { fontSize: 24, fontWeight: 800, lineHeight: 1.1, letterSpacing: -0.3 },
   role: { fontSize: 12, fontWeight: 600, color: palette.primary, marginTop: 3 },
   contactRow: { flexDirection: "row", flexWrap: "wrap", marginTop: 8, color: palette.muted },
@@ -182,9 +184,11 @@ export interface ResumeDocumentProps {
   locale: LandingLocale;
   content: LandingContent;
   profile: CandidateProfile;
+  /** Header portrait bytes; omitted when it could not be loaded. */
+  portraitSrc?: { data: Buffer; format: "png" | "jpg" };
 }
 
-export function ResumeDocument({ locale, content, profile }: ResumeDocumentProps) {
+export function ResumeDocument({ locale, content, profile, portraitSrc }: ResumeDocumentProps) {
   const isSpanish = locale === "es";
   const contactRows = [
     [
@@ -224,26 +228,38 @@ export function ResumeDocument({ locale, content, profile }: ResumeDocumentProps
             `${isSpanish ? "Página" : "Page"} ${pageNumber} / ${totalPages}`
           }
         />
+        <Text style={[styles.footer, { left: 44, right: 44, textAlign: "center" }]} fixed>
+          {isSpanish ? "Documento generado en " : "Document generated at "}
+          <Link src={profile.links.website.href} style={styles.link}>
+            {stripProtocol(profile.links.website.href)}
+          </Link>
+        </Text>
         <View style={styles.header}>
-          <Text style={styles.name}>{profile.name}</Text>
-          <Text style={styles.role}>{content.role}</Text>
-          {contactRows.map((row, rowIndex) => (
-            <View key={rowIndex} style={rowIndex === 0 ? styles.contactRow : styles.contactRowNext}>
-              {row.map((contact, index) => (
-                <View key={contact.label} style={styles.contactPair}>
-                  {index > 0 ? <Text style={styles.separator}>|</Text> : null}
-                  <ContactGlyph name={contact.icon} />
-                  {contact.href ? (
-                    <Link src={contact.href} style={styles.contactItem}>
-                      {contact.label}
-                    </Link>
-                  ) : (
-                    <Text>{contact.label}</Text>
-                  )}
-                </View>
-              ))}
-            </View>
-          ))}
+          <View style={styles.headerText}>
+            <Text style={styles.name}>{profile.name}</Text>
+            <Text style={styles.role}>{content.role}</Text>
+            {contactRows.map((row, rowIndex) => (
+              <View key={rowIndex} style={rowIndex === 0 ? styles.contactRow : styles.contactRowNext}>
+                {row.map((contact, index) => (
+                  <View key={contact.label} style={styles.contactPair}>
+                    {index > 0 ? <Text style={styles.separator}>|</Text> : null}
+                    <ContactGlyph name={contact.icon} />
+                    {contact.href ? (
+                      <Link src={contact.href} style={styles.contactItem}>
+                        {contact.label}
+                      </Link>
+                    ) : (
+                      <Text>{contact.label}</Text>
+                    )}
+                  </View>
+                ))}
+              </View>
+            ))}
+          </View>
+          {portraitSrc ? (
+            // eslint-disable-next-line jsx-a11y/alt-text
+            <Image style={styles.portrait} src={portraitSrc} />
+          ) : null}
         </View>
 
         <Section title={isSpanish ? "Perfil" : "Profile"}>

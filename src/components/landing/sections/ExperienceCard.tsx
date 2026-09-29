@@ -1,9 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { IconLoader2 } from "@tabler/icons-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useFileDownload } from "@/hooks/use-file-download";
+import { buildResumeFilename } from "@/lib/download";
 import { Timeline, TimelineItem } from "@/components/ui/timeline";
 import type { LandingAction, LandingActionVariant, LandingExperienceItem } from "../landing.types";
 
@@ -15,6 +18,8 @@ interface ExperienceCardProps {
   aiUsageLabel: string;
   experience: LandingExperienceItem[];
   resumeAction: LandingAction;
+  name: string;
+  locale: string;
 }
 
 const DEFAULT_VISIBLE_EXPERIENCE_ITEMS = 3;
@@ -33,6 +38,8 @@ export function ExperienceCard({
   aiUsageLabel,
   experience,
   resumeAction,
+  name,
+  locale,
 }: ExperienceCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const shouldShowToggle = experience.length > DEFAULT_VISIBLE_EXPERIENCE_ITEMS;
@@ -40,6 +47,10 @@ export function ExperienceCard({
     () =>
       isExpanded ? experience : experience.slice(0, DEFAULT_VISIBLE_EXPERIENCE_ITEMS),
     [experience, isExpanded],
+  );
+
+  const { download, isDownloading } = useFileDownload(resumeAction.href, () =>
+    buildResumeFilename(name, locale),
   );
 
   return (
@@ -116,13 +127,14 @@ export function ExperienceCard({
       ) : null}
 
       <Button
-        asChild
         variant={buttonVariantByActionVariant[resumeAction.variant ?? "light"]}
         className="mt-4"
+        onClick={download}
+        disabled={isDownloading || !resumeAction.href}
+        aria-busy={isDownloading}
       >
-        <a href={resumeAction.href} download>
-          {resumeAction.label}
-        </a>
+        {isDownloading ? <IconLoader2 className="size-4 animate-spin" aria-hidden /> : null}
+        {resumeAction.label}
       </Button>
     </Card>
   );
