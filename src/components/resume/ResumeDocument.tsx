@@ -1,5 +1,5 @@
 import path from "node:path";
-import { Document, Font, Image, Link, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
+import { Document, Font, Image, Link, Page, Path, StyleSheet, Svg, Text, View } from "@react-pdf/renderer";
 import type { LandingLocale } from "@/components/landing/i18n";
 import type { LandingContent } from "@/components/landing/landing.types";
 import type { CandidateProfile } from "@/components/landing/profile-data";
@@ -47,9 +47,10 @@ const styles = StyleSheet.create({
   header: { marginBottom: 14 },
   name: { fontSize: 24, fontWeight: 800, lineHeight: 1.1, letterSpacing: -0.3 },
   role: { fontSize: 12, fontWeight: 600, color: palette.primary, marginTop: 3 },
-  contactRow: { flexDirection: "row", flexWrap: "wrap", justifyContent: "center", marginTop: 8, color: palette.muted },
-  contactRowNext: { flexDirection: "row", flexWrap: "wrap", justifyContent: "center", marginTop: 1, color: palette.muted },
-  contactPair: { flexDirection: "row" },
+  contactRow: { flexDirection: "row", flexWrap: "wrap", marginTop: 8, color: palette.muted },
+  contactRowNext: { flexDirection: "row", flexWrap: "wrap", marginTop: 1, color: palette.muted },
+  contactPair: { flexDirection: "row", alignItems: "center" },
+  contactIcon: { marginRight: 3 },
   contactItem: { color: palette.muted, textDecoration: "none" },
   separator: { marginHorizontal: 5, color: palette.rule },
   section: { marginTop: 12 },
@@ -97,6 +98,62 @@ const styles = StyleSheet.create({
   },
 });
 
+/* Tabler outline icon paths (24x24 viewBox), drawn with react-pdf SVG primitives. */
+const contactIcons = {
+  location: [
+    "M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0",
+    "M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z",
+  ],
+  email: [
+    "M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z",
+    "M3 7l9 6l9 -6",
+  ],
+  phone: [
+    "M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2",
+  ],
+  linkedin: [
+    "M8 11v5",
+    "M8 8v.01",
+    "M12 16v-5",
+    "M16 16v-3a2 2 0 0 0 -4 0",
+    "M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z",
+  ],
+  github: [
+    "M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5",
+  ],
+  website: [
+    "M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0",
+    "M3.6 9h16.8",
+    "M3.6 15h16.8",
+    "M11.5 3a17 17 0 0 0 0 18",
+    "M12.5 3a17 17 0 0 1 0 18",
+  ],
+} as const;
+
+type ContactIcon = keyof typeof contactIcons;
+
+function ContactGlyph({ name }: { name: ContactIcon }) {
+  return (
+    <Svg viewBox="0 0 24 24" width={9} height={9} style={styles.contactIcon}>
+      {contactIcons[name].map((d) => (
+        <Path
+          key={d}
+          d={d}
+          stroke={palette.muted}
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      ))}
+    </Svg>
+  );
+}
+
+function stripProtocol(href: string) {
+  return href.replace(/^https?:\/\//, "").replace(/\/$/, "");
+}
+
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <View style={styles.section}>
@@ -131,15 +188,22 @@ export function ResumeDocument({ locale, content, profile }: ResumeDocumentProps
   const isSpanish = locale === "es";
   const contactRows = [
     [
-      { label: profile.location },
-      { label: profile.email, href: `mailto:${profile.email}` },
-      { label: profile.phone, href: profile.links.whatsapp.href },
+      { icon: "location", label: profile.location },
+      { icon: "email", label: profile.email, href: `mailto:${profile.email}` },
+      { icon: "phone", label: profile.phone, href: profile.links.whatsapp.href },
     ],
-    [profile.links.linkedin, profile.links.github, profile.links.website].map((link) => ({
-      label: link.href.replace(/\/$/, ""),
+    (
+      [
+        ["linkedin", profile.links.linkedin],
+        ["github", profile.links.github],
+        ["website", profile.links.website],
+      ] as const
+    ).map(([icon, link]) => ({
+      icon,
+      label: stripProtocol(link.href),
       href: link.href,
     })),
-  ];
+  ] satisfies { icon: ContactIcon; label: string; href?: string }[][];
 
   return (
     <Document
@@ -168,6 +232,7 @@ export function ResumeDocument({ locale, content, profile }: ResumeDocumentProps
               {row.map((contact, index) => (
                 <View key={contact.label} style={styles.contactPair}>
                   {index > 0 ? <Text style={styles.separator}>|</Text> : null}
+                  <ContactGlyph name={contact.icon} />
                   {contact.href ? (
                     <Link src={contact.href} style={styles.contactItem}>
                       {contact.label}
