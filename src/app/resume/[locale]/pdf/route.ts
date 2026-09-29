@@ -10,14 +10,31 @@ import { RESUME_CACHE_TAG, getResume } from "@/lib/resume/get-resume";
 // Served on demand so the PDF follows the latest resume version.
 export const dynamic = "force-dynamic";
 
+// A missing portrait must not break the PDF, so failures fall back to no image.
+async function loadPortrait(url: string | undefined) {
+  if (!url) return undefined;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) return undefined;
+    const type = response.headers.get("content-type") ?? "";
+    const format = type.includes("png") ? "png" : type.includes("jpeg") || type.includes("jpg") ? "jpg" : null;
+    if (!format) return undefined;
+    return { data: Buffer.from(await response.arrayBuffer()), format } as const;
+  } catch {
+    return undefined;
+  }
+}
+
 // The profile is part of the cache key, so a new resume version renders a new PDF.
 const renderResumePdf = unstable_cache(
   async (locale: LandingLocale, profile: CandidateProfile): Promise<string> => {
+    const portraitSrc = await loadPortrait(profile.portraitUrl);
     const buffer = await renderToBuffer(
       createElement(ResumeDocument, {
         locale,
         content: getLandingContentByLocale(profile)[locale],
         profile,
+        portraitSrc,
       }) as ReactElement<DocumentProps>,
     );
     return buffer.toString("base64");
