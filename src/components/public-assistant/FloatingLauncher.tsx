@@ -15,9 +15,11 @@ type Mode = "chat" | "job-match";
 
 interface FloatingLauncherProps {
   locale: LandingLocale;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
-export function FloatingLauncher({ locale }: FloatingLauncherProps) {
+export function FloatingLauncher({ locale, open, onOpenChange }: FloatingLauncherProps) {
   const copy = assistantCopy[locale];
   const [mode, setMode] = useState<Mode>("chat");
 
@@ -28,7 +30,7 @@ export function FloatingLauncher({ locale }: FloatingLauncherProps) {
   }
 
   return (
-    <Sheet modal={false}>
+    <Sheet modal={false} open={open} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
         <button
           type="button"

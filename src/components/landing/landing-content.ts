@@ -148,9 +148,15 @@ function getLandingContent(profile: CandidateProfile, locale: LandingLocale): La
       },
       {
         href: "#contact",
-        label: isSpanish ? "Iniciar conversación" : "Start a conversation",
+        label: isSpanish ? "Contáctame" : "Get in touch",
         variant: "light",
         icon: "message",
+      },
+      {
+        intent: "open-assistant",
+        label: isSpanish ? "Pregunta a mi asistente IA" : "Ask my AI assistant",
+        variant: "light",
+        icon: "sparkles",
       },
       {
         href: profile.links.linkedin.href,

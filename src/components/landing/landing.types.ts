@@ -5,10 +5,13 @@ export type LandingActionIcon =
   | "github"
   | "whatsapp"
   | "briefcase"
-  | "message";
+  | "message"
+  | "sparkles";
 
 export interface LandingAction {
-  href: string;
+  /** Omit `href` and set `intent` for actions that trigger behavior instead of navigating. */
+  href?: string;
+  intent?: "open-assistant";
   label: string;
   external?: boolean;
   variant?: LandingActionVariant;

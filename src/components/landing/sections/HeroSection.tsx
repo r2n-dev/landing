@@ -12,6 +12,7 @@ interface HeroSectionProps {
   about: string;
   portraitUrl: string;
   actions: LandingAction[];
+  onOpenAssistant?: () => void;
 }
 
 export function HeroSection({
@@ -22,6 +23,7 @@ export function HeroSection({
   about,
   portraitUrl,
   actions,
+  onOpenAssistant,
 }: HeroSectionProps) {
   return (
     <Card variant="page" padding="xl">
@@ -39,7 +41,7 @@ export function HeroSection({
           <h1 className="font-heading text-h1">{name}</h1>
           <p className="text-lg text-muted-foreground">{intro}</p>
           <p>{about}</p>
-          <LandingActions actions={actions} />
+          <LandingActions actions={actions} onOpenAssistant={onOpenAssistant} />
         </div>
 
         <div className="w-full max-w-[320px] self-stretch justify-self-center overflow-hidden rounded-2xl border border-border bg-background md:w-auto md:max-w-none md:justify-self-auto">
