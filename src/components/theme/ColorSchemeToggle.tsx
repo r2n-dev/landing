@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { IconMoonStars, IconSunHigh } from "@tabler/icons-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -18,13 +18,12 @@ const defaultLabels: NonNullable<ColorSchemeToggleProps["labels"]> = {
   switchToDarkMode: "Switch to dark mode",
 };
 
+const subscribeNoop = () => () => {};
+
 export function ColorSchemeToggle({ labels = defaultLabels }: ColorSchemeToggleProps) {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  // False on the server and during hydration, true afterwards, so the icon matches the server HTML first.
+  const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
 
   const isDark = mounted ? resolvedTheme === "dark" : false;
   const label = isDark ? labels.switchToLightMode : labels.switchToDarkMode;

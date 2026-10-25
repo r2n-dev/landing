@@ -1,7 +1,7 @@
 # AI Context
 
 ## Project Snapshot
-- Framework: Next.js 15.5 (App Router) + TypeScript.
+- Framework: Next.js 16 (App Router) + TypeScript.
 - Styling: Tailwind CSS v4, configured in CSS (`src/app/globals.css`; no `tailwind.config`).
 - UI primitives: shadcn/ui (Radix base, `components.json`) in `src/components/ui/*`.
 - Color scheme runtime: `next-themes`.

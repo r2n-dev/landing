@@ -9,6 +9,8 @@ import {
 export function useLocaleManager(initialLocale: LandingLocale) {
   const [locale, setLocale] = useState<LandingLocale>(initialLocale);
 
+  // The stored/browser locale is only known on the client; applying it after hydration avoids a mismatch.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     const storedLocale = normalizeLandingLocale(
       window.localStorage.getItem(landingLocaleStorageKey),
@@ -24,6 +26,7 @@ export function useLocaleManager(initialLocale: LandingLocale) {
       setLocale(browserLocale);
     }
   }, [initialLocale]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
     window.localStorage.setItem(landingLocaleStorageKey, locale);
