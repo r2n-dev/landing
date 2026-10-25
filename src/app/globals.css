@@ -251,3 +251,70 @@
     }
   }
 }
+
+/* Visitor accessibility settings (A11yPanel). The attributes on <html> come from src/components/a11y/a11y-settings.ts. */
+:root[data-a11y-contrast="high"]:not(.dark) {
+  --foreground: #000;
+  --muted-foreground: #3d434a;
+  --border: #6b7280;
+  --input: #6b7280;
+  --card-border: #6b7280;
+  --anchor: #0a58c2;
+  --primary-solid: #1a5bb5;
+  --primary-solid-hover: #134a96;
+  --primary-light-foreground: #0a58c2;
+  --accent-foreground: #0a58c2;
+  --destructive: #c92a2a;
+}
+
+.dark[data-a11y-contrast="high"] {
+  --foreground: #fff;
+  --card-foreground: #fff;
+  --muted-foreground: #d4d4d4;
+  --border: #8a8a8a;
+  --input: #8a8a8a;
+  --card-border: #8a8a8a;
+  --anchor: #9cc9ff;
+  --primary-solid: #1a66bb;
+  --primary-solid-hover: #155aa8;
+  --primary-light-foreground: #cfe4ff;
+  --accent-foreground: #cfe4ff;
+  --destructive: #ff8787;
+}
+
+:root[data-a11y-links="underline"] a:not([data-slot="button"]),
+:root[data-a11y-contrast="high"] a:not([data-slot="button"]) {
+  text-decoration-line: underline;
+  text-underline-offset: 0.2em;
+}
+
+:root[data-a11y-text="115"] {
+  font-size: 115%;
+}
+
+:root[data-a11y-text="130"] {
+  font-size: 130%;
+}
+
+:root[data-a11y-spacing="wide"] * {
+  line-height: 1.6 !important;
+  letter-spacing: 0.05em !important;
+  word-spacing: 0.12em !important;
+}
+
+:root[data-a11y-font="readable"] *:not(.font-logo) {
+  font-family: Verdana, Tahoma, "Segoe UI", system-ui, sans-serif !important;
+}
+
+:root[data-a11y-motion="reduce"] *,
+:root[data-a11y-motion="reduce"] ::before,
+:root[data-a11y-motion="reduce"] ::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+:root[data-a11y-motion="reduce"] [class*="hover:-translate"]:hover {
+  translate: none !important;
+}
