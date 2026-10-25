@@ -35,7 +35,7 @@ jobs:
         run: |
           npm start &
           for i in $(seq 1 30); do curl -sf http://127.0.0.1:3000/robots.txt >/dev/null && break; sleep 1; done
-          for path in / /robots.txt /sitemap.xml /json-en /resume-en; do
+          for path in / /robots.txt /sitemap.xml /json-en /resume-en.pdf; do
             code="$(curl -s -o /dev/null -w '%{http_code}' "http://127.0.0.1:3000$path")"
             echo "$path -> $code"
             [ "$code" = "200" ] || exit 1
