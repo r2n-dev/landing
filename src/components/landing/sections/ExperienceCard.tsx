@@ -69,7 +69,7 @@ export function ExperienceCard({
                     href={item.companyUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-anchor hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                    className="text-anchor underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                   >
                     {item.company}
                   </a>

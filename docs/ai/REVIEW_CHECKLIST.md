@@ -13,6 +13,9 @@
 - [ ] Keyboard navigation works.
 - [ ] Focus state visible.
 - [ ] Contrast remains readable in light and dark schemes.
+- [ ] `npm run test:a11y` passes (axe, WCAG 2.1 AA, light/dark, desktop/mobile) against `npm start`.
+- [ ] New text uses semantic tokens that meet 4.5:1; links inside text are underlined.
+- [ ] Motion is covered by `prefers-reduced-motion`.
 
 ## Code Quality
 - [ ] Types are explicit for public APIs.
