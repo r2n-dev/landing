@@ -1,4 +1,5 @@
 import type { LandingLocale } from "@/components/landing/i18n";
+import { A11yPanel } from "@/components/a11y/A11yPanel";
 import { ColorSchemeToggle } from "@/components/theme/ColorSchemeToggle";
 import { LanguageSelector } from "@/components/theme/LanguageSelector";
 import type { LandingControlCopy } from "../landing.types";
@@ -22,6 +23,7 @@ export function PageHeader({ locale, controls, onLocaleChange }: PageHeaderProps
               ariaLabel={controls.languageSelectorLabel}
               onChange={onLocaleChange}
             />
+            <A11yPanel locale={locale} />
             <ColorSchemeToggle labels={controls} />
           </div>
         </div>

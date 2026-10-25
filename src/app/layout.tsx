@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import "./globals.css";
+import { a11yInitScript } from "@/components/a11y/a11y-settings";
 import { audiowide, jetBrainsMono, manrope } from "./fonts";
 import { resolveLandingLocaleFromHeaders } from "@/components/landing/i18n";
 import { andresProfileData } from "@/components/landing/profile-data";
@@ -69,6 +70,9 @@ export default async function RootLayout({
       className={`${manrope.variable} ${jetBrainsMono.variable} ${audiowide.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: a11yInitScript }} />
+      </head>
       <body>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
