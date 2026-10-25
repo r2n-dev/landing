@@ -17,6 +17,6 @@ export async function POST(request: Request) {
   if (!isValidSecret(request.headers.get("x-revalidate-secret"))) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
-  revalidateTag(RESUME_CACHE_TAG);
+  revalidateTag(RESUME_CACHE_TAG, { expire: 0 });
   return Response.json({ revalidated: true });
 }

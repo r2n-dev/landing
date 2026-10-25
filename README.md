@@ -24,9 +24,11 @@ Single-page portfolio built with Next.js App Router, TypeScript, Tailwind CSS an
 ## Scripts
 - `npm run dev` - start development server
 - `npm run lint` - run lint checks (Next.js rules + `shadcn/no-restyle`)
+- `npm run typecheck` - TypeScript check
+- `npm test` - unit tests (vitest)
 - `npm run build` - build production bundle
 - `npm run start` - run production server
-- `npm run check:ds` - lint + build validation gate
+- `npm run check:ds` - lint + typecheck + tests + build validation gate
 
 ## Supabase
 Resume content is moving to Supabase. The connection is configured through env vars (see `.env.example`):
@@ -102,7 +104,7 @@ Hosted on Vercel. Set these environment variables for Production and Preview, th
 
 Also add the deployed callback URL to Supabase (Authentication > URL Configuration): `https://r2n.dev/auth/callback`, plus a preview wildcard such as `https://*-<team>.vercel.app/**` to sign in on preview deployments.
 
-The repository also carries a `Dockerfile` (`output: "standalone"`) and a GitHub Actions workflow that deploys to Dokploy on pushes to `main`; Vercel ignores both.
+The repository also carries a `Dockerfile` (`output: "standalone"`) and a CI workflow (lint, typecheck, tests, build and a production smoke test) that runs on pull requests and gates the deploy workflow, which publishes to Dokploy on pushes to `main`; Vercel ignores both.
 
 ## AI Contributor Pack
 - Root policies: `AGENTS.md`, `AI_CONTEXT.md`, `CONTRIBUTING.md`
@@ -115,3 +117,11 @@ Start from:
 3. `docs/ai/TASK_SPEC_TEMPLATE.md`
 
 # Test automatic deploy
+
+### Public assistant limits
+
+`checkAndRecordUsage` limits each visitor per hour and the whole site per day. It reads the visitor IP from the right of `x-forwarded-for`; set `TRUSTED_PROXY_HOPS` to the number of reverse proxies in front of the app (default `1`). If Supabase is unreachable it falls back to a per-process limit instead of allowing unmetered calls.
+
+### Security headers
+
+`next.config.ts` sends a CSP, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` and HSTS. `script-src`/`style-src` keep `'unsafe-inline'` for Next.js and next-themes inline snippets; add any new external image or API host to the policy.

@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -45,7 +45,7 @@ async function publishResume(data: ResumeData, note: string): Promise<ActionResu
     return { ok: false, error: `Could not save the version: ${error.message}` };
   }
 
-  revalidateTag(RESUME_CACHE_TAG);
+  updateTag(RESUME_CACHE_TAG);
   revalidatePath("/admin");
   return { ok: true, data: { id: row.id } };
 }
