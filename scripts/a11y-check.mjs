@@ -4,7 +4,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { chromium } from "playwright";
 
 const baseUrl = process.env.A11Y_BASE_URL ?? "http://127.0.0.1:3000";
-const paths = ["/", "/resume-en"];
+const paths = (process.env.A11Y_PATHS ?? "/,/resume-en,/resume-es").split(",");
 const schemes = ["light", "dark"];
 const allSettings = { highContrast: true, underlineLinks: true, textSize: 130, wideSpacing: true, reduceMotion: true, readableFont: true };
 const variants = [

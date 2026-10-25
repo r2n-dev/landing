@@ -7,10 +7,13 @@ import { getResume } from "@/lib/resume/get-resume";
 import { FloatingLauncher } from "@/components/public-assistant/FloatingLauncher";
 import { Button } from "@/components/ui/button";
 
-export const metadata: Metadata = {
-  title: "Resume",
-  robots: { index: false },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = normalizeLandingLocale((await params).locale);
+  return {
+    title: locale === "es" ? "Currículum" : "Resume",
+    robots: { index: false },
+  };
+}
 
 export function generateStaticParams() {
   return landingLocales.map((locale) => ({ locale }));
@@ -26,7 +29,7 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
   const isSpanish = locale === "es";
 
   return (
-    <main className="mx-auto flex max-w-3xl flex-col gap-6 bg-background px-6 py-10 text-sm text-foreground print:max-w-none print:bg-white print:p-0 print:text-black">
+    <main lang={locale} className="mx-auto flex max-w-3xl flex-col gap-6 bg-background px-6 py-10 text-sm text-foreground print:max-w-none print:bg-white print:p-0 print:text-black">
       <div className="flex justify-end print:hidden">
         <Button asChild>
           <a href={`/resume-${locale}.pdf`} download>
