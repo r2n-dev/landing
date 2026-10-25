@@ -51,16 +51,19 @@ export async function askAboutMe(
     throw new Error("The last message must come from the visitor.");
   }
 
+  // The resume leads the conversation and is marked cacheable, so Anthropic can reuse it across turns.
   const messages: ModelMessage[] = [
+    {
+      role: "user",
+      content: `Candidate resume JSON:\n\`\`\`json\n${JSON.stringify(resume, null, 2)}\n\`\`\`\n\nSite language: ${locale === "es" ? "Spanish" : "English"}`,
+      providerOptions: { anthropic: { cacheControl: { type: "ephemeral" } } },
+    },
     ...history.slice(0, -1).map((turn): ModelMessage =>
       turn.role === "user"
         ? { role: "user", content: turn.text }
         : { role: "assistant", content: turn.text },
     ),
-    {
-      role: "user",
-      content: `Candidate resume JSON:\n\`\`\`json\n${JSON.stringify(resume, null, 2)}\n\`\`\`\n\nSite language: ${locale === "es" ? "Spanish" : "English"}\n\nVisitor question: ${request.text}`,
-    },
+    { role: "user", content: `Visitor question: ${request.text}` },
   ];
 
   const { text } = await generateText({

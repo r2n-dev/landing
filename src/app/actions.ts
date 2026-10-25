@@ -7,6 +7,7 @@ import { MAX_JOB_DESCRIPTION_LENGTH } from "@/lib/assistant/job-match-constants"
 import { assistantServerCopy, isLocale } from "@/lib/assistant/copy";
 import type { LandingLocale } from "@/components/landing/i18n";
 import { checkAndRecordUsage } from "@/lib/assistant/rate-limit";
+import { log } from "@/lib/log";
 import { getResume } from "@/lib/resume/get-resume";
 
 export type ActionResult<T = undefined> = { ok: true; data: T } | { ok: false; error: string };
@@ -39,6 +40,7 @@ export async function askAboutMe(turns: unknown, localeInput?: unknown): Promise
     const reply = await askAboutMeModel(resume, parsedTurns.data as ChatTurn[], locale);
     return { ok: true, data: reply };
   } catch (error) {
+    log("error", "assistant", "askAboutMe failed", { error });
     return { ok: false, error: errorMessage(error, locale) };
   }
 }
@@ -70,6 +72,7 @@ export async function matchJob(input: unknown, localeInput?: unknown): Promise<A
     const result = await matchJobModel(resume, parsedInput.data as JobMatchInput, locale);
     return { ok: true, data: result };
   } catch (error) {
+    log("error", "assistant", "matchJob failed", { error });
     return { ok: false, error: errorMessage(error, locale) };
   }
 }
