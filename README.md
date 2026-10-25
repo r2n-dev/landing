@@ -87,9 +87,8 @@ Color scheme is managed by next-themes (`light`, `dark`, `system`) and persisted
 ## Localization
 - Supported locales: English (`en`) and Spanish (`es`).
 - Initial locale is resolved from request headers (`x-vercel-ip-country` / `accept-language`) and persisted in local storage.
-- The landing page, `/json-en`, `/json-es`, the resume pages and the PDFs render the latest resume version from Supabase (`getResume()` in `src/lib/resume/get-resume.ts`), falling back to `src/components/landing/profile-data.ts` when Supabase is unavailable:
+- The landing page, `/json-en`, `/json-es` and the PDFs render the latest resume version from Supabase (`getResume()` in `src/lib/resume/get-resume.ts`), falling back to `src/components/landing/profile-data.ts` when Supabase is unavailable:
   - `/resume-en.pdf`, `/resume-es.pdf` (layout: `src/components/resume/ResumeDocument.tsx`, rendered with `@react-pdf/renderer` and cached per resume version)
-  - `/resume-en`, `/resume-es` show an HTML version with a download button
 
 ## Deployment
 Hosted on Vercel. Set these environment variables for Production and Preview, then redeploy (existing deployments keep the values they were built with):
