@@ -142,6 +142,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-primary-solid: var(--primary-solid);
+  --color-primary-solid-hover: var(--primary-solid-hover);
   --color-anchor: var(--anchor);
   --color-cyan-light: var(--cyan-light);
 }
@@ -159,6 +161,8 @@
   --primary: #3b95ff;
   --primary-foreground: #fff;
   --primary-hover: #2d80e4;
+  --primary-solid: #2275d7;
+  --primary-solid-hover: #1c6fd0;
   --primary-light: rgba(59, 149, 255, 0.1);
   --primary-light-hover: rgba(59, 149, 255, 0.12);
   --primary-light-foreground: #3b95ff;
@@ -169,7 +173,7 @@
   --surface-foreground: #000;
   --surface-hover: #f8f9fa;
   --muted: #f1f3f5;
-  --muted-foreground: #868e96;
+  --muted-foreground: #656d76;
   --accent: rgba(59, 149, 255, 0.12);
   --accent-foreground: #3b95ff;
   --destructive: #fa5252;
@@ -191,6 +195,8 @@
   --primary: #2d80e4;
   --primary-foreground: #fff;
   --primary-hover: #1f72cd;
+  --primary-solid: #1f72cd;
+  --primary-solid-hover: #1a66bb;
   --primary-light: rgba(75, 156, 255, 0.15);
   --primary-light-hover: rgba(75, 156, 255, 0.2);
   --primary-light-foreground: #afd5ff;
@@ -201,7 +207,7 @@
   --surface-foreground: #fff;
   --surface-hover: #3b3b3b;
   --muted: #1f1f1f;
-  --muted-foreground: #828282;
+  --muted-foreground: #a6a6a6;
   --accent: rgba(75, 156, 255, 0.2);
   --accent-foreground: #afd5ff;
   --destructive: #e03131;
@@ -228,5 +234,20 @@
 
   body {
     @apply bg-background text-base text-foreground antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    [class*="hover:-translate"]:hover {
+      translate: none !important;
+    }
   }
 }

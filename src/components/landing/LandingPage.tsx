@@ -30,13 +30,19 @@ export function LandingPage({ initialLocale, contentByLocale }: LandingPageProps
 
   return (
     <div className="flex min-h-screen flex-col">
+      <a
+        href="#main-content"
+        className="sr-only z-200 rounded-md bg-primary px-4 py-2 text-primary-foreground focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      >
+        {content.controls.skipToContent}
+      </a>
       <PageHeader
         locale={locale}
         controls={content.controls}
         onLocaleChange={setLocale}
       />
 
-      <main className="relative flex-1 pt-[clamp(2rem,4vw,4rem)] pb-[clamp(3rem,5vw,5rem)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_0%_10%,var(--primary-light)_0%,transparent_45%),radial-gradient(circle_at_90%_20%,var(--cyan-light)_0%,transparent_30%)] before:opacity-75">
+      <main id="main-content" tabIndex={-1} className="relative flex-1 outline-none pt-[clamp(2rem,4vw,4rem)] pb-[clamp(3rem,5vw,5rem)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_0%_10%,var(--primary-light)_0%,transparent_45%),radial-gradient(circle_at_90%_20%,var(--cyan-light)_0%,transparent_30%)] before:opacity-75">
         <div className="relative z-1 mx-auto max-w-page px-4">
           <div className="flex flex-col gap-8">
             <HeroSection

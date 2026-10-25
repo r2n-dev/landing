@@ -93,6 +93,8 @@ export interface LandingSectionCopy {
 
 export interface LandingControlCopy {
   languageSelectorLabel: string;
+  skipToContent: string;
+  homeLabel: string;
   switchToLightMode: string;
   switchToDarkMode: string;
 }

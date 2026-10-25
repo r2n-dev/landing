@@ -26,6 +26,7 @@ Single-page portfolio built with Next.js App Router, TypeScript, Tailwind CSS an
 - `npm run lint` - run lint checks (Next.js rules + `shadcn/no-restyle`)
 - `npm run typecheck` - TypeScript check
 - `npm test` - unit tests (vitest)
+- `npm run test:a11y` - axe accessibility check against a running `npm start` (set `CHROMIUM_PATH` to use a local Chromium)
 - `npm run build` - build production bundle
 - `npm run start` - run production server
 - `npm run check:ds` - lint + typecheck + tests + build validation gate

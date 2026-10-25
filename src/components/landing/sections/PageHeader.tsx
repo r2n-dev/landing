@@ -15,7 +15,7 @@ export function PageHeader({ locale, controls, onLocaleChange }: PageHeaderProps
     <header className="sticky top-0 z-100 border-b border-border bg-background py-3">
       <div className="mx-auto max-w-page px-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <LogoLink />
+          <LogoLink homeLabel={controls.homeLabel} />
           <div className="flex flex-nowrap items-center gap-2.5">
             <LanguageSelector
               value={locale}

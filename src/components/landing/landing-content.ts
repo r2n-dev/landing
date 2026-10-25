@@ -122,6 +122,8 @@ function getLandingContent(profile: CandidateProfile, locale: LandingLocale): La
     },
     controls: {
       languageSelectorLabel: isSpanish ? "Seleccionar idioma" : "Select language",
+      skipToContent: isSpanish ? "Saltar al contenido" : "Skip to content",
+      homeLabel: isSpanish ? "inicio" : "home",
       switchToLightMode: isSpanish
         ? "Cambiar a modo claro"
         : "Switch to light mode",

@@ -48,6 +48,7 @@ Mantine `gray[0..9]` and `dark[0..9]` are available as `--color-gray-N` / `--col
 | `--mantine-primary-color-filled` | `--primary`, `--ring` | `#3b95ff` | `#2d80e4` |
 | white text on filled | `--primary-foreground` | `#fff` | `#fff` |
 | `--mantine-primary-color-filled-hover` | `--primary-hover` | `#2d80e4` | `#1f72cd` |
+| (new) | `--primary-solid` / `--primary-solid-hover` | `#2275d7` / `#1c6fd0` | `#1f72cd` / `#1a66bb` |
 | `--mantine-primary-color-light` | `--primary-light` | `rgba(59,149,255,.1)` | `rgba(75,156,255,.15)` |
 | `--mantine-primary-color-light-hover` | `--primary-light-hover`, `--accent` | `rgba(59,149,255,.12)` | `rgba(75,156,255,.2)` |
 | `--mantine-primary-color-light-color` | `--primary-light-foreground`, `--accent-foreground` | `#3b95ff` | `#afd5ff` |
@@ -57,7 +58,7 @@ Mantine `gray[0..9]` and `dark[0..9]` are available as `--color-gray-N` / `--col
 | `--mantine-color-default-hover` | `--surface-hover`, `--secondary` | `#f8f9fa` | `#3b3b3b` |
 | `--mantine-color-text` on default-hover | `--secondary-foreground` | `#000` | `#c9c9c9` |
 | SegmentedControl track (`gray-1` / `dark-8`) | `--muted` | `#f1f3f5` | `#1f1f1f` |
-| `--mantine-color-dimmed` | `--muted-foreground` | `#868e96` | `#828282` |
+| `--mantine-color-dimmed` | `--muted-foreground` | `#656d76` | `#a6a6a6` |
 | `--mantine-color-default-border` | `--border`, `--input` | `#ced4da` | `#424242` |
 | `--mantine-color-error` | `--destructive` | `#fa5252` | `#e03131` |
 | `--mantine-color-anchor` | `--anchor` | `#3b95ff` | `#61a9ff` |
